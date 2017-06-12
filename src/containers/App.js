@@ -9,6 +9,15 @@ import Home from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import Favorites from './Favorites';
+import Dashboard from './Dashboard';
+
+import CircularProgress from 'material-ui/CircularProgress';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+// Needed for onTouchTap
+// http://stackoverflow.com/a/34015469/988941
+injectTapEventPlugin();
 
 const PrivateRoute = ({component: Component, authenticated, ...props}) => {
     return (
@@ -27,7 +36,7 @@ const PublicRoute = ({component: Component, authenticated, ...props}) => {
             {...props}
             render={(props) => authenticated === false
                 ? <Component {...props} />
-                : <Redirect to='/favorites' />}
+                : <Redirect to='/dashboard' />}
         />
     );
 };
@@ -39,11 +48,12 @@ class App extends React.Component {
                 <div>
                     <Header />
 
-                    <div className="container">
+                    <div>
                         <Route exact path="/" component={ Home }/>
                         <PublicRoute authenticated={ this.props.authenticated }  path="/signup" component={ Signup } />
                         <PublicRoute authenticated={ this.props.authenticated }  path="/login" component={ Login } />
                         <PrivateRoute authenticated={ this.props.authenticated }  path="/favorites" component={ Favorites } />
+                        <PrivateRoute authenticated={ this.props.authenticated }  path="/dashboard" component={ Dashboard } />
                     </div>
                 </div>
             </ConnectedRouter>
