@@ -17,7 +17,8 @@
     "superagent": "^3.5.2"
   },
   "devDependencies": {
-    "react-scripts": "1.0.7"
+    "react-scripts": "1.0.7",
+    "react-sidenav": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

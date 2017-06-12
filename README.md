@@ -1,3 +1,3 @@
-# React GIF Search Engine
+# Studly Web app
 
-Find the tutorial for this repository [on our blog](http://blog.tighten.co/react-101-building-a-gif-search-engine)!
+Boiler plate from (http://blog.tighten.co/react-101-building-a-gif-search-engine)!

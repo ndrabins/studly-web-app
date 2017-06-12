@@ -13,9 +13,12 @@ const API_URL = 'http://api.giphy.com/v1/gifs/search?q=';
 const API_KEY = '&api_key=dc6zaTOxFJmzC';
 
 const config = {
-    apiKey: "",
-    authDomain: "",
-    databaseURL: "",
+    apiKey: "AIzaSyDVmPnm6gixi4mZ-rrhXQPzHTCKGjiF2Aw",
+    authDomain: "studly-ed04f.firebaseapp.com",
+    databaseURL: "https://studly-ed04f.firebaseio.com",
+    projectId: "studly-ed04f",
+    storageBucket: "studly-ed04f.appspot.com",
+    messagingSenderId: "21341825630",
 };
 
 Firebase.initializeApp(config);
