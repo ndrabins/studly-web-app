@@ -18,18 +18,6 @@ export function signUpUser(credentials) {
   };
 }
 
-// export function signInUser(credentials) {
-//     return function(dispatch) {
-//         firebase.auth().signInWithEmailAndPassword(credentials.email, credentials.password)
-//             .then(response => {
-//                 dispatch(authUser());
-//             })
-//             .catch(error => {
-//                 dispatch(authError(error));
-//             });
-//     }
-// }
-
 export function signInUser(credentials) {
   return dispatch => {
     dispatch({ type: AUTH_USER });
