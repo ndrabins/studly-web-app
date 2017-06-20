@@ -4,20 +4,14 @@ import { Route, Redirect } from 'react-router-dom'
 import { history } from '../store/configureStore';
 import { connect } from 'react-redux';
 
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import Header from './Header';
 import Home from './Home';
 import Signup from './Signup';
 import Login from './Login';
 import Favorites from './Favorites';
 import Dashboard from './Dashboard';
-
-import CircularProgress from 'material-ui/CircularProgress';
-
-import injectTapEventPlugin from 'react-tap-event-plugin';
-
-// Needed for onTouchTap
-// http://stackoverflow.com/a/34015469/988941
-injectTapEventPlugin();
 
 const PrivateRoute = ({component: Component, authenticated, ...props}) => {
     return (
@@ -44,6 +38,7 @@ const PublicRoute = ({component: Component, authenticated, ...props}) => {
 class App extends React.Component {
     render() {
         return (
+          <MuiThemeProvider>
             <ConnectedRouter history={history}>
                 <div>
                     <Header />
@@ -57,6 +52,7 @@ class App extends React.Component {
                     </div>
                 </div>
             </ConnectedRouter>
+          </MuiThemeProvider>
         );
     }
 }
