@@ -1,34 +1,46 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as Actions from '../actions';
+import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../actions";
 
-
-import '../styles/app.css';
+import Sidenav from "./Sidenav";
+import "../styles/app.css";
 
 class Dashboard extends React.Component {
-    render() {
-        return (
-            <div>
-              Dashboard
-            </div>
-        );
+  constructor(props) {
+    super(props);
+    this.state = { drawerOpen: true };
+  }
+
+  render() {
+    const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
+
+    if (this.state.drawerOpen) {
+      contentStyle.marginLeft = 256;
     }
+
+    return (
+      <div style={contentStyle}>
+        <Sidenav open={this.state.drawerOpen}/>
+        Dashboard
+      </div>
+    );
+  }
 }
 
 function mapStateToProps(state) {
-    return {
-        authenticated: state.auth.authenticated,
-        gifs: state.gifs.favorites,
-        modalIsOpen: state.modal.modalIsOpen,
-        selectedGif: state.modal.selectedGif
-    };
+  return {
+    authenticated: state.auth.authenticated,
+    gifs: state.gifs.favorites,
+    modalIsOpen: state.modal.modalIsOpen,
+    selectedGif: state.modal.selectedGif
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-    return {
-        actions: bindActionCreators(Actions, dispatch)
-    };
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

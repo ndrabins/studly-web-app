@@ -6,12 +6,12 @@ import { connect } from "react-redux";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
-import Header from "./Header";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
 import Favorites from "./Favorites";
 import Dashboard from "./Dashboard";
+import Navbar from './Navbar';
 
 const PrivateRoute = ({ component: Component, authenticated, ...props }) => {
   return (
@@ -45,7 +45,7 @@ class App extends React.Component {
       <MuiThemeProvider>
         <ConnectedRouter history={history}>
           <div>
-            <Header />
+            <Navbar />
             <div>
               <Route exact path="/" component={Home} />
               <PublicRoute
