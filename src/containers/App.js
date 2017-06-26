@@ -1,6 +1,6 @@
 import React from "react";
 import { ConnectedRouter } from "react-router-redux";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect,  Switch} from "react-router-dom";
 import { history } from "../store/configureStore";
 import { connect } from "react-redux";
 
@@ -12,6 +12,7 @@ import Login from "./Login";
 import Favorites from "./Favorites";
 import Dashboard from "./Dashboard";
 import Navbar from './Navbar';
+import Error_404 from '../components/error_404';
 
 const PrivateRoute = ({ component: Component, authenticated, ...props }) => {
   return (
@@ -47,27 +48,30 @@ class App extends React.Component {
           <div>
             <Navbar />
             <div>
-              <Route exact path="/" component={Home} />
-              <PublicRoute
-                authenticated={this.props.authenticated}
-                path="/signup"
-                component={Signup}
-              />
-              <PublicRoute
-                authenticated={this.props.authenticated}
-                path="/login"
-                component={Login}
-              />
-              <PrivateRoute
-                authenticated={this.props.authenticated}
-                path="/favorites"
-                component={Favorites}
-              />
-              <PrivateRoute
-                authenticated={this.props.authenticated}
-                path="/dashboard"
-                component={Dashboard}
-              />
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <PublicRoute
+                  authenticated={this.props.authenticated}
+                  path="/signup"
+                  component={Signup}
+                />
+                <PublicRoute
+                  authenticated={this.props.authenticated}
+                  path="/login"
+                  component={Login}
+                />
+                <PrivateRoute
+                  authenticated={this.props.authenticated}
+                  path="/favorites"
+                  component={Favorites}
+                />
+                <PrivateRoute
+                  authenticated={this.props.authenticated}
+                  path="/dashboard"
+                  component={Dashboard}
+                />
+                <Route component={Error_404} />
+              </Switch>
             </div>
           </div>
         </ConnectedRouter>

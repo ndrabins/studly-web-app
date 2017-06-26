@@ -7,7 +7,7 @@ const initialState = {
   loading: false
 };
 
-export default function gifs(state = initialState, action) {
+export default function auth(state = initialState, action) {
   switch (action.type) {
     case AUTH_USER:
       return {

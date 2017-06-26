@@ -3,7 +3,14 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
+import {
+  Route,
+  Link
+} from 'react-router-dom'
+
+
 import Sidenav from "./Sidenav";
+import AddCourseForm from "./forms/AddCourseForm";
 import "../styles/app.css";
 
 class Dashboard extends React.Component {
@@ -13,7 +20,9 @@ class Dashboard extends React.Component {
   }
 
   render() {
-    const contentStyle = {  transition: 'margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)' };
+    const contentStyle = {
+      transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)"
+    };
 
     if (this.state.drawerOpen) {
       contentStyle.marginLeft = 256;
@@ -21,8 +30,10 @@ class Dashboard extends React.Component {
 
     return (
       <div style={contentStyle}>
-        <Sidenav open={this.state.drawerOpen}/>
+        <Sidenav open={this.state.drawerOpen} />
         Dashboard
+        <Route path={`/dashboard/addCourse`} component={AddCourseForm} />
+
       </div>
     );
   }

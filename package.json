@@ -16,6 +16,7 @@
     "react-tap-event-plugin": "^2.0.1",
     "redux": "^3.6.0",
     "redux-form": "^6.7.0",
+    "redux-form-material-ui": "^4.2.0",
     "redux-promise": "^0.5.3",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.5.2"
