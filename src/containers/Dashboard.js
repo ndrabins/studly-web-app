@@ -3,14 +3,16 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
+import firebase from 'firebase';
+
 import {
   Route,
-  Link
 } from 'react-router-dom'
 
 
 import Sidenav from "./Sidenav";
-import AddCourseForm from "./forms/AddCourseForm";
+import AddCourseForm from './forms/AddCourseForm';
+
 import "../styles/app.css";
 
 class Dashboard extends React.Component {

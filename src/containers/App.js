@@ -1,6 +1,6 @@
 import React from "react";
 import { ConnectedRouter } from "react-router-redux";
-import { Route, Redirect,  Switch} from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { history } from "../store/configureStore";
 import { connect } from "react-redux";
 
@@ -70,7 +70,7 @@ class App extends React.Component {
                   path="/dashboard"
                   component={Dashboard}
                 />
-                <Route component={Error_404} />
+                <Route path="/" component={Error_404} />
               </Switch>
             </div>
           </div>

@@ -15,12 +15,16 @@ export function signUpUser(credentials) {
         console.log(error);
         dispatch(authError(error));
       });
+
+
   };
 }
 
 export function signInUser(credentials) {
   return dispatch => {
     dispatch({ type: AUTH_USER });
+
+    const { currentUser } = firebase.auth();
 
     firebase
       .auth()
@@ -30,6 +34,8 @@ export function signInUser(credentials) {
         console.log(error);
         dispatch(authError(error));
       });
+
+      // firebase.database().ref().child("users").child(firebase.auth().currentUser.uid).setValue(firebase.auth().currentUser);
   };
 }
 

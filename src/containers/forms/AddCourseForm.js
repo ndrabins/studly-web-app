@@ -1,38 +1,16 @@
 import React, { Component } from "react";
+import { reduxForm, Field } from "redux-form";
 
-import { Field, reduxForm } from "redux-form";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
+import { connect } from "react-redux";
+import { createCourse } from "../../actions";
 
-const style = {
-  margin: 12
-};
+import { TextField, DatePicker } from "redux-form-material-ui";
+import DateRange from "material-ui/svg-icons/action/date-range";
 
-const validate = values => {
-  const errors = {};
-  const requiredFields = ["courseName"];
-  requiredFields.forEach(field => {
-    if (!values[field]) {
-      errors[field] = "Required";
-    }
-  });
-  return errors;
-};
-
-const renderTextField = props =>
-  <TextField
-    hintText={props.label}
-    floatingLabelText={props.label}
-    errorText={props.touched && props.error}
-    {...props}
-  />;
-
-class AddCourseForm extends React.Component {
+class AddCourse extends Component {
   handleFormSubmit = values => {
-    console.log("submitting");
+    this.props.createCourse(values)
   };
-
-  // const { pristine, reset, submitting } = props;
 
 
   render() {
@@ -41,24 +19,53 @@ class AddCourseForm extends React.Component {
         <div>
           <Field
             name="courseName"
-            component={renderTextField}
-            label="Course Name"
+            component={TextField}
+            hintText="Course Name"
           />
         </div>
         <div>
-          <RaisedButton  type="submit" label="Submit" primary={true} style={style} />
-          <RaisedButton  type="submit" label="Clear" onClick={this.props.handleFormSubmit} style={style} />
-          {/*<button type="submit" disabled={pristine || submitting}>Submit</button>
-          <button type="button" disabled={pristine || submitting} onClick={reset}>
-            Clear Values
-          </button>*/}
+          <Field
+            name="teacherName"
+            component={TextField}
+            hintText="Teacher Name"
+          />
+        </div>
+        {/*Start date*/}
+        <div>
+          {/*<DateRange />*/}
+          <Field
+            name="beginDate"
+            component={DatePicker}
+            format={null}
+            mode="landscape"
+            hintText="What day does your course begin?"
+          />
+        </div>
+
+        <div>
+          <button type="submit">
+            Submit
+          </button>
         </div>
       </form>
     );
   }
 }
 
-export default reduxForm({
-  form: "AddCourseForm", // a unique identifier for this form
-  validate
-})(AddCourseForm);
+// Decorate with redux-form
+function mapStateToProps(state) {
+  return {};
+}
+
+export default connect(mapStateToProps, { createCourse })(
+  reduxForm({
+    form: "addCourse"
+    // validate
+  })(AddCourse)
+);
+
+// MyForm = reduxForm({
+//   form: "addCourse"
+// })(MyForm);
+
+// export default MyForm;

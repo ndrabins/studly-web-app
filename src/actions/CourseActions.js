@@ -5,70 +5,50 @@ import {
   CREATE_COURSE,
   LEAVE_COURSE,
   FETCH_ALL_COURSES,
-  FETCH_COURSE
+  FETCH_COURSE,
+  FETCH_COURSE_SUCCESS
 } from "./Types";
-// export function fetchUserCourses();
 
-// export function createCourse();
-
-export const createCourse = ({ courseName }) => {
+export const createCourse = ({ courseName, teacherName, beginDate }) => {
   const userUid = firebase.auth().currentUser.uid;
-
   var courseData = {
-    adminUid : userUid,
-    courseName : courseName
+    courseOwnerUid: userUid,
+    courseName: courseName,
+    teacherName: teacherName,
+    dateCreated : new Date()
   };
 
-  // var newCourseKey = firebase.database().ref().child('courses').push().key;
+  // Get a key for a new Post.
+  var newCourseKey = firebase.database().ref().child("courses").push().key;
 
-  // var updates = {};
-  // updates['/courses/' + newCourseKey] = courseData;
-  // updates['/user-posts/' + uid + '/' + newPostKey] = postData;
+  // // Write the new post's data simultaneously in the posts list and the user's post list.
+  var new_course = {};
+  new_course["/courses/" + newCourseKey] = courseData;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] = true;
 
-  // return firebase.database().ref().update(updates);
-
+  // // return firebase.database().ref().update(updates);
   return dispatch => {
-    console.log("creating course" + courseName)
-    dispatch({ type: CREATE_COURSE, payload: "courseName" });
+    firebase.database().ref().update(new_course).then(() => {
+      dispatch({ type: CREATE_COURSE });
+    });
+    console.log("creating course " + courseName);
   };
 };
 
-// export function leaveCourse();
+    // return dispatch => {
+    //   firebase.database().ref().child('courses')
+    //   .push({ courseData })
+    //   .then(() => {
+    //       dispatch({ type: CREATE_COURSE });
+    //     });
+    //   console.log("creating course " + courseName)
 
-// export function addCourse();
 
-// export const employeeCreate = ({ name, phone, shift }) => {
-//   const { currentUser } = firebase.auth();
+export const courseFetch = () => {
+  const userUid = firebase.auth().currentUser.uid;
 
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-//       .push({ name, phone, shift })
-//       .then(() => {
-//         dispatch({ type: EMPLOYEE_CREATE });
-//         Actions.employeeList({ type: 'reset' });
-//       });
-//   };
-// };
+  return dispatch => {
 
-// export const employeesFetch = () => {
-//   const { currentUser } = firebase.auth();
+  }
 
-//   return (dispatch) => {
-//     firebase.database().ref(`/users/${currentUser.uid}/employees`)
-//       .on('value', snapshot => {
-//         dispatch({ type: EMPLOYEES_FETCH_SUCCESS, payload: snapshot.val() });
-//       });
-//   };
-// };
-
-// export const employeeDelete = ({ uid }) => {
-//   const { currentUser } = firebase.auth();
-
-//   return () => {
-//     firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
-//       .remove()
-//       .then(() => {
-//         Actions.employeeList({ type: 'reset' });
-//       });
-//   };
-// };
+};
