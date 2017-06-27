@@ -7,7 +7,6 @@ import {
   FETCH_COURSE_SUCCESS
 } from "../actions/Types";
 
-
 const initialState = {
   data: []
 };
@@ -23,7 +22,10 @@ export default function gifs(state = initialState, action) {
     case LEAVE_COURSE:
       return state;
     case FETCH_ALL_COURSES:
-      return state;
+      return {
+        ...state,
+        data: action.payload
+      };
     case FETCH_COURSE:
       return state;
     case FETCH_COURSE_SUCCESS:

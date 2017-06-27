@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import { createCourse } from "../../actions";
 
 import { TextField, DatePicker } from "redux-form-material-ui";
-import DateRange from "material-ui/svg-icons/action/date-range";
 
 class AddCourse extends Component {
   handleFormSubmit = values => {

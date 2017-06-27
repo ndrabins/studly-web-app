@@ -1,12 +1,18 @@
 import React from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../actions";
+
+import _ from "lodash";
+
 import Drawer from "material-ui/Drawer";
 import MenuItem from "material-ui/MenuItem";
 // import MobileTearSheet from "../../../MobileTearSheet";
 
 import RaisedButton from "material-ui/RaisedButton";
-import Subheader from 'material-ui/Subheader';
+import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
-import Dialog from 'material-ui/Dialog';
+import Dialog from "material-ui/Dialog";
 
 import ActionGrade from "material-ui/svg-icons/action/grade";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
@@ -15,11 +21,13 @@ import ContentSend from "material-ui/svg-icons/content/send";
 
 import CreateClassButton from "./CreateClassButton";
 
-
-export default class Sidenav extends React.Component {
+class Sidenav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { open: this.props.open };
+    this.state = {
+      open: this.props.open
+    };
+    this.props.actions.courseFetch();
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -31,6 +39,12 @@ export default class Sidenav extends React.Component {
   };
 
   render() {
+    console.log(this.props.courses);
+    const myArray = [1,2,3]
+    _.forEach(myArray, function(value) {
+      console.log(value);
+    });
+
     return (
       <div>
         <Drawer
@@ -41,7 +55,7 @@ export default class Sidenav extends React.Component {
 
           <div>
             <List>
-              <Subheader>Courses</Subheader>
+              {/*<Subheader>Courses</Subheader>
               <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
               <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
               <ListItem
@@ -61,7 +75,8 @@ export default class Sidenav extends React.Component {
                     leftIcon={<ContentSend />}
                   />
                 ]}
-              />
+              />*/}
+              {}
             </List>
           </div>
 
@@ -72,3 +87,18 @@ export default class Sidenav extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    uid: state.auth.user.uid,
+    courses: state.courses.data
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidenav);

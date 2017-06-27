@@ -1,4 +1,6 @@
 import firebase from "firebase";
+import keys from "lodash/keys";
+import forEach from "lodash/forEach";
 
 import {
   ADD_COURSE,
@@ -15,7 +17,7 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
-    dateCreated : new Date()
+    dateCreated: new Date()
   };
 
   // Get a key for a new Post.
@@ -35,20 +37,32 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   };
 };
 
-    // return dispatch => {
-    //   firebase.database().ref().child('courses')
-    //   .push({ courseData })
-    //   .then(() => {
-    //       dispatch({ type: CREATE_COURSE });
-    //     });
-    //   console.log("creating course " + courseName)
-
+// return dispatch => {
+//   firebase.database().ref().child('courses')
+//   .push({ courseData })
+//   .then(() => {
+//       dispatch({ type: CREATE_COURSE });
+//     });
+//   console.log("creating course " + courseName)
 
 export const courseFetch = () => {
   const userUid = firebase.auth().currentUser.uid;
+  const courseRef = firebase.database().ref("courses/");
+
+  let data = [];
 
   return dispatch => {
-
-  }
-
+    firebase
+      .database()
+      .ref(`users/${userUid}/courses`)
+      .on("value", snapshot => {
+        let courseKeys = keys(snapshot.val());
+        forEach(courseKeys, function(key) {
+          firebase.database().ref(`courses/${key}`).on("value", snapshot => {
+            data.append(snapshot.val());
+          });
+          dispatch({ type: FETCH_ALL_COURSES, payload: data });
+        });
+      });
+  };
 };
