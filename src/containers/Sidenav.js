@@ -27,7 +27,6 @@ class Sidenav extends React.Component {
     this.state = {
       open: this.props.open
     };
-    this.props.actions.courseFetch();
   }
 
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -38,13 +37,15 @@ class Sidenav extends React.Component {
     });
   };
 
-  render() {
-    console.log(this.props.courses);
-    const myArray = [1,2,3]
-    _.forEach(myArray, function(value) {
-      console.log(value);
-    });
+  renderCourseList() {
+    if (this.props.courses) {
+      return <li>Loading</li>;
+    } else {
+      return <li> not loading </li>;
+    }
+  }
 
+  render() {
     return (
       <div>
         <Drawer
@@ -52,11 +53,10 @@ class Sidenav extends React.Component {
           docked={true}
           containerStyle={{ height: "calc(100% - 64px)", top: 64 }}
         >
-
           <div>
             <List>
-              {/*<Subheader>Courses</Subheader>
-              <ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
+              <Subheader>Courses</Subheader>
+              {/*<ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
               <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
               <ListItem
                 primaryText="Inbox"
@@ -76,7 +76,9 @@ class Sidenav extends React.Component {
                   />
                 ]}
               />*/}
-              {}
+              {this.renderCourseList()}
+              <div> something </div>
+
             </List>
           </div>
 
@@ -91,7 +93,8 @@ class Sidenav extends React.Component {
 function mapStateToProps(state) {
   return {
     uid: state.auth.user.uid,
-    courses: state.courses.data
+    courses: state.courses.data,
+    loadingCourses: state.courses.fetchingAllCourses
   };
 }
 

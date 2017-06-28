@@ -21,7 +21,6 @@ class Navbar extends React.Component {
     return (
       <FlatButton
         onClick={() => this.handleSignout()}
-        {...this.props}
         label="Log out"
       />
     );
@@ -31,10 +30,10 @@ class Navbar extends React.Component {
     return (
       <div>
         <Link to="/login">
-          <FlatButton {...this.props} label="Login" />
+          <FlatButton label="Login" />
         </Link>
         <Link to="/signup">
-          <FlatButton {...this.props} label="Sign Up" />
+          <FlatButton label="Sign Up" />
         </Link>
       </div>
     );

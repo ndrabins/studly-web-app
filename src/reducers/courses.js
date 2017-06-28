@@ -2,13 +2,16 @@ import {
   ADD_COURSE,
   CREATE_COURSE,
   LEAVE_COURSE,
-  FETCH_ALL_COURSES,
+  FETCH_ALL_COURSES_REQUEST,
+  FETCH_ALL_COURSES_FAILURE,
+  FETCH_ALL_COURSES_SUCCESS,
   FETCH_COURSE,
   FETCH_COURSE_SUCCESS
 } from "../actions/Types";
 
 const initialState = {
-  data: []
+  data: [],
+  fetchingAllCourses: false
 };
 
 export default function gifs(state = initialState, action) {
@@ -21,10 +24,18 @@ export default function gifs(state = initialState, action) {
       return state;
     case LEAVE_COURSE:
       return state;
-    case FETCH_ALL_COURSES:
+    case FETCH_ALL_COURSES_FAILURE:
+      return state;
+    case FETCH_ALL_COURSES_REQUEST:
       return {
         ...state,
-        data: action.payload
+        fetchingAllCourses: true
+      }
+    case FETCH_ALL_COURSES_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        fetchingAllCourses: false
       };
     case FETCH_COURSE:
       return state;

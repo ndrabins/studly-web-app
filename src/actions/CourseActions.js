@@ -6,7 +6,9 @@ import {
   ADD_COURSE,
   CREATE_COURSE,
   LEAVE_COURSE,
-  FETCH_ALL_COURSES,
+  FETCH_ALL_COURSES_FAILURE,
+  FETCH_ALL_COURSES_REQUEST,
+  FETCH_ALL_COURSES_SUCCESS,
   FETCH_COURSE,
   FETCH_COURSE_SUCCESS
 } from "./Types";
@@ -26,7 +28,7 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
-  new_course["/users/" + userUid + "/courses/" + newCourseKey] = true;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData;
 
   // // return firebase.database().ref().update(updates);
   return dispatch => {
@@ -37,32 +39,30 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   };
 };
 
-// return dispatch => {
-//   firebase.database().ref().child('courses')
-//   .push({ courseData })
-//   .then(() => {
-//       dispatch({ type: CREATE_COURSE });
-//     });
-//   console.log("creating course " + courseName)
-
-export const courseFetch = () => {
+export const fetchAllCourses = () => {
   const userUid = firebase.auth().currentUser.uid;
   const courseRef = firebase.database().ref("courses/");
 
   let data = [];
 
+  //begin request
+
   return dispatch => {
+    //begin request
+    dispatch({ type: FETCH_ALL_COURSES_REQUEST });
+
     firebase
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
-        let courseKeys = keys(snapshot.val());
-        forEach(courseKeys, function(key) {
-          firebase.database().ref(`courses/${key}`).on("value", snapshot => {
-            data.append(snapshot.val());
-          });
-          dispatch({ type: FETCH_ALL_COURSES, payload: data });
-        });
+        // let courseKeys = keys(snapshot.val());
+        // forEach(courseKeys, function(key) {
+        //   firebase.database().ref(`courses/${key}`).on("value", snapshot => {
+        //     data.push(snapshot.val());
+        //   });
+        // });
+        dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val()});
       });
+      // dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: data });
   };
 };

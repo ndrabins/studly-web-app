@@ -16,6 +16,10 @@ class Dashboard extends React.Component {
     this.state = { drawerOpen: true };
   }
 
+  componentDidMount() {
+    this.props.actions.fetchAllCourses();
+  }
+
   render() {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)"
@@ -28,7 +32,6 @@ class Dashboard extends React.Component {
     return (
       <div style={contentStyle}>
         <Sidenav open={this.state.drawerOpen} />
-        Dashboard
         <Route path={`/dashboard/addCourse`} component={AddCourseForm} />
 
       </div>
@@ -39,9 +42,7 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    gifs: state.gifs.favorites,
-    modalIsOpen: state.modal.modalIsOpen,
-    selectedGif: state.modal.selectedGif
+    courses: state.courses.data
   };
 }
 
