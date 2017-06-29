@@ -5,9 +5,9 @@ import * as Actions from "../actions";
 
 import _ from "lodash";
 
+import { Link } from "react-router-dom";
+
 import Drawer from "material-ui/Drawer";
-import MenuItem from "material-ui/MenuItem";
-// import MobileTearSheet from "../../../MobileTearSheet";
 
 import RaisedButton from "material-ui/RaisedButton";
 import Subheader from "material-ui/Subheader";
@@ -39,8 +39,16 @@ class Sidenav extends React.Component {
 
   renderCourseList() {
     if (this.props.courses) {
-      return <li>Loading</li>;
-    } else {
+      console.log(this.props.courses);
+      const courseList = this.props.courses.map(course =>
+        <li>
+          {"course"}
+        </li>
+      );
+
+      return courseList;
+    } else if (this.props.courses === undefined) {
+      console.log("undefined");
       return <li> not loading </li>;
     }
   }
@@ -56,29 +64,47 @@ class Sidenav extends React.Component {
           <div>
             <List>
               <Subheader>Courses</Subheader>
-              {/*<ListItem primaryText="Sent mail" leftIcon={<ContentSend />} />
-              <ListItem primaryText="Drafts" leftIcon={<ContentDrafts />} />
-              <ListItem
-                primaryText="Inbox"
-                leftIcon={<ContentInbox />}
-                initiallyOpen={true}
-                primaryTogglesNestedList={true}
-                nestedItems={[
-                  <ListItem
-                    key={1}
-                    primaryText="Starred"
-                    leftIcon={<ActionGrade />}
-                  />,
-                  <ListItem
-                    key={2}
-                    primaryText="Sent Mail"
-                    leftIcon={<ContentSend />}
-                  />
-                ]}
-              />*/}
-              {this.renderCourseList()}
-              <div> something </div>
-
+              {/*{this.renderCourseList()}*/}
+              {Object.keys(this.props.courses).map(key => {
+                return (
+                  <div>
+                    <ListItem
+                      primaryText={this.props.courses[key].courseName}
+                      leftIcon={<ContentInbox />}
+                      initiallyOpen={true}
+                      primaryTogglesNestedList={true}
+                      nestedItems={[
+                        <ListItem
+                          key={1}
+                          primaryText="Chat"
+                          leftIcon={<ActionGrade />}
+                        />,
+                        <ListItem
+                          key={2}
+                          primaryText="Notes"
+                          leftIcon={<ContentSend />}
+                          containerElement={<Link to={`/dashboard/notes`} />}
+                        />,
+                        <ListItem
+                          key={3}
+                          primaryText="Announcements"
+                          leftIcon={<ContentSend />}
+                        />,
+                        <ListItem
+                          key={4}
+                          primaryText="Assignments"
+                          leftIcon={<ContentSend />}
+                        />,
+                        <ListItem
+                          key={5}
+                          primaryText="Grades"
+                          leftIcon={<ContentSend />}
+                        />
+                      ]}
+                    />
+                  </div>
+                );
+              })}
             </List>
           </div>
 
