@@ -78,6 +78,7 @@ class Sidenav extends React.Component {
                           key={1}
                           primaryText="Chat"
                           leftIcon={<ActionGrade />}
+                          containerElement={<Link to={`/dashboard/chat`} />}
                         />,
                         <ListItem
                           key={2}
@@ -107,9 +108,7 @@ class Sidenav extends React.Component {
               })}
             </List>
           </div>
-
           <CreateClassButton />
-
         </Drawer>
       </div>
     );

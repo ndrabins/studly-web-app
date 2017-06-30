@@ -3,8 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "codemirror": "^5.27.2",
     "firebase": "^4.1.1",
     "firechat": "^3.0.1",
+    "firepad": "^1.4.0",
     "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "react": "^15.5.4",
