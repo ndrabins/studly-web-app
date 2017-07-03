@@ -2,39 +2,31 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
-import firebase from 'firebase';
-//  import firechat from 'firechat';
+import firebase from "firebase";
+import firechat from "firechat";
 
 class CourseChat extends Component {
   componentDidMount() {
-    // var chatRef = firebase.database().ref("chat");
+    var chatRef = firebase.database().ref("firechat");
 
-    // var chat = new Firechat(chatRef);
-    // chat.setUser(this.props.user.uid, "userName", function(user) {
-    //   chat.resumeSession();
-    // });
-    // Create a Firechat instance
-    // var chat = new FirechatUI(
+
+
+    // var chat = firechat.FirechatUi(
     //   chatRef,
     //   document.getElementById("firechat-wrapper")
     // );
-
-    // Set the Firechat user
-    // chat.setUser(this.props.user.uid, this.props.user.displayName);
+    // chat.setUser(this.props.user.uid, "bob");
   }
 
   render() {
-    return (
-      <div id="firechat-wrapper">
-        chat
-      </div>
-    );
+    // return <div id="firechat-wrapper">chat</div>;
+    return <div> chat </div>;
   }
 }
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user,
+    user: state.auth.user
   };
 }
 

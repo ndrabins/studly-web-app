@@ -10,6 +10,7 @@
     "lodash": "^4.17.4",
     "material-ui": "^0.18.3",
     "react": "^15.5.4",
+    "react-codemirror": "^1.0.0",
     "react-dom": "^15.5.4",
     "react-icons": "^2.2.5",
     "react-icons-kit": "^1.0.7",

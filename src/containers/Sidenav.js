@@ -95,6 +95,7 @@ class Sidenav extends React.Component {
                           key={4}
                           primaryText="Assignments"
                           leftIcon={<ContentSend />}
+                          containerElement={<Link to={`/dashboard/assignments`} />}
                         />,
                         <ListItem
                           key={5}
