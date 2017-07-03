@@ -7,6 +7,8 @@ import { Route, Switch } from "react-router-dom";
 
 import Sidenav from "./Sidenav";
 import AddCourseForm from "./forms/AddCourseForm";
+import CreateAssignmentForm from "./forms/CreateAssignmentForm";
+
 import CourseNotes from "./CourseNotes";
 import CourseChat from "./CourseChat";
 import Assignments from "./Assignments";
@@ -35,14 +37,13 @@ class Dashboard extends React.Component {
     return (
       <div style={contentStyle}>
         <Sidenav open={this.state.drawerOpen} />
-
         <Switch>
           <Route path={`/dashboard/addCourse`} component={AddCourseForm} />
           <Route path={`/dashboard/notes`} component={CourseNotes} />
           <Route path={`/dashboard/chat`} component={CourseChat} />
+          <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
           <Route path={`/dashboard/assignments`} component={Assignments} />
         </Switch>
-
       </div>
     );
   }

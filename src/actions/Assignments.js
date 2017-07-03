@@ -20,8 +20,8 @@ export const createAssignment = ({ assignmentTitle, courseId, dueDate, pointValu
   var newAssignmentKey = firebase.database().ref().child("course-assignments").push().key;
 
   var newAssignment = {};
-  // newAssignment["/courses/assignments" + newAssignmentKey] = true;
-  newAssignment["/course-assignments/" + courseId] = courseData;
+   newAssignment[`/assignments/${newAssignmentKey}`] = assignmentData;
+  newAssignment[`/course-assignments/${courseId}/${newAssignmentKey}`] = true;
 
   // // return firebase.database().ref().update(updates);
   return dispatch => {
