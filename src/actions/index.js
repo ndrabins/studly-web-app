@@ -22,6 +22,7 @@ Firebase.initializeApp(config);
 
 export * from './AuthActions';
 export * from './CourseActions';
+export * from './Assignments';
 
 export function requestGifs(term = null) {
     return function(dispatch) {

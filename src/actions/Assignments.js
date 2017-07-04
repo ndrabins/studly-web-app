@@ -28,6 +28,6 @@ export const createAssignment = ({ assignmentTitle, courseId, dueDate, pointValu
     firebase.database().ref().update(newAssignment).then(() => {
       dispatch({ type: CREATE_ASSIGNMENT });
     });
-    console.log("creating assignment " + assignmentName);
+    console.log("creating assignment " + assignmentData.assignmentName);
   };
 };
