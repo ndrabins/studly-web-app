@@ -1,60 +1,25 @@
 import React, { Component } from "react";
 import firebase from "firebase";
-// import Firepad from 'firepad';
-// import CodeMirror  from 'codemirror';
-
-// import makeFirepads from "../utils/firepad";
 
 class CourseNotes extends Component {
-
-  constructor(props){
-    super(props)
-    this.init = this.init.bind(this);
-  }
-
-
-  componentDidMount(){
-    this.init();
-  }
-
-  init(){
-    // Get Firebase Database reference.
-    var firepadRef = firebase.database().ref('/html');
+  componentDidMount() {
+    let firepadRef = firebase.database().ref();
 
     // Create CodeMirror (with lineWrapping on).
-   var codeMirror = CodeMirror(document.getElementById('firepad'), {
-        lineWrapping: true,
-        lineNumbers: true,
-        mode: 'javascript',
-        matchBrackets: true,
-        autoCloseBrackets: true,
-        // matchTags: true,
-        autoCloseTags: true,
-        toggleComment: true,
-        foldCode: true,
-        hint: true
+    var codeMirror = window.CodeMirror(document.getElementById("firepad"), {
+      lineWrapping: true
     });
 
     // Create Firepad (with rich text toolbar and shortcuts enabled).
-    var firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, {
-      richTextShortcuts: false,
-      richTextToolbar: false,
-      defaultText: 'HTML here!'
+    var firepad = window.Firepad.fromCodeMirror(firepadRef, codeMirror, {
+      richTextShortcuts: true,
+      richTextToolbar: true,
+      defaultText: "Let's get coding!"
     });
-
   }
 
-  render () {
-    return (
-      <div className="container">
-      <div>
-        <div id="firepad" className="pagehalf"></div>
-      </div>
-        <div className="pagehalf">
-        <img src="https://storage.googleapis.com/material-design/publish/material_v_10/assets/0Bx4BSt6jniD7MG80dmpHT0RidGs/style_icons_system_intro_principles_actionable.png"></img>
-      </div>
-      </div>
-    )
+  render() {
+    return <div id="firepad" />;
   }
 }
 
