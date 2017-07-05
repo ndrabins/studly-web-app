@@ -10,7 +10,11 @@ import Drawer from "material-ui/Drawer";
 import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
 
-import ActionGrade from "material-ui/svg-icons/action/grade";
+import School from "material-ui/svg-icons/social/school";
+import QuestionAnswer from "material-ui/svg-icons/action/question-answer";
+import Description from "material-ui/svg-icons/action/description";
+import Grade from "material-ui/svg-icons/action/grade";
+import VolumeUp from "material-ui/svg-icons/av/volume-up";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
 import ContentSend from "material-ui/svg-icons/content/send";
 
@@ -76,34 +80,38 @@ class Sidenav extends React.Component {
                         <ListItem
                           key={1}
                           primaryText="Chat"
-                          leftIcon={<ActionGrade />}
+                          leftIcon={<QuestionAnswer />}
                           containerElement={<Link to={`/dashboard/chat`} />}
                           onClick={() => this.props.actions.selectCourse(key)}
                         />,
                         <ListItem
                           key={2}
                           primaryText="Notes"
-                          leftIcon={<ContentSend />}
+                          leftIcon={<Description />}
                           onClick={() => this.props.actions.selectCourse(key)}
-                          containerElement={<Link to={`/dashboard/${key}/notes`} />}
+                          containerElement={
+                            <Link to={`/dashboard/${key}/notes`} />
+                          }
                         />,
                         <ListItem
                           key={3}
                           primaryText="Announcements"
-                          leftIcon={<ContentSend />}
+                          leftIcon={<VolumeUp />}
                           onClick={() => this.props.actions.selectCourse(key)}
                         />,
                         <ListItem
                           key={4}
                           primaryText="Assignments"
-                          leftIcon={<ContentSend />}
-                          containerElement={<Link to={`/dashboard/assignments`} />}
+                          leftIcon={<School />}
+                          containerElement={
+                            <Link to={`/dashboard/assignments`} />
+                          }
                           onClick={() => this.props.actions.selectCourse(key)}
                         />,
                         <ListItem
                           key={5}
                           primaryText="Grades"
-                          leftIcon={<ContentSend />}
+                          leftIcon={<Grade />}
                           onClick={() => this.props.actions.selectCourse(key)}
                         />
                       ]}
@@ -125,7 +133,7 @@ function mapStateToProps(state) {
     uid: state.auth.user.uid,
     courses: state.courses.data,
     loadingCourses: state.courses.fetchingAllCourses,
-    selectedCourse : state.courses.selectedCourse
+    selectedCourse: state.courses.selectedCourse
   };
 }
 

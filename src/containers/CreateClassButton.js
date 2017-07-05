@@ -8,11 +8,13 @@ class CreateClassButton extends Component {
   render() {
     return (
       <div>
-        <Link to={"/dashboard/addCourse"}>
-          <FloatingActionButton label="addCourse" onTouchTap={this.handleOpen}>
-            <ContentAdd />
-          </FloatingActionButton>
-        </Link>
+        <FloatingActionButton
+          label="addCourse"
+          onTouchTap={this.handleOpen}
+          containerElement={<Link to={"/dashboard/addCourse"} />}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }
