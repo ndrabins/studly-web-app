@@ -7,16 +7,32 @@ import firebase from "firebase";
 class CourseChat extends Component {
   componentDidMount() {
     // Get a Firebase Database ref
-    var chatRef = firebase.database().ref("chat");
+    console.log("chat");
+    console.log(this.props.selectedCourse);
+    var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
 
     // // Create a Firechat instance
-    var chat = new window.FirechatUI(
+    this.chat = new window.FirechatUI(
       chatRef,
       document.getElementById("firechat-wrapper")
     );
 
-    chat.setUser(this.props.user.uid, "bob", function(user) {
-      chat.resumeSession();
+    this.chat.setUser(this.props.user.uid, "bob", function(user) {
+      this.chat.resumeSession();
+    });
+  }
+
+  componentDidUpdate() {
+    console.log("new chat");
+    var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
+
+    this.chat = new window.FirechatUI(
+      chatRef,
+      document.getElementById("firechat-wrapper")
+    );
+
+    this.chat.setUser(this.props.user.uid, "bob", function(user) {
+      this.chat.resumeSession();
     });
   }
 
@@ -27,7 +43,8 @@ class CourseChat extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    selectedCourse: state.courses.selectedCourse
   };
 }
 

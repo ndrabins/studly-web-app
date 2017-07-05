@@ -29,12 +29,8 @@ class Navbar extends React.Component {
   loggedOutLinks() {
     return (
       <div>
-        <Link to="/login">
-          <FlatButton label="Login" />
-        </Link>
-        <Link to="/signup">
-          <FlatButton label="Sign Up" />
-        </Link>
+        <FlatButton containerElement={<Link to={`/login`} />} label="Login" />
+        <FlatButton containerElement={<Link to={`/signup`} />} label="Sign Up" />
       </div>
     );
   }

@@ -16,7 +16,6 @@ import {
 
 export function selectCourse(courseKey) {
     return dispatch => {
-      console.log("Selecting course");
       dispatch({ type: SELECT_COURSE, payload: courseKey});
     }
 }
