@@ -84,8 +84,8 @@ class Sidenav extends React.Component {
                           key={2}
                           primaryText="Notes"
                           leftIcon={<ContentSend />}
-                          containerElement={<Link to={`/dashboard/notes`} />}
                           onClick={() => this.props.actions.selectCourse(key)}
+                          containerElement={<Link to={`/dashboard/${key}/notes`} />}
                         />,
                         <ListItem
                           key={3}

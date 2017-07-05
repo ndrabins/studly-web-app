@@ -39,7 +39,7 @@ class Dashboard extends React.Component {
         <Sidenav open={this.state.drawerOpen} />
         <Switch>
           <Route path={`/dashboard/addCourse`} component={AddCourseForm} />
-          <Route path={`/dashboard/notes`} component={CourseNotes} />
+          <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
           <Route path={`/dashboard/chat`} component={CourseChat} />
           <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
           <Route path={`/dashboard/assignments`} component={Assignments} />
