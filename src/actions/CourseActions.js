@@ -6,12 +6,20 @@ import {
   ADD_COURSE,
   CREATE_COURSE,
   LEAVE_COURSE,
+  SELECT_COURSE,
   FETCH_ALL_COURSES_FAILURE,
   FETCH_ALL_COURSES_REQUEST,
   FETCH_ALL_COURSES_SUCCESS,
   FETCH_COURSE,
   FETCH_COURSE_SUCCESS
 } from "./Types";
+
+export function selectCourse(courseKey) {
+    return dispatch => {
+      console.log("Selecting course");
+      dispatch({ type: SELECT_COURSE, payload: courseKey});
+    }
+}
 
 export const createCourse = ({ courseName, teacherName, beginDate }) => {
   const userUid = firebase.auth().currentUser.uid;

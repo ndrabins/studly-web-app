@@ -14,7 +14,7 @@ const firepadStyle = {
 
 class CourseNotes extends Component {
   componentDidMount() {
-    let firepadRef = firebase.database().ref();
+    let firepadRef = firebase.database().ref(`/courses/${this.props.selectedCourse}`);
 
     // Create CodeMirror (with lineWrapping on).
     var codeMirror = window.CodeMirror(document.getElementById("firepad"), {
@@ -42,7 +42,8 @@ class CourseNotes extends Component {
 }
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    selectedCourse : state.courses.selectedCourse
   };
 }
 

@@ -2,6 +2,7 @@ import {
   ADD_COURSE,
   CREATE_COURSE,
   LEAVE_COURSE,
+  SELECT_COURSE,
   FETCH_ALL_COURSES_REQUEST,
   FETCH_ALL_COURSES_FAILURE,
   FETCH_ALL_COURSES_SUCCESS,
@@ -24,6 +25,11 @@ export default function gifs(state = initialState, action) {
       return state;
     case LEAVE_COURSE:
       return state;
+    case SELECT_COURSE:
+      return {
+        ...state,
+        selectedCourse: action.payload
+       }
     case FETCH_ALL_COURSES_FAILURE:
       return state;
     case FETCH_ALL_COURSES_REQUEST:

@@ -24,7 +24,7 @@ export function signInUser(credentials) {
   return dispatch => {
     dispatch({ type: AUTH_USER });
 
-    const { currentUser } = firebase.auth();
+    // const { currentUser } = firebase.auth();
 
     firebase
       .auth()
