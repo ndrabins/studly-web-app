@@ -5,18 +5,23 @@ import * as Actions from "../actions";
 import firebase from "firebase";
 
 class CourseChat extends Component {
-  componentDidMount(){
+  componentDidMount() {
     // Get a Firebase Database ref
     var chatRef = firebase.database().ref("chat");
 
     // // Create a Firechat instance
-    var chat = new window.FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+    var chat = new window.FirechatUI(
+      chatRef,
+      document.getElementById("firechat-wrapper")
+    );
+
+    chat.setUser(this.props.user.uid, "bob", function(user) {
+      chat.resumeSession();
+    });
   }
 
   render() {
-    return (
-      <div id="firechat-wrapper"></div>
-    );
+    return <div id="firechat-wrapper" />;
   }
 }
 
