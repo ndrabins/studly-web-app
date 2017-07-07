@@ -21,7 +21,8 @@ const renderTextField = props => (
 
 class CreateAssignmentForm extends Component {
   handleFormSubmit = values => {
-    // this.props.createAssignment(values);
+    values["courseId"] = this.props.selectedCourse;
+    this.props.createAssignment(values);
     console.log(values)
   };
 
@@ -68,10 +69,11 @@ class CreateAssignmentForm extends Component {
   }
 }
 
-// export default AddCourse;
 // Decorate with redux-form
 function mapStateToProps(state) {
-  return {};
+  return {
+    selectedCourse: state.courses.selectedCourse
+  };
 }
 
 export default connect(mapStateToProps, { createAssignment })(

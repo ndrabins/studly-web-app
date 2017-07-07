@@ -11,7 +11,7 @@ const API_KEY = '&api_key=dc6zaTOxFJmzC';
 
 export * from './AuthActions';
 export * from './CourseActions';
-export * from './Assignments';
+export * from './AssignmentActions';
 
 export function requestGifs(term = null) {
     return function(dispatch) {

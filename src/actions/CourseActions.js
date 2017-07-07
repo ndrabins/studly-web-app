@@ -52,8 +52,7 @@ export const fetchAllCourses = () => {
 
   let data = [];
 
-  //begin request
-
+  //TODO: possible refactoring needed here. Storing course information under /user/ and /course/
   return dispatch => {
     //begin request
     dispatch({ type: FETCH_ALL_COURSES_REQUEST });
