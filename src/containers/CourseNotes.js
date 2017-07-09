@@ -34,7 +34,7 @@ class CourseNotes extends Component {
   }
 
   componentDidUpdate() {
-
+    console.log("updating firepad...");
     //Delete old firepad, clear codemirror text so that new
     //firepad can be instantiated
     this.firepad.dispose();
