@@ -15,6 +15,8 @@ export const createAssignment = ({
   description
 }) => {
   // const userUid = firebase.auth().currentUser.uid;
+  console.log(`Course due date: ${dueDate}`);
+
   var assignmentData = {
     courseId: courseId,
     assignmentTitle: assignmentTitle,

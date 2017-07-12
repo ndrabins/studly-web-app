@@ -5,7 +5,8 @@ import {
 } from "../actions/Types";
 
 const initialState = {
-  data: [],
+  data: [{}],
+  loading: false
 };
 
 export default function auth(state = initialState, action) {
@@ -13,11 +14,15 @@ export default function auth(state = initialState, action) {
     case CREATE_ASSIGNMENT:
       return state;
     case FETCH_ASSIGNMENTS_REQUEST:
-      return state;
+      return {
+        ...state,
+        loading: true
+      };
     case FETCH_ASSIGNMENTS_SUCCESS:
        return {
         ...state,
         data: action.payload,
+        loading: false
       };
     default:
       return state;

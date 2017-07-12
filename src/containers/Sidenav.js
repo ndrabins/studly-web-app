@@ -36,27 +36,8 @@ class Sidenav extends React.Component {
     });
   };
 
-  renderCourseList() {
-    if (this.props.courses) {
-      console.log(this.props.courses);
-      const courseList = this.props.courses.map(course =>
-        <li>
-          {"course"}
-        </li>
-      );
-
-      return courseList;
-    } else if (this.props.courses === undefined) {
-      console.log("undefined");
-      return <li> not loading </li>;
-    }
-  }
-
-  handleFormSubmit = values => {
-    this.props.signInUser(values);
-  };
-
   render() {
+
     return (
       <div>
         <Drawer

@@ -6,8 +6,10 @@ import * as Actions from "../actions";
 import { Link } from "react-router-dom";
 
 import map from "lodash/map";
+import forEach from "lodash/forEach";
 
 import RaisedButton from "material-ui/RaisedButton";
+import CircularProgress from 'material-ui/CircularProgress';
 
 //https://github.com/react-component/collapse
 import "rc-collapse/assets/index.css";
@@ -24,6 +26,32 @@ class Assignments extends Component {
   }
 
   render() {
+    if (this.props.loading) {
+      return (
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <CircularProgress size={80} thickness={5} />
+        </div>
+      );
+    }
+
+    // If there are no assignments
+    if(!this.props.assignments){
+      return(
+        <div>
+          <h2>Assignments</h2>
+          <RaisedButton
+            label="Create Assignment"
+            containerElement={<Link to={`/dashboard/create-assignment`} />}
+          />
+          <h2> No assignments in this course. Add one! </h2>
+        </div>
+      );
+    }
+
+    const assignmentList = this.props.assignments.map((assignment) => {
+      return <div> hello </div>;
+    });
+
     return (
       <div>
         <h1>
@@ -36,15 +64,8 @@ class Assignments extends Component {
         />
         {/*{this.props.assignments.map(this.renderAssignmentList)}*/}
         <Collapse accordion={true} style={assignmentListStyle}>
-          {Object.keys(this.props.assignments).map(key => {
-            return (
-                <Panel key={key} header={this.props.assignments[key].assignmentTitle} headerClass="my-header-class">
-                  {this.props.assignments[key].description}
-                  {this.props.assignments[key].dueDate}
-                </Panel>
-            );
-          })}
         </Collapse>
+         {assignmentList}
       </div>
     );
   }
@@ -53,7 +74,8 @@ class Assignments extends Component {
 function mapStateToProps(state) {
   return {
     assignments: state.assignments.data,
-    selectedCourse: state.courses.selectedCourse
+    selectedCourse: state.courses.selectedCourse,
+    loading: state.assignments.loading
   };
 }
 
