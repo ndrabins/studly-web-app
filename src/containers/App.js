@@ -9,7 +9,6 @@ import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
-import Favorites from "./Favorites";
 import Dashboard from "./Dashboard";
 import Navbar from './Navbar';
 import Error_404 from '../components/error_404';
@@ -59,11 +58,6 @@ class App extends React.Component {
                   authenticated={this.props.authenticated}
                   path="/login"
                   component={Login}
-                />
-                <PrivateRoute
-                  authenticated={this.props.authenticated}
-                  path="/favorites"
-                  component={Favorites}
                 />
                 <PrivateRoute
                   authenticated={this.props.authenticated}
