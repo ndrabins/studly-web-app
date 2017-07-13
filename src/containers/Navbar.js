@@ -23,9 +23,14 @@ class Navbar extends React.Component {
 
   loggedOutLinks() {
     return (
-      <div>
-        <FlatButton containerElement={<Link to={`/login`} />} label="Login" />
+      <div style={{ marginTop: "7px" }}>
         <FlatButton
+          style={{ color: "#FFFFFF" }}
+          containerElement={<Link to={`/login`} />}
+          label="Login"
+        />
+        <FlatButton
+          style={{ color: "#FFFFFF" }}
           containerElement={<Link to={`/signup`} />}
           label="Sign Up"
         />
@@ -37,10 +42,12 @@ class Navbar extends React.Component {
     return (
       <div>
         <AppBar
-          style={{ position: "fixed" }}
+          style={{ position: "fixed", backgroundColor: "#F4511E" }}
           title={
             <span style={styles.title}>
-              <Link style={{color:"#ffffff", hover:"none" }}to="/dashboard">Studly</Link>
+              <Link style={{ color: "#ffffff", hover: "none" }} to="/dashboard">
+                Studly
+              </Link>
             </span>
           }
           onTitleTouchTap={this.handleTouchTap}
@@ -65,7 +72,6 @@ class Navbar extends React.Component {
 const styles = {
   title: {
     cursor: "pointer"
-
   }
 };
 

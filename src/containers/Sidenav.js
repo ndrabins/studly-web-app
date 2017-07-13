@@ -21,6 +21,10 @@ import ContentSend from "material-ui/svg-icons/content/send";
 
 import CreateClassButton from "./CreateClassButton";
 
+const listStyle = {
+  textColor: `#ffffff !important`
+}
+
 class Sidenav extends React.Component {
   constructor(props) {
     super(props);
@@ -28,6 +32,7 @@ class Sidenav extends React.Component {
       open: this.props.open
     };
   }
+
 
   handleToggle = () => this.setState({ open: !this.state.open });
 
@@ -47,41 +52,47 @@ class Sidenav extends React.Component {
         <ListItem
           key={key}
           primaryText={course.courseName}
-          leftIcon={<ContentInbox />}
+          leftIcon={<ContentInbox color={"#FFFFFF"} />}
           initiallyOpen={true}
+          style = {{color:"#FFFFFF"}}
           primaryTogglesNestedList={true}
           nestedItems={[
             <ListItem
               key={1}
               primaryText="Chat"
-              leftIcon={<QuestionAnswer />}
+              leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
               containerElement={<Link to={`/dashboard/chat`} />}
+              style = {{color:"#FFFFFF"}}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={2}
               primaryText="Notes"
-              leftIcon={<Description />}
+              leftIcon={<Description color={"#FFFFFF"}/>}
+              style = {{color:"#FFFFFF"}}
               onClick={() => this.props.actions.selectCourse(key)}
               containerElement={<Link to={`/dashboard/${key}/notes`} />}
             />,
             <ListItem
               key={3}
               primaryText="Announcements"
-              leftIcon={<VolumeUp />}
+              leftIcon={<VolumeUp color={"#FFFFFF"}/>}
+              style = {{color:"#FFFFFF"}}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={4}
               primaryText="Assignments"
-              leftIcon={<School />}
+              leftIcon={<School color={"#FFFFFF"} />}
+              style = {{color:"#FFFFFF"}}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={5}
               primaryText="Grades"
-              leftIcon={<Grade />}
+              leftIcon={<Grade color={"#FFFFFF"}/>}
+              style = {{color:"#FFFFFF"}}
               onClick={() => this.props.actions.selectCourse(key)}
             />
           ]}
@@ -97,11 +108,11 @@ class Sidenav extends React.Component {
         <Drawer
           open={this.state.open}
           docked={true}
-          containerStyle={{ height: "calc(100% - 64px)", top: 64 }}
+          containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#424242" }}
         >
           <div>
             <List>
-              <Subheader>Courses</Subheader>
+              <Subheader style = {{color:"#FFFFFF"}}>Courses</Subheader>
               {this.courseList()}
             </List>
           </div>
