@@ -6,7 +6,6 @@ import store from '../index';
 
 export default function makeFirepads() {
 	let userId = store.getState().auth.user.uid;
-  console.log(userId);
   var firepadRef = firebase.database().ref(`/users/${userId}/javascript`);
 
   var codeMirror = CodeMirror(document.getElementById('firepad'), { lineWrapping: true });

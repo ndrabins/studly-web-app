@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import { Link } from "react-router-dom";
+import Map from "lodash/map";
 
 import Drawer from "material-ui/Drawer";
 
@@ -36,8 +37,61 @@ class Sidenav extends React.Component {
     });
   };
 
-  render() {
+  courseList() {
+    if(!this.props.courses){
+      return <div> You are in no courses </div>
+    }
 
+    const courseList = Map(this.props.courses, (course, key) => {
+      return (
+        <ListItem
+          key={key}
+          primaryText={course.courseName}
+          leftIcon={<ContentInbox />}
+          initiallyOpen={true}
+          primaryTogglesNestedList={true}
+          nestedItems={[
+            <ListItem
+              key={1}
+              primaryText="Chat"
+              leftIcon={<QuestionAnswer />}
+              containerElement={<Link to={`/dashboard/chat`} />}
+              onClick={() => this.props.actions.selectCourse(key)}
+            />,
+            <ListItem
+              key={2}
+              primaryText="Notes"
+              leftIcon={<Description />}
+              onClick={() => this.props.actions.selectCourse(key)}
+              containerElement={<Link to={`/dashboard/${key}/notes`} />}
+            />,
+            <ListItem
+              key={3}
+              primaryText="Announcements"
+              leftIcon={<VolumeUp />}
+              onClick={() => this.props.actions.selectCourse(key)}
+            />,
+            <ListItem
+              key={4}
+              primaryText="Assignments"
+              leftIcon={<School />}
+              containerElement={<Link to={`/dashboard/assignments`} />}
+              onClick={() => this.props.actions.selectCourse(key)}
+            />,
+            <ListItem
+              key={5}
+              primaryText="Grades"
+              leftIcon={<Grade />}
+              onClick={() => this.props.actions.selectCourse(key)}
+            />
+          ]}
+        />
+      );
+    });
+    return courseList;
+  }
+
+  render() {
     return (
       <div>
         <Drawer
@@ -48,61 +102,12 @@ class Sidenav extends React.Component {
           <div>
             <List>
               <Subheader>Courses</Subheader>
-              {/*{this.renderCourseList()}*/}
-              {Object.keys(this.props.courses).map(key => {
-                return (
-                  <div key={key}>
-                    <ListItem
-                      primaryText={this.props.courses[key].courseName}
-                      leftIcon={<ContentInbox />}
-                      initiallyOpen={true}
-                      primaryTogglesNestedList={true}
-                      nestedItems={[
-                        <ListItem
-                          key={1}
-                          primaryText="Chat"
-                          leftIcon={<QuestionAnswer />}
-                          containerElement={<Link to={`/dashboard/chat`} />}
-                          onClick={() => this.props.actions.selectCourse(key)}
-                        />,
-                        <ListItem
-                          key={2}
-                          primaryText="Notes"
-                          leftIcon={<Description />}
-                          onClick={() => this.props.actions.selectCourse(key)}
-                          containerElement={
-                            <Link to={`/dashboard/${key}/notes`} />
-                          }
-                        />,
-                        <ListItem
-                          key={3}
-                          primaryText="Announcements"
-                          leftIcon={<VolumeUp />}
-                          onClick={() => this.props.actions.selectCourse(key)}
-                        />,
-                        <ListItem
-                          key={4}
-                          primaryText="Assignments"
-                          leftIcon={<School />}
-                          containerElement={
-                            <Link to={`/dashboard/assignments`} />
-                          }
-                          onClick={() => this.props.actions.selectCourse(key)}
-                        />,
-                        <ListItem
-                          key={5}
-                          primaryText="Grades"
-                          leftIcon={<Grade />}
-                          onClick={() => this.props.actions.selectCourse(key)}
-                        />
-                      ]}
-                    />
-                  </div>
-                );
-              })}
+              {this.courseList()}
             </List>
           </div>
-          <CreateClassButton />
+          <div style={{display: "flex", justifyContent:"center" }}>
+            <CreateClassButton />
+          </div>
         </Drawer>
       </div>
     );

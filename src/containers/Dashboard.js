@@ -27,7 +27,8 @@ class Dashboard extends React.Component {
 
   render() {
     const contentStyle = {
-      transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)"
+      transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
+      paddingTop: "64px"
     };
 
     if (this.state.drawerOpen) {

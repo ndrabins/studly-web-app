@@ -7,8 +7,6 @@ import firebase from "firebase";
 class CourseChat extends Component {
   componentDidMount() {
     // Get a Firebase Database ref
-    console.log("chat");
-    console.log(this.props.selectedCourse);
     var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
 
     // // Create a Firechat instance
@@ -23,7 +21,6 @@ class CourseChat extends Component {
   }
 
   componentDidUpdate() {
-    console.log("new chat");
     var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
 
     this.chat = new window.FirechatUI(
@@ -37,7 +34,11 @@ class CourseChat extends Component {
   }
 
   render() {
-    return <div id="firechat-wrapper" />;
+    const chatStyle = {
+      margin: "30px"
+    };
+
+    return <div style={chatStyle} id="firechat-wrapper" />;
   }
 }
 

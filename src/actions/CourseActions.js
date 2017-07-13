@@ -42,7 +42,6 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
     firebase.database().ref().update(new_course).then(() => {
       dispatch({ type: CREATE_COURSE });
     });
-    console.log("creating course " + courseName);
   };
 };
 

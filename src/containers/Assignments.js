@@ -5,11 +5,10 @@ import * as Actions from "../actions";
 
 import { Link } from "react-router-dom";
 
-import map from "lodash/map";
-import forEach from "lodash/forEach";
+import Map from "lodash/map";
 
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from 'material-ui/CircularProgress';
+import CircularProgress from "material-ui/CircularProgress";
 
 //https://github.com/react-component/collapse
 import "rc-collapse/assets/index.css";
@@ -25,47 +24,44 @@ class Assignments extends Component {
     this.props.actions.fetchAllAssignments(this.props.selectedCourse);
   }
 
+  assignmentList() {
+    const assignmentList = Map(this.props.assignments, (assignment, key) => {
+      return (
+        <Panel
+          key={key}
+          header={assignment.assignmentTitle}
+          headerClass="my-header-class"
+        >
+          {assignment.description}
+
+          {/*<RaisedButton label="Create Assignment" />*/}
+        </Panel>
+      );
+    });
+    return assignmentList;
+  }
+
   render() {
     if (this.props.loading) {
       return (
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{ display: "flex", justifyContent: "center" }}>
           <CircularProgress size={80} thickness={5} />
         </div>
       );
     }
 
-    // If there are no assignments
-    if(!this.props.assignments){
-      return(
-        <div>
+    return (
+      <div>
+        <div style={{display: "flex", justifyContent:"center", flexDirection:"column", alignItems:"center" }}>
           <h2>Assignments</h2>
           <RaisedButton
             label="Create Assignment"
             containerElement={<Link to={`/dashboard/create-assignment`} />}
           />
-          <h2> No assignments in this course. Add one! </h2>
         </div>
-      );
-    }
-
-    const assignmentList = this.props.assignments.map((assignment) => {
-      return <div> hello </div>;
-    });
-
-    return (
-      <div>
-        <h1>
-          {this.props.selectedCourse}
-        </h1>
-        <h2>Assignments</h2>
-        <RaisedButton
-          label="Create Assignment"
-          containerElement={<Link to={`/dashboard/create-assignment`} />}
-        />
-        {/*{this.props.assignments.map(this.renderAssignmentList)}*/}
         <Collapse accordion={true} style={assignmentListStyle}>
+          {this.assignmentList()}
         </Collapse>
-         {assignmentList}
       </div>
     );
   }

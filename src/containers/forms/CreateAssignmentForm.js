@@ -23,14 +23,13 @@ class CreateAssignmentForm extends Component {
   handleFormSubmit = values => {
     values["courseId"] = this.props.selectedCourse;
     this.props.createAssignment(values);
-    console.log(values)
   };
 
   // assignmentTitle, courseId, dueDate, pointValue, description
   render() {
     return (
-      <div>
-        <div>Create Assignment</div>
+      <div style={{}}>
+        <h2>Create Assignment</h2>
         <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <div>
             <Field

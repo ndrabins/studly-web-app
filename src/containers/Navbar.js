@@ -40,6 +40,7 @@ class Navbar extends React.Component {
       <div>
 
         <AppBar
+          style={{ position:"fixed" }}
           title={
             <span style={styles.title}>
               <Link to="/dashboard">Studly</Link>
