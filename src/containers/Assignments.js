@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
+import moment from "moment"
 import { Link } from "react-router-dom";
 
 import Map from "lodash/map";
@@ -24,11 +25,13 @@ class Assignments extends Component {
 
   assignmentList() {
     const assignmentList = Map(this.props.assignments, (assignment, key) => {
+      var dueDate = moment(assignment.dueDate).format("dddd, MMMM Do YYYY, h:mm:ss")
+
       return (
         <Card key={key}>
           <CardHeader
             title={assignment.assignmentTitle}
-            subtitle={assignment.dueDate}
+            subtitle={dueDate}
             actAsExpander={true}
             showExpandableButton={true}
           />

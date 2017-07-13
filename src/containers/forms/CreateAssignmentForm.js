@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 
 import { reduxForm, Field } from "redux-form";
+import { Redirect } from 'react-router'
 
-import { connect } from "react-redux";
 import { createAssignment } from "../../actions";
 
 import { TextField, DatePicker } from "redux-form-material-ui";
@@ -20,13 +21,25 @@ const renderTextField = props => (
 )
 
 class CreateAssignmentForm extends Component {
+  constructor () {
+    super();
+    this.state = {
+      fireRedirect: false
+    }
+  }
+
+
   handleFormSubmit = values => {
     values["courseId"] = this.props.selectedCourse;
     this.props.createAssignment(values);
+    this.setState({ fireRedirect: true })
   };
 
   // assignmentTitle, courseId, dueDate, pointValue, description
   render() {
+    const { from } = this.props.location.state || '/'
+    const { fireRedirect } = this.state
+
     return (
       <div style={{}}>
         <h2>Create Assignment</h2>
@@ -63,6 +76,9 @@ class CreateAssignmentForm extends Component {
             <button type="submit">Submit</button>
           </div>
         </form>
+        {fireRedirect && (
+          <Redirect to={'/dashboard/assignments'}/>
+        )}
       </div>
     );
   }

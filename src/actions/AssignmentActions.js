@@ -1,5 +1,4 @@
 import firebase from "firebase";
-import keys from "lodash/keys";
 
 import {
   CREATE_ASSIGNMENT,
@@ -16,15 +15,16 @@ export const createAssignment = ({
 }) => {
   // const userUid = firebase.auth().currentUser.uid;
   var dateCreated = new Date();
-  dueDate = dueDate.toString();
+  dateCreated = dateCreated.toString();
+  var dueDateString = dueDate.toString();
 
   var assignmentData = {
     courseId: courseId,
     assignmentTitle: assignmentTitle,
-    dueDate: "dueDate",
+    dueDate: dueDateString,
     pointValue: pointValue,
     description: description,
-    dateCreated: "dateCreated"
+    dateCreated: dateCreated
   };
   console.log(assignmentData);
 
