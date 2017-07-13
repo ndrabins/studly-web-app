@@ -67,7 +67,7 @@ class Login extends React.Component {
 
           {this.renderAuthenticationError()}
 
-          <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <form style={{marginTop:"80px" }} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
             <Field
               name="email"
               component={this.renderField}

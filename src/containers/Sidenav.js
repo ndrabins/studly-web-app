@@ -87,13 +87,6 @@ class Sidenav extends React.Component {
               style = {{color:"#FFFFFF"}}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
-            />,
-            <ListItem
-              key={5}
-              primaryText="Grades"
-              leftIcon={<Grade color={"#FFFFFF"}/>}
-              style = {{color:"#FFFFFF"}}
-              onClick={() => this.props.actions.selectCourse(key)}
             />
           ]}
         />

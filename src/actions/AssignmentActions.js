@@ -21,10 +21,10 @@ export const createAssignment = ({
   var assignmentData = {
     courseId: courseId,
     assignmentTitle: assignmentTitle,
-    dueDate: dueDate,
+    dueDate: "dueDate",
     pointValue: pointValue,
     description: description,
-    dateCreated: dateCreated.toString
+    dateCreated: "dateCreated"
   };
   console.log(assignmentData);
 

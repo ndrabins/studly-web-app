@@ -3,8 +3,8 @@
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "studly.png",
-      "sizes": "192x192",
+      "src": "favicon.ico",
+      "sizes": "16x16",
       "type": "image/png"
     }
   ],
