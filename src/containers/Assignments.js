@@ -10,10 +10,8 @@ import Map from "lodash/map";
 import RaisedButton from "material-ui/RaisedButton";
 import CircularProgress from "material-ui/CircularProgress";
 
-//https://github.com/react-component/collapse
-import "rc-collapse/assets/index.css";
-import Collapse from "rc-collapse";
-var Panel = Collapse.Panel;
+import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
+import FlatButton from "material-ui/FlatButton";
 
 const assignmentListStyle = {
   margin: "20px"
@@ -27,15 +25,17 @@ class Assignments extends Component {
   assignmentList() {
     const assignmentList = Map(this.props.assignments, (assignment, key) => {
       return (
-        <Panel
-          key={key}
-          header={assignment.assignmentTitle}
-          headerClass="my-header-class"
-        >
-          {assignment.description}
-
-          {/*<RaisedButton label="Create Assignment" />*/}
-        </Panel>
+        <Card key={key}>
+          <CardHeader
+            title={assignment.assignmentTitle}
+            subtitle={assignment.dueDate}
+            actAsExpander={true}
+            showExpandableButton={true}
+          />
+          <CardText expandable={true}>
+            {assignment.description}
+          </CardText>
+        </Card>
       );
     });
     return assignmentList;
@@ -52,16 +52,23 @@ class Assignments extends Component {
 
     return (
       <div>
-        <div style={{display: "flex", justifyContent:"center", flexDirection:"column", alignItems:"center" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center"
+          }}
+        >
           <h2>Assignments</h2>
           <RaisedButton
             label="Create Assignment"
             containerElement={<Link to={`/dashboard/create-assignment`} />}
           />
         </div>
-        <Collapse accordion={true} style={assignmentListStyle}>
+        <div style={{ margin: "20px" }}>
           {this.assignmentList()}
-        </Collapse>
+        </div>
       </div>
     );
   }

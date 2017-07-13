@@ -15,6 +15,8 @@ export const createAssignment = ({
   description
 }) => {
   // const userUid = firebase.auth().currentUser.uid;
+  var dateCreated = new Date();
+  dueDate = dueDate.toString();
 
   var assignmentData = {
     courseId: courseId,
@@ -22,8 +24,9 @@ export const createAssignment = ({
     dueDate: dueDate,
     pointValue: pointValue,
     description: description,
-    dateCreated: new Date()
+    dateCreated: dateCreated.toString
   };
+  console.log(assignmentData);
 
   // Get a key for a new Post.
   var newAssignmentRef = firebase

@@ -46,7 +46,7 @@ class App extends React.Component {
       <MuiThemeProvider>
         <ConnectedRouter history={history}>
           <div>
-            <Navbar />
+            <Navbar history={history} />
             <div>
               <Switch>
                 <Route exact path="/" component={Home} />

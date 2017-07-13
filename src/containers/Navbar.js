@@ -18,19 +18,17 @@ class Navbar extends React.Component {
   }
 
   loggedInLinks() {
-    return (
-      <FlatButton
-        onClick={() => this.handleSignout()}
-        label="Log out"
-      />
-    );
+    return <FlatButton onClick={() => this.handleSignout()} label="Log out" />;
   }
 
   loggedOutLinks() {
     return (
       <div>
         <FlatButton containerElement={<Link to={`/login`} />} label="Login" />
-        <FlatButton containerElement={<Link to={`/signup`} />} label="Sign Up" />
+        <FlatButton
+          containerElement={<Link to={`/signup`} />}
+          label="Sign Up"
+        />
       </div>
     );
   }
@@ -38,19 +36,21 @@ class Navbar extends React.Component {
   render() {
     return (
       <div>
-
         <AppBar
-          style={{ position:"fixed" }}
+          style={{ position: "fixed" }}
           title={
             <span style={styles.title}>
-              <Link to="/dashboard">Studly</Link>
+              <Link style={{color:"#ffffff", hover:"none" }}to="/dashboard">Studly</Link>
             </span>
           }
+          onTitleTouchTap={this.handleTouchTap}
           iconElementLeft={
             this.props.authenticated
-              ? <IconButton><NavigationClose /></IconButton>
-              : <div></div>
-            }
+              ? <IconButton>
+                  <NavigationClose />
+                </IconButton>
+              : <div />
+          }
           iconElementRight={
             this.props.authenticated
               ? this.loggedInLinks()
@@ -65,6 +65,7 @@ class Navbar extends React.Component {
 const styles = {
   title: {
     cursor: "pointer"
+
   }
 };
 
