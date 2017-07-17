@@ -25,18 +25,21 @@ class Assignments extends Component {
 
   assignmentList() {
     const assignmentList = Map(this.props.assignments, (assignment, key) => {
-      var dueDate = moment(assignment.dueDate).format("dddd, MMMM Do YYYY, h:mm:ss")
+      var dueDate = moment(assignment.dueDate).format("llll")
 
       return (
         <Card key={key}>
           <CardHeader
             title={assignment.assignmentTitle}
-            subtitle={dueDate}
+            subtitle={`Due Date: ${dueDate}`}
             actAsExpander={true}
             showExpandableButton={true}
           />
-          <CardText expandable={true}>
-            {assignment.description}
+          <CardText style={{ }} expandable={true}>
+            <div>Point Value: {assignment.pointValue}</div>
+            <div>
+              {assignment.description}
+            </div>
           </CardText>
         </Card>
       );

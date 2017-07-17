@@ -1,84 +1,127 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { reduxForm, Field } from "redux-form";
-import { Redirect } from 'react-router'
+import { Redirect } from "react-router";
 
 import { createAssignment } from "../../actions";
 
 import { TextField, DatePicker } from "redux-form-material-ui";
 // import { Control, Form } from 'react-redux-form';
 
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardText,
+  CardActions
+} from "material-ui/Card";
 
-const renderTextField = props => (
-  <TextField hintText={props.label}
+import DateRange from "material-ui/svg-icons/action/date-range";
+import RaisedButton from "material-ui/RaisedButton";
+import FlatButton from "material-ui/FlatButton";
+
+const renderTextField = props =>
+  <TextField
+    hintText={props.label}
     floatingLabelText={props.label}
     errorText={props.touched && props.error}
     {...props}
-  />
-)
+  />;
+
+const formStyle = {
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center"
+};
+const headerStyle = {
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  alignItems: "center",
+  backgroundColor: "#206E9B",
+  color: "#FFF",
+  height: "80px"
+};
 
 class CreateAssignmentForm extends Component {
-  constructor () {
+  constructor() {
     super();
     this.state = {
       fireRedirect: false
-    }
+    };
   }
-
 
   handleFormSubmit = values => {
     values["courseId"] = this.props.selectedCourse;
     this.props.createAssignment(values);
-    this.setState({ fireRedirect: true })
+    this.setState({ fireRedirect: true });
   };
 
   // assignmentTitle, courseId, dueDate, pointValue, description
   render() {
-    const { from } = this.props.location.state || '/'
-    const { fireRedirect } = this.state
+    const { from } = this.props.location.state || "/";
+    const { fireRedirect } = this.state;
 
     return (
-      <div style={{}}>
-        <h2>Create Assignment</h2>
-        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-          <div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
+        <Card style={{ width: "60%", margin: "30px" }}>
+          <div style={headerStyle}>
+            <h1>Create Assignment</h1>
+          </div>
+          <form
+            onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
+            style={formStyle}
+          >
             <Field
               name="assignmentTitle"
               component={TextField}
               hintText="Assignment Title"
+              style={{ width: "40%" }}
             />
-          </div>
-          <div>
             <Field
               name="pointValue"
               component={TextField}
               hintText="Point Value"
+              style={{ width: "20%" }}
             />
-          </div>
-          <div>
-            <Field name="description" component={renderTextField} label="Assignment Description" multiLine={true} rows={5}/>
-          </div>
-          <div>
-            {/*<DateRange />*/}
             <Field
-              name="dueDate"
-              component={DatePicker}
-              format={null}
-              mode="landscape"
-              hintText="Due Date"
+              name="description"
+              component={renderTextField}
+              label="Assignment Description"
+              multiLine={true}
+              rows={5}
+              style={{ width: "60%" }}
             />
-          </div>
-
-          <div>
-            <button type="submit">Submit</button>
-          </div>
-        </form>
-        {fireRedirect && (
-          <Redirect to={'/dashboard/assignments'}/>
-        )}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <DateRange />
+              <Field
+                name="dueDate"
+                component={DatePicker}
+                format={null}
+                mode="landscape"
+                hintText="Due Date"
+              />
+            </div>
+            <CardActions>
+              <FlatButton type="submit" label="Submit" />
+            </CardActions>
+          </form>
+        </Card>
+        {fireRedirect && <Redirect to={"/dashboard/assignments"} />}
       </div>
     );
   }
