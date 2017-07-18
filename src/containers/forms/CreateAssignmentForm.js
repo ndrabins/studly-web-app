@@ -117,7 +117,7 @@ class CreateAssignmentForm extends Component {
               />
             </div>
             <CardActions>
-              <FlatButton type="submit" label="Submit" />
+              <FlatButton type="submit" label="Create Assignment" />
             </CardActions>
           </form>
         </Card>

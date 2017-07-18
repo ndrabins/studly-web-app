@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
-import moment from "moment"
+import moment from "moment";
 import { Link } from "react-router-dom";
 
 import Map from "lodash/map";
@@ -25,7 +25,8 @@ class Assignments extends Component {
 
   assignmentList() {
     const assignmentList = Map(this.props.assignments, (assignment, key) => {
-      var dueDate = moment(assignment.dueDate).format("llll")
+      var dueDate = moment(assignment.dueDate).format("llll");
+      var dateCreated = moment(assignment.dateCreated).format("llll");
 
       return (
         <Card key={key}>
@@ -35,10 +36,24 @@ class Assignments extends Component {
             actAsExpander={true}
             showExpandableButton={true}
           />
-          <CardText style={{ }} expandable={true}>
-            <div>Point Value: {assignment.pointValue}</div>
+          <CardText style={{}} expandable={true}>
+            <div>
+              Point Value: {assignment.pointValue}
+            </div>
+            <div>
+              Date Created: {assignment.dateCreated}
+            </div>
             <div>
               {assignment.description}
+              <CardActions
+                style={{ display: "flex", justifyContent: "flex-end" }}
+              >
+                <FlatButton
+                  style={{ color: "#E6463B" }}
+                  label="Delete Assignment"
+                  onClick={() => this.props.actions.deleteAssignment(this.props.selectedCourse, key)}
+                />
+              </CardActions>
             </div>
           </CardText>
         </Card>

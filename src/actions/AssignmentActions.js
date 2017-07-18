@@ -1,9 +1,11 @@
 import firebase from "firebase";
+import moment from "moment";
 
 import {
   CREATE_ASSIGNMENT,
   FETCH_ASSIGNMENTS_REQUEST,
-  FETCH_ASSIGNMENTS_SUCCESS
+  FETCH_ASSIGNMENTS_SUCCESS,
+  DELETE_ASSIGNMENT,
 } from "./Types";
 
 export const createAssignment = ({
@@ -14,7 +16,7 @@ export const createAssignment = ({
   description
 }) => {
   // const userUid = firebase.auth().currentUser.uid;
-  var dateCreated = new Date();
+  var dateCreated = moment();
   dateCreated = dateCreated.toString();
   var dueDateString = dueDate.toString();
 
@@ -41,6 +43,13 @@ export const createAssignment = ({
     });
   };
 };
+
+export const deleteAssignment = (courseId, assignmentId) => {
+  // console.log("Deleting ish");
+  const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
+
+  return dispatch => assignmentRef.child(assignmentId).remove();
+}
 
 export const fetchAllAssignments = (courseId) => {
   const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);

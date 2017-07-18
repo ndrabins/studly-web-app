@@ -1,7 +1,8 @@
 import {
   CREATE_ASSIGNMENT,
   FETCH_ASSIGNMENTS_REQUEST,
-  FETCH_ASSIGNMENTS_SUCCESS
+  FETCH_ASSIGNMENTS_SUCCESS,
+  DELETE_ASSIGNMENT
 } from "../actions/Types";
 
 const initialState = {
@@ -12,6 +13,8 @@ const initialState = {
 export default function auth(state = initialState, action) {
   switch (action.type) {
     case CREATE_ASSIGNMENT:
+      return state;
+    case DELETE_ASSIGNMENT:
       return state;
     case FETCH_ASSIGNMENTS_REQUEST:
       return {
