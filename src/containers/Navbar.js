@@ -8,6 +8,9 @@ import Toggle from "material-ui/Toggle";
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
 import NavigationClose from "material-ui/svg-icons/navigation/close";
 
+import Avatar from "material-ui/Avatar";
+import FileFolder from "material-ui/svg-icons/file/folder";
+
 import studlyLogo from "../static/studly.png";
 
 import { connect } from "react-redux";
@@ -20,8 +23,32 @@ class Navbar extends React.Component {
   }
 
   loggedInLinks() {
-    return <FlatButton onClick={() => this.handleSignout()} label="Log out" />;
+    return (
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center' }}>
+        <Avatar icon={<FileFolder />} />
+        {/*src="images/uxceo-128.jpg"  */}
+        <FlatButton
+          style={{ color: "#FFFFFF" }}
+          containerElement={<Link to={`/dashboard/profile`} />}
+          label="Profile"
+        />
+        <IconMenu
+          iconButtonElement={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          targetOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "top" }}
+        >
+          <MenuItem primaryText="Refresh" />
+          <MenuItem primaryText="Help" />
+          <MenuItem primaryText="Sign out" />
+        </IconMenu>
+      </div>
+    );
   }
+  //  <FlatButton onClick={() => this.handleSignout()} label="Log out" />
 
   loggedOutLinks() {
     return (
@@ -53,7 +80,9 @@ class Navbar extends React.Component {
             </span>
           }
           onTitleTouchTap={this.handleTouchTap}
-          iconElementLeft={<img style={{height:"50px", width:"50px" }}src={studlyLogo} />}
+          iconElementLeft={
+            <img style={{ height: "50px", width: "50px" }} src={studlyLogo} />
+          }
           iconElementRight={
             this.props.authenticated
               ? this.loggedInLinks()
@@ -73,7 +102,8 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    // photoUrl : state.auth.user.photoUrl
   };
 }
 

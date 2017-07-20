@@ -20,7 +20,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
-window.firebase.initializeApp(config);
+// window.firebase.initializeApp(config);
 
 const store = configureStore();
 

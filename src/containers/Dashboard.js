@@ -12,6 +12,7 @@ import CreateAssignmentForm from "./forms/CreateAssignmentForm";
 import CourseNotes from "./CourseNotes";
 import CourseChat from "./CourseChat";
 import Assignments from "./Assignments";
+import Profile from "./Profile";
 
 import "../styles/app.css";
 
@@ -28,7 +29,7 @@ class Dashboard extends React.Component {
   render() {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
-      paddingTop: "64px"
+      paddingTop: "64px",
     };
 
     if (this.state.drawerOpen) {
@@ -44,6 +45,7 @@ class Dashboard extends React.Component {
           <Route path={`/dashboard/chat`} component={CourseChat} />
           <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
           <Route path={`/dashboard/assignments`} component={Assignments} />
+          <Route path={`/dashboard/Profile`} component={Profile} />
         </Switch>
       </div>
     );
