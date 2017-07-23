@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
+import Preloader from "../utils/Preloader";
 
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -9,13 +10,23 @@ import { Link } from "react-router-dom";
 import Map from "lodash/map";
 
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from "material-ui/CircularProgress";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 
 const assignmentListStyle = {
   margin: "20px"
+};
+
+const fabStyle = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
 };
 
 class Assignments extends Component {
@@ -65,9 +76,7 @@ class Assignments extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <CircularProgress size={80} thickness={5} />
-        </div>
+        <Preloader />
       );
     }
 
@@ -82,10 +91,13 @@ class Assignments extends Component {
           }}
         >
           <h2>Assignments</h2>
-          <RaisedButton
+          <FloatingActionButton
             label="Create Assignment"
             containerElement={<Link to={`/dashboard/create-assignment`} />}
-          />
+            style={fabStyle}
+          >
+            <ContentAdd />
+          </FloatingActionButton>
         </div>
         <div style={{ margin: "20px" }}>
           {this.assignmentList()}
