@@ -5,51 +5,26 @@ import * as Actions from "../actions";
 
 import firebase from "firebase";
 
-import ProfileForm from "./forms/ProfileForm"
+import ProfileForm from "./forms/ProfileForm";
 
-import Avatar from 'material-ui/Avatar';
 import RaisedButton from "material-ui/RaisedButton";
 
 const styles = {
-  button: {
-    margin: 12,
-  },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
   profilePage: {
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     margin: "30px",
-    borderStyle: "solid"
-  }
+    borderStyle: "solid",
+    flexDirection: "column"
+  },
 };
 
 class Profile extends Component {
-  state = {
-  };
-
   render() {
     return (
-      <div>
-        <Avatar size={300} src={this.props.user.photoURL} />
-         <RaisedButton
-          label="Choose an Image"
-          labelPosition="before"
-          style={styles.button}
-          containerElement="label"
-        >
-          <input type="file" style={styles.exampleImageInput} />
-        </RaisedButton>
-        <RaisedButton label="change picture" onClick={() => this.props.actions.updateProfileImage("hello:")} />
-        <ProfileForm />
+      <div style={styles.profilePage}>
+        <ProfileForm/>
       </div>
     );
   }
@@ -57,7 +32,7 @@ class Profile extends Component {
 
 function mapStateToProps(state) {
   return {
-    user: state.auth.user,
+    user: state.auth.user
   };
 }
 
@@ -68,5 +43,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);
-
-

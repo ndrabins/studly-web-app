@@ -25,7 +25,7 @@ class Navbar extends React.Component {
   loggedInLinks() {
     return (
       <div style={{display:'flex', justifyContent:'center', alignItems:'center' }}>
-        <Avatar icon={<FileFolder />} />
+        <Avatar src={this.props.user.photoURL} />
         {/*src="images/uxceo-128.jpg"  */}
         <FlatButton
           style={{ color: "#FFFFFF" }}
@@ -43,7 +43,7 @@ class Navbar extends React.Component {
         >
           <MenuItem primaryText="Refresh" />
           <MenuItem primaryText="Help" />
-          <MenuItem primaryText="Sign out" />
+          <MenuItem primaryText="Sign out" onClick={this.handleSignout.bind(this)} />
         </IconMenu>
       </div>
     );
@@ -103,6 +103,7 @@ const styles = {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
+    user: state.auth.user
     // photoUrl : state.auth.user.photoUrl
   };
 }

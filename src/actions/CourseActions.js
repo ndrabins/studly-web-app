@@ -60,14 +60,7 @@ export const fetchAllCourses = () => {
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
-        // let courseKeys = keys(snapshot.val());
-        // forEach(courseKeys, function(key) {
-        //   firebase.database().ref(`courses/${key}`).on("value", snapshot => {
-        //     data.push(snapshot.val());
-        //   });
-        // });
         dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val()});
       });
-      // dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: data });
   };
 };
