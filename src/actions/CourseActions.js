@@ -1,17 +1,12 @@
 import firebase from "firebase";
-import keys from "lodash/keys";
-import forEach from "lodash/forEach";
 
 import {
   ADD_COURSE,
   CREATE_COURSE,
   LEAVE_COURSE,
   SELECT_COURSE,
-  FETCH_ALL_COURSES_FAILURE,
   FETCH_ALL_COURSES_REQUEST,
   FETCH_ALL_COURSES_SUCCESS,
-  FETCH_COURSE,
-  FETCH_COURSE_SUCCESS
 } from "./Types";
 
 export function selectCourse(courseKey) {
@@ -47,9 +42,6 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
 
 export const fetchAllCourses = () => {
   const userUid = firebase.auth().currentUser.uid;
-  const courseRef = firebase.database().ref("courses/");
-
-  let data = [];
 
   //TODO: possible refactoring needed here. Storing course information under /user/ and /course/
   return dispatch => {

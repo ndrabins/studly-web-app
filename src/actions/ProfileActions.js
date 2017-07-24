@@ -1,6 +1,6 @@
 import firebase from "firebase";
 
-import { UPDATE_PROFILE, UPDATE_PROFILE_IMAGE } from "./Types";
+import { UPDATE_PROFILE, UPDATE_PROFILE_IMAGE, FETCH_PROFILE } from "./Types";
 
 // var storageRef = firebase.storage().ref();
 //  var storage = firebase.storage()
@@ -61,3 +61,16 @@ export const updateProfile = (values) => {
     });
   };
 };
+
+export const fetchProfile = () => {
+
+  let user = firebase.auth().currentUser;
+  const userUid = user.uid;
+  const userRef = firebase.database().ref(`users/${userUid}`)
+
+  return dispatch => {
+    userRef.on("value", snapshot => {
+      dispatch({ type: FETCH_PROFILE, payload: snapshot.val()})
+    });
+  };
+}

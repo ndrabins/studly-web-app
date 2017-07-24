@@ -31,16 +31,32 @@ const styles = {
   }
 };
 
+const validate = values => {
+  const errors = {}
+  const requiredFields = [ 'name', 'displayName', 'schoolName', 'grade', 'majorFavoriteSubject', 'age' ]
+  requiredFields.forEach(field => {
+    if (!values[ field ]) {
+      errors[ field ] = 'Required'
+    }
+  })
+
+  return errors
+}
+
 class ProfileForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isEditing: true
+      isEditing: true,
     };
   }
 
   handleFormSubmit = values => {
+    console.log("submitting");
+    this.setState({
+      isEditing: !this.state.isEditing
+    })
     this.props.actions.updateProfile(values);
   };
 
@@ -62,6 +78,7 @@ class ProfileForm extends Component {
           <RaisedButton
             primary={true}
             style={styles.button}
+            disabled={this.props.pristine || this.props.submitting}
             type="submit"
             label="Submit"
           />
@@ -116,6 +133,7 @@ class ProfileForm extends Component {
   }
 
   render() {
+
     return (
       <div>
         {this.renderProfilePicture()}
@@ -126,55 +144,55 @@ class ProfileForm extends Component {
           <Field
             name="name"
             component={TextField}
-            hintText="Your Name"
             disabled={this.state.isEditing}
+            defaultValue={"Default Value"}
+            floatingLabelText="Your Name"
           />
           <Field
             name="displayName"
             component={TextField}
-            hintText="Display Name"
+            floatingLabelText="Display Name"
             disabled={this.state.isEditing}
           />
           <Field
             name="schoolName"
             component={TextField}
-            hintText="School Name"
+            floatingLabelText="School Name"
             disabled={this.state.isEditing}
           />
 
           <Field
             name="grade"
             component={SelectField}
-            hintText="Grade"
+            floatingLabelText="Grade"
             disabled={this.state.isEditing}
           >
             <MenuItem value={"teacher"} primaryText="Educator" />
             <MenuItem value={"Parent"} primaryText="Parent" />
-            <MenuItem value={1} primaryText="k-5th grade" />
-            <MenuItem value={1} primaryText="k-5th grade" />
-            <MenuItem value={2} primaryText="6th grade" />
-            <MenuItem value={3} primaryText="7th grade" />
-            <MenuItem value={4} primaryText="8th grade" />
-            <MenuItem value={5} primaryText="9th grade" />
-            <MenuItem value={6} primaryText="10th grade" />
-            <MenuItem value={7} primaryText="11th grade" />
-            <MenuItem value={8} primaryText="12th grade" />
-            <MenuItem value={9} primaryText="College Freshman" />
-            <MenuItem value={10} primaryText="College Sophomore" />
-            <MenuItem value={11} primaryText="College Junior" />
-            <MenuItem value={12} primaryText="College Senior" />
+            <MenuItem value={"elementary"} primaryText="k-5th grade" />
+            <MenuItem value={"6th"} primaryText="6th grade" />
+            <MenuItem value={"7th"} primaryText="7th grade" />
+            <MenuItem value={"8th"} primaryText="8th grade" />
+            <MenuItem value={"9th"} primaryText="9th grade" />
+            <MenuItem value={"10th"} primaryText="10th grade" />
+            <MenuItem value={"11th"} primaryText="11th grade" />
+            <MenuItem value={"12th"} primaryText="12th grade" />
+            <MenuItem value={"College Freshman"} primaryText="College Freshman" />
+            <MenuItem value={"College Sophomore"} primaryText="College Sophomore" />
+            <MenuItem value={"College Junior"} primaryText="College Junior" />
+            <MenuItem value={"College Senior"} primaryText="College Senior" />
           </Field>
 
           <Field
             name="majorFavoriteSubject"
             component={TextField}
-            hintText="Major or Favorite Subject"
+            floatingLabelText="Major or Favorite Subject"
             disabled={this.state.isEditing}
           />
           <Field
             name="age"
             component={TextField}
-            hintText="Age"
+            floatingLabelText="Age"
             disabled={this.state.isEditing}
           />
           {this.renderEditingMode()}
@@ -186,7 +204,8 @@ class ProfileForm extends Component {
 // Decorate with redux-form
 function mapStateToProps(state) {
   return {
-    user: state.auth.user
+    user: state.auth.user,
+    userProfile: state.profile.data
   };
 }
 
@@ -198,7 +217,9 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(mapStateToProps, mapDispatchToProps)(
   reduxForm({
-    form: "updateProfileForm"
+    form: "updateProfileForm",
+    validate,
+
     // validate
   })(ProfileForm)
 );

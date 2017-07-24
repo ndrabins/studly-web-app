@@ -24,6 +24,7 @@ class Dashboard extends React.Component {
 
   componentDidMount() {
     this.props.actions.fetchAllCourses();
+    this.props.actions.fetchProfile();
   }
 
   render() {

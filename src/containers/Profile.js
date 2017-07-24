@@ -3,11 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
-import firebase from "firebase";
-
 import ProfileForm from "./forms/ProfileForm";
-
-import RaisedButton from "material-ui/RaisedButton";
 
 const styles = {
   profilePage: {
@@ -15,7 +11,6 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     margin: "30px",
-    borderStyle: "solid",
     flexDirection: "column"
   },
 };
