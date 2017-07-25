@@ -69,7 +69,7 @@ class Navbar extends React.Component {
     return (
       <div>
         <AppBar
-          style={{ position: "fixed", backgroundColor: "#5BC891" }}
+          style={{ position: "fixed", backgroundColor: "#1FA186" }}
           title={
             <span style={styles.title}>
               <Link style={{ color: "#ffffff", hover: "none" }} to="/dashboard">

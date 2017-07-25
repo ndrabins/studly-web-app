@@ -12,7 +12,7 @@ class CreateClassButton extends Component {
           label="addCourse"
           onTouchTap={this.handleOpen}
           containerElement={<Link to={"/dashboard/newCourse"} />}
-          backgroundColor = {"#1B6B9B"}
+          backgroundColor = {"#2E81BA"}
         >
           <ContentAdd />
         </FloatingActionButton>

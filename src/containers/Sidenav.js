@@ -18,6 +18,7 @@ import Grade from "material-ui/svg-icons/action/grade";
 import VolumeUp from "material-ui/svg-icons/av/volume-up";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
 import ContentSend from "material-ui/svg-icons/content/send";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 import CreateClassButton from "./CreateClassButton";
 
@@ -47,6 +48,7 @@ class Sidenav extends React.Component {
       return <div> You are in no courses </div>
     }
 
+    //           rightIcon={<ContentAdd color={"#FFFFFF"} />}
     const courseList = Map(this.props.courses, (course, key) => {
       return (
         <ListItem
@@ -101,7 +103,7 @@ class Sidenav extends React.Component {
         <Drawer
           open={this.state.open}
           docked={true}
-          containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#424242" }}
+          containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#303030" }}
         >
           <div>
             <List>
