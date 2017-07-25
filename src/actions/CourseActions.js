@@ -22,7 +22,8 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
-    dateCreated: new Date()
+    dateCreated: new Date(),
+    users: userUid
   };
 
   // Get a key for a new Post.
@@ -31,9 +32,7 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
-  new_course["/courses/" + newCourseKey + "/users/" + userUid] = true;
-  new_course["/users/" + userUid + "/courses/" + newCourseKey] =
-    courseData.courseName;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData.courseName;
 
   // // return firebase.database().ref().update(updates);
   return dispatch => {
@@ -63,16 +62,18 @@ export const fetchAllCourses = () => {
 export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
 
-  var addUserToCourse = {};
-  addUserToCourse[`/courses/${courseKey}/users/`] = userUid;
-  addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = "Bib 101";
+
   //need to check if course exists first..
   //if it exists retrieve course name
 
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).on("value", snapshot => {
       if(snapshot.val()){
-        console.log("found course");
+        let courseName = snapshot.val().courseName;
+        var addUserToCourse = {};
+        addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
+        addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
+
          firebase.database().ref().update(addUserToCourse).then(() => {
           dispatch({ type: ADD_COURSE });
         });

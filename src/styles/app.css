@@ -11,6 +11,23 @@ body {
   height: 100%;
   position: relative;
 }
+
+/*Studly Style guide  */
+/* h1 {
+  font-family: "Raleway Heavy";
+  font-size: 36px;
+}
+h2 {
+  font-family: "Raleway Heavy";
+  font-size: 28px;
+}
+h3{
+  font-family: "Raleway Bold";
+  font-size: 24px;
+} */
+
+
+/*  */
 .container {
   display: flex;
   justify-content: space-around;

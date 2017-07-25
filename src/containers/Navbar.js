@@ -41,8 +41,6 @@ class Navbar extends React.Component {
           targetOrigin={{ horizontal: "right", vertical: "top" }}
           anchorOrigin={{ horizontal: "right", vertical: "top" }}
         >
-          <MenuItem primaryText="Refresh" />
-          <MenuItem primaryText="Help" />
           <MenuItem primaryText="Sign out" onClick={this.handleSignout.bind(this)} />
         </IconMenu>
       </div>

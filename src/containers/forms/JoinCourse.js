@@ -35,7 +35,7 @@ const validate = values => {
   })
   if (
     values.courseKey &&
-    !/^-\w{19}$/.test(values.courseKey)
+    !/^-.{19}$/.test(values.courseKey)
   ) {
     errors.courseKey = 'Invalid course key'
   }
