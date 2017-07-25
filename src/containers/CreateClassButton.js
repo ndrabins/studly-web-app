@@ -11,7 +11,7 @@ class CreateClassButton extends Component {
         <FloatingActionButton
           label="addCourse"
           onTouchTap={this.handleOpen}
-          containerElement={<Link to={"/dashboard/addCourse"} />}
+          containerElement={<Link to={"/dashboard/newCourse"} />}
           backgroundColor = {"#1B6B9B"}
         >
           <ContentAdd />

@@ -2,17 +2,18 @@ import firebase from "firebase";
 
 import {
   ADD_COURSE,
+  ADD_COURSE_ERROR,
   CREATE_COURSE,
   LEAVE_COURSE,
   SELECT_COURSE,
   FETCH_ALL_COURSES_REQUEST,
-  FETCH_ALL_COURSES_SUCCESS,
+  FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
 export function selectCourse(courseKey) {
-    return dispatch => {
-      dispatch({ type: SELECT_COURSE, payload: courseKey});
-    }
+  return dispatch => {
+    dispatch({ type: SELECT_COURSE, payload: courseKey });
+  };
 }
 
 export const createCourse = ({ courseName, teacherName, beginDate }) => {
@@ -30,7 +31,9 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
-  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData;
+  new_course["/courses/" + newCourseKey + "/users/" + userUid] = true;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] =
+    courseData.courseName;
 
   // // return firebase.database().ref().update(updates);
   return dispatch => {
@@ -43,7 +46,7 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
 export const fetchAllCourses = () => {
   const userUid = firebase.auth().currentUser.uid;
 
-  //TODO: possible refactoring needed here. Storing course information under /user/ and /course/
+  // TODO: possible refactoring needed here. Storing course information under /user/ and /course/
   return dispatch => {
     //begin request
     dispatch({ type: FETCH_ALL_COURSES_REQUEST });
@@ -52,7 +55,33 @@ export const fetchAllCourses = () => {
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
-        dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val()});
+        dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val() });
       });
   };
 };
+
+export const addCourse = ({ courseKey }) => {
+  const userUid = firebase.auth().currentUser.uid;
+
+  var addUserToCourse = {};
+  addUserToCourse[`/courses/${courseKey}/users/`] = userUid;
+  addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = "Bib 101";
+  //need to check if course exists first..
+  //if it exists retrieve course name
+
+  return dispatch => {
+    firebase.database().ref().child('courses').child(courseKey).on("value", snapshot => {
+      if(snapshot.val()){
+        console.log("found course");
+         firebase.database().ref().update(addUserToCourse).then(() => {
+          dispatch({ type: ADD_COURSE });
+        });
+      }else{
+        console.log("course does not exist");
+        dispatch({ type: ADD_COURSE_ERROR });
+      }
+    });
+  };
+};
+
+//export const leaveCourse = () => {}

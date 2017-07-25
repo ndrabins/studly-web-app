@@ -7,6 +7,8 @@ export const AUTH_SUCCESS = 'AUTH_SUCCESS';
 
 //Course actions
 export const ADD_COURSE = "ADD_COURSE";
+export const ADD_COURSE_ERROR =  "ADD_COURSE_ERROR";
+
 export const CREATE_COURSE = "CREATE_COURSE";
 export const LEAVE_COURSE = "LEAVE_COURSE";
 export const SELECT_COURSE = "SELECT_COURSE";
