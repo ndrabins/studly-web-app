@@ -46,8 +46,9 @@ const validate = values => {
 class CreateAnnouncement extends Component {
   handleFormSubmit = values => {
     values["courseId"] = this.props.selectedCourse;
-    console.log(values);
     this.props.createAnnouncement(values);
+    this.props.unmountMe();
+    console.log("submitting");
   };
 
   render() {

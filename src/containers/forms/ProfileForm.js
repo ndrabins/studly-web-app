@@ -53,7 +53,6 @@ class ProfileForm extends Component {
   }
 
   handleFormSubmit = values => {
-    console.log("submitting");
     this.setState({
       isEditing: !this.state.isEditing
     })

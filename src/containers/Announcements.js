@@ -47,14 +47,25 @@ const styles = {
 };
 
 class Announcements extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      renderAnnoucementForm: false
+    }
+    this.handleChildUnmount = this.handleChildUnmount.bind(this);
+  }
+
   componentDidMount() {
     this.props.actions.fetchAnnouncements(this.props.selectedCourse);
   }
 
+  handleChildUnmount(){
+    this.setState({renderAnnoucementForm: false});
+  }
+
   announcementList() {
-    console.log("stuff");
     const announcementList = Map(this.props.announcements, (announcement, key) => {
-      console.log({announcement});
       let dateCreated = moment(announcement.dateCreated).format("llll");
 
       return (
@@ -68,7 +79,7 @@ class Announcements extends Component {
                 anchorOrigin={{horizontal: 'left', vertical: 'top'}}
                 targetOrigin={{horizontal: 'left', vertical: 'top'}}
               >
-                <MenuItem primaryText="Delete" />
+                <MenuItem primaryText="Delete" onClick={() => this.props.actions.deleteAnnouncement(this.props.selectedCourse, key)} />
               </IconMenu>
             </div>
             <h6 style={{marginTop:"0px" }}>{dateCreated}</h6>
@@ -85,7 +96,7 @@ class Announcements extends Component {
     return (
       <div style={styles.announcementStyle}>
         <h2>Announcements</h2>
-        <CreateAnnouncementForm />
+        {this.state.renderAnnoucementForm ? <CreateAnnouncementForm unmountMe={this.handleChildUnmount} /> : null}
 
         {this.announcementList()}
 
@@ -93,6 +104,7 @@ class Announcements extends Component {
           style={styles.buttonStyle}
           label="addCourse"
           backgroundColor={"#1FA186"}
+          onClick={() => this.setState({renderAnnoucementForm:!this.state.renderAnnoucementForm})}
         >
           <ContentAdd />
         </FloatingActionButton>

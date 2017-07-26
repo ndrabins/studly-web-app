@@ -35,9 +35,14 @@ export const createAnnouncement = ({
   };
 };
 
-export const deleteAnnouncement = () =>{
-
+export const deleteAnnouncement = (courseId, announcementId) => {
+  const announcementRef = firebase.database().ref(`course-announcements/${courseId}`);
+  return dispatch => {
+    dispatch({type: DELETE_ANNOUNCEMENT });
+    announcementRef.child(announcementId).remove();
+  }
 }
+
 
 export const fetchAnnouncements = (courseId) =>{
   const announcementRef = firebase.database().ref(`course-announcements/${courseId}`);
