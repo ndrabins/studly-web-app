@@ -11,7 +11,7 @@ import NavigationClose from "material-ui/svg-icons/navigation/close";
 import Avatar from "material-ui/Avatar";
 import FileFolder from "material-ui/svg-icons/file/folder";
 
-import studlyLogo from "../static/studly.png";
+import studlyLogo from "../static/studlyLogo.svg";
 
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
@@ -69,18 +69,15 @@ class Navbar extends React.Component {
     return (
       <div>
         <AppBar
-          style={{ position: "fixed", backgroundColor: "#1FA186" }}
+          style={{ position: "fixed", backgroundColor: "#303030" }}
           title={
             <span style={styles.title}>
               <Link style={{ color: "#ffffff", hover: "none" }} to="/dashboard">
-                Studly
+                <img style={{ height: "90px", width: "90px", paddingBottom:"20px"}} src={studlyLogo} />
               </Link>
             </span>
           }
           onTitleTouchTap={this.handleTouchTap}
-          iconElementLeft={
-            <img style={{ height: "50px", width: "50px" }} src={studlyLogo} />
-          }
           iconElementRight={
             this.props.authenticated
               ? this.loggedInLinks()

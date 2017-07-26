@@ -9,6 +9,7 @@ import Sidenav from "./Sidenav";
 import NewCourse from "./NewCourse";
 import CreateAssignmentForm from "./forms/CreateAssignmentForm";
 
+import Announcements from "./Announcements";
 import CourseNotes from "./CourseNotes";
 import CourseChat from "./CourseChat";
 import Assignments from "./Assignments";
@@ -31,6 +32,7 @@ class Dashboard extends React.Component {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
       paddingTop: "64px",
+      height: "100%"
     };
 
     if (this.state.drawerOpen) {
@@ -47,6 +49,7 @@ class Dashboard extends React.Component {
           <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
           <Route path={`/dashboard/assignments`} component={Assignments} />
           <Route path={`/dashboard/Profile`} component={Profile} />
+          <Route path={`/dashboard/Announcements`} component={Announcements} />
         </Switch>
       </div>
     );

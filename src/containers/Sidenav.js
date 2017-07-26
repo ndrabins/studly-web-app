@@ -80,6 +80,7 @@ class Sidenav extends React.Component {
               primaryText="Announcements"
               leftIcon={<VolumeUp color={"#FFFFFF"}/>}
               style = {{color:"#FFFFFF"}}
+              containerElement={<Link to={`/dashboard/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem

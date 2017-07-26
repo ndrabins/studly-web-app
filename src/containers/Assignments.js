@@ -14,10 +14,6 @@ import CircularProgress from "material-ui/CircularProgress";
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 
-const assignmentListStyle = {
-  margin: "20px"
-};
-
 class Assignments extends Component {
   componentDidMount() {
     this.props.actions.fetchAllAssignments(this.props.selectedCourse);

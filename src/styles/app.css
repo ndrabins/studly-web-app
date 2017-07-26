@@ -3,6 +3,12 @@
   width: 90%;
 }
 
+#app {
+  height: 100%;
+}
+
+#root > [data-reactroot] { height: 100% }
+
 html {
   height: 100%;
 }

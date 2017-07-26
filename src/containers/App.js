@@ -46,7 +46,7 @@ class App extends React.Component {
         <ConnectedRouter history={history}>
           <div>
             <Navbar history={history} />
-            <div>
+            <div style={{ height: "100vh"}}>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <PublicRoute
