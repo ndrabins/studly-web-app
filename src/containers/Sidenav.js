@@ -102,7 +102,7 @@ class Sidenav extends React.Component {
     return (
       <div>
         <Drawer
-          open={this.state.open}
+          open={this.props.sideNavOpen}
           docked={true}
           containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#303030" }}
         >
@@ -126,7 +126,8 @@ function mapStateToProps(state) {
     uid: state.auth.user.uid,
     courses: state.courses.data,
     loadingCourses: state.courses.fetchingAllCourses,
-    selectedCourse: state.courses.selectedCourse
+    selectedCourse: state.courses.selectedCourse,
+    sideNavOpen: state.utility.sideNavOpen,
   };
 }
 

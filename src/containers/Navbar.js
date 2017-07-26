@@ -1,4 +1,9 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import * as Actions from "../actions";
+
 import AppBar from "material-ui/AppBar";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
@@ -12,10 +17,6 @@ import Avatar from "material-ui/Avatar";
 import FileFolder from "material-ui/svg-icons/file/folder";
 
 import studlyLogo from "../static/studlyLogo.svg";
-
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import * as Actions from "../actions";
 
 class Navbar extends React.Component {
   handleSignout() {
@@ -65,10 +66,15 @@ class Navbar extends React.Component {
     );
   }
 
+  handleTouchMenu(){
+    this.props.actions.toggleNav(this.props.sideNavOpen)
+  }
+
   render() {
     return (
       <div>
         <AppBar
+          onLeftIconButtonTouchTap = { this.handleTouchMenu.bind(this) }
           style={{ position: "fixed", backgroundColor: "#303030" }}
           title={
             <span style={styles.title}>
@@ -98,9 +104,16 @@ const styles = {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    user: state.auth.user
+    user: state.auth.user,
+    sideNavOpen: state.utility.sideNavOpen
     // photoUrl : state.auth.user.photoUrl
   };
 }
 
-export default connect(mapStateToProps, Actions)(Navbar);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

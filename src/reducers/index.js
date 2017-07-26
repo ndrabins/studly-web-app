@@ -4,6 +4,7 @@ import CourseReducer from './courses';
 import AssignmentReducer from './assignments';
 import ProfileReducer from './profile';
 import AnnoucementReducer from './announcements';
+import UtilReducer from './utilityReducer';
 import { routerReducer } from 'react-router-redux';
 import { reducer as FormReducer } from 'redux-form';
 
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     profile: ProfileReducer,
     announcements: AnnoucementReducer,
     form: FormReducer,
+    utility: UtilReducer,
     router: routerReducer
 });
 
