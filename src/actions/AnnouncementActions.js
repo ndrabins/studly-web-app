@@ -39,6 +39,14 @@ export const deleteAnnouncement = () =>{
 
 }
 
-export const fetchAnnouncements = () =>{
+export const fetchAnnouncements = (courseId) =>{
+  const announcementRef = firebase.database().ref(`course-announcements/${courseId}`);
+  return dispatch => {
+    //begin request
+    dispatch({ type: FETCH_ANNOUNCEMENTS_REQUEST });
 
+    announcementRef.on("value", snapshot => {
+      dispatch({ type: FETCH_ANNOUNCEMENTS_SUCCESS, payload: snapshot.val() });
+    });
+  };
 }
