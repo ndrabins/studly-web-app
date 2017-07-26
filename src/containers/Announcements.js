@@ -4,13 +4,10 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import moment from "moment";
-import { Link } from "react-router-dom";
 
 import Map from "lodash/map";
 
-import RaisedButton from "material-ui/RaisedButton";
 import Paper from "material-ui/Paper";
-import Subheader from "material-ui/Subheader";
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import IconMenu from 'material-ui/IconMenu';

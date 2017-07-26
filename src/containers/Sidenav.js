@@ -17,7 +17,6 @@ import Description from "material-ui/svg-icons/action/description";
 import Grade from "material-ui/svg-icons/action/grade";
 import VolumeUp from "material-ui/svg-icons/av/volume-up";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
-import ContentSend from "material-ui/svg-icons/content/send";
 import ContentAdd from "material-ui/svg-icons/content/add";
 
 import CreateClassButton from "./CreateClassButton";

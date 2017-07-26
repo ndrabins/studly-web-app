@@ -11,14 +11,10 @@ import { TextField, DatePicker } from "redux-form-material-ui";
 
 import {
   Card,
-  CardHeader,
-  CardTitle,
-  CardText,
   CardActions
 } from "material-ui/Card";
 
 import DateRange from "material-ui/svg-icons/action/date-range";
-import RaisedButton from "material-ui/RaisedButton";
 import FlatButton from "material-ui/FlatButton";
 
 const renderTextField = props =>
