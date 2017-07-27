@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import { Route, Switch } from "react-router-dom";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import Sidenav from "./Sidenav";
 import NewCourse from "./NewCourse";
@@ -42,15 +43,17 @@ class Dashboard extends React.Component {
     return (
       <div style={contentStyle}>
         <Sidenav open={this.state.drawerOpen} />
-        <Switch>
-          <Route path={`/dashboard/newCourse`} component={NewCourse} />
-          <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
-          <Route path={`/dashboard/chat`} component={CourseChat} />
-          <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
-          <Route path={`/dashboard/assignments`} component={Assignments} />
-          <Route path={`/dashboard/Profile`} component={Profile} />
-          <Route path={`/dashboard/Announcements`} component={Announcements} />
-        </Switch>
+        <Scrollbars renderThumbVertical={props => < div {...props} className="thumb-vertical-dashboard"/>}>
+          <Switch>
+            <Route path={`/dashboard/newCourse`} component={NewCourse} />
+            <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
+            <Route path={`/dashboard/chat`} component={CourseChat} />
+            <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
+            <Route path={`/dashboard/assignments`} component={Assignments} />
+            <Route path={`/dashboard/Profile`} component={Profile} />
+            <Route path={`/dashboard/Announcements`} component={Announcements} />
+          </Switch>
+        </Scrollbars>
       </div>
     );
   }

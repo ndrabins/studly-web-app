@@ -56,3 +56,23 @@ h3{
 .CodeMirror {
   display: flexbox;
 }
+
+.thumb-vertical {
+   position: relative;
+   display: block;
+   width: 100px;
+   height: 100px;
+   cursor: pointer;
+   border-radius: inherit;
+   background-color: #EEEEEE;
+}
+
+.thumb-vertical-dashboard {
+   position: relative;
+   display: block;
+   width: 100px;
+   height: 100px;
+   cursor: pointer;
+   border-radius: inherit;
+   background-color: #767778;
+}

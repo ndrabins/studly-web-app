@@ -4,6 +4,7 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import { Link } from "react-router-dom";
+import { Scrollbars } from 'react-custom-scrollbars';
 import Map from "lodash/map";
 
 import Drawer from "material-ui/Drawer";
@@ -105,15 +106,17 @@ class Sidenav extends React.Component {
           docked={true}
           containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#303030" }}
         >
-          <div>
-            <List>
-              <Subheader style = {{color:"#FFFFFF"}}>Courses</Subheader>
-              {this.courseList()}
-            </List>
-          </div>
-          <div style={{display: "flex", justifyContent:"center" }}>
-            <CreateClassButton />
-          </div>
+          <Scrollbars renderThumbVertical={props => < div {...props} className="thumb-vertical"/>}>
+            <div>
+              <List>
+                <Subheader style = {{color:"#FFFFFF"}}>Courses</Subheader>
+                {this.courseList()}
+              </List>
+            </div>
+            <div style={{display: "flex", justifyContent:"center" }}>
+              <CreateClassButton />
+            </div>
+          </Scrollbars>
         </Drawer>
       </div>
     );
