@@ -67,7 +67,7 @@ class Announcements extends Component {
 
       return (
         <Paper style={styles.announcementDetailStyle} zDepth={2} key={key}>
-          <div style={{marginLeft:"40px", marginRight:"40px" }}>
+          <div style={{marginLeft:"40px" }}>
             <div style={{display:"flex",flexDirection:"row", justifyContent:"space-between" }}>
               <h4 style={{marginBottom:"0px" }}>{announcement.title}</h4>
               <IconMenu
