@@ -32,7 +32,7 @@ class Navbar extends React.Component {
           label="Profile"
         />
         <IconMenu
-          style={{color:"#FFFFFF" }}
+          iconStyle={{ color:"#FFFFFF" }}
           iconButtonElement={
             <IconButton>
               <MoreVertIcon />
