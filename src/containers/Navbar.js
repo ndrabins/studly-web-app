@@ -18,7 +18,7 @@ import studlyLogo from "../static/studlyLogo.svg";
 
 class Navbar extends React.Component {
   handleSignout() {
-    this.props.signOutUser();
+    this.props.actions.signOutUser();
   }
 
   loggedInLinks() {
@@ -32,6 +32,7 @@ class Navbar extends React.Component {
           label="Profile"
         />
         <IconMenu
+          style={{color:"#FFFFFF" }}
           iconButtonElement={
             <IconButton>
               <MoreVertIcon />

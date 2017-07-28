@@ -15,19 +15,22 @@ import CourseNotes from "./CourseNotes";
 import CourseChat from "./CourseChat";
 import Assignments from "./Assignments";
 import Profile from "./Profile";
+import DashboardContent from "./DashboardContent";
 
 import "../styles/app.css";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { drawerOpen: true };
   }
 
   componentDidMount() {
     this.props.actions.fetchAllCourses();
     this.props.actions.fetchProfile();
   }
+
+  // handleToggle = () => this.setState({ open: !this.state.open });
+  //handleToggle={this.handleToggle.bind(this) }
 
   render() {
     const contentStyle = {
@@ -36,15 +39,18 @@ class Dashboard extends React.Component {
       height: "100%"
     };
 
-    if (this.state.drawerOpen) {
+    if (this.props.sideNavOpen) {
       contentStyle.marginLeft = 256;
+    } else {
+      contentStyle.marginLeft = 0;
     }
 
     return (
       <div style={contentStyle}>
-        <Sidenav open={this.state.drawerOpen} />
+        <Sidenav />
         <Scrollbars renderThumbVertical={props => < div {...props} className="thumb-vertical-dashboard"/>}>
           <Switch>
+            <Route path={`/dashboard/`} exact component={DashboardContent} />
             <Route path={`/dashboard/newCourse`} component={NewCourse} />
             <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
             <Route path={`/dashboard/chat`} component={CourseChat} />
@@ -62,7 +68,8 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    courses: state.courses.data
+    courses: state.courses.data,
+    sideNavOpen: state.utility.sideNavOpen
   };
 }
 

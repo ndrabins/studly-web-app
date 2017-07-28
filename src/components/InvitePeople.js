@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import Map from "lodash/map";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
-import { List, ListItem } from "material-ui/List";
 import Paper from "material-ui/Paper";
-import Subheader from "material-ui/Subheader";
 import ContentAdd from "material-ui/svg-icons/content/add";
 import RaisedButton from "material-ui/RaisedButton";
 import Divider from "material-ui/Divider";
@@ -14,6 +12,7 @@ const styles = {
   inviteStyle: {
     color: "#FFFFFF",
     marginTop: "50px",
+    marginBottom: "50px",
     display: "flex",
     alignSelf: "center",
   },
@@ -59,7 +58,7 @@ class invitePeople extends Component {
           <h4>{course}</h4>
           <h4 style={{color:"#767778"}}>{key}</h4>
 
-          <CopyToClipboard text={"stuff"}>
+          <CopyToClipboard text={key}>
             <RaisedButton className="copyButton" backgroundColor="#F57C00" labelColor="#FFFFFF" label="Copy"/>
           </CopyToClipboard>
         </Paper>

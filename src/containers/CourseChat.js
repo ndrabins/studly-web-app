@@ -15,7 +15,13 @@ class CourseChat extends Component {
       document.getElementById("firechat-wrapper")
     );
 
-    this.chat.setUser(this.props.user.uid, "bob", function(user) {
+    let userName = "Anonymous";
+
+    if(this.props.user.displayName){
+      userName = this.props.user.displayName;
+    }
+
+    this.chat.setUser(this.props.user.uid, userName, function(user) {
       this.chat.resumeSession();
     });
   }
@@ -28,7 +34,13 @@ class CourseChat extends Component {
       document.getElementById("firechat-wrapper")
     );
 
-    this.chat.setUser(this.props.user.uid, "bob", function(user) {
+    let userName = "Anonymous";
+
+    if(this.props.user.displayName){
+      userName = this.props.user.displayName;
+    }
+
+    this.chat.setUser(this.props.user.uid, userName, function(user) {
       this.chat.resumeSession();
     });
   }

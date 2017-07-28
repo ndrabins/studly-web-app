@@ -26,15 +26,6 @@ import CreateClassButton from "./CreateClassButton";
 import InvitePeople from "../components/InvitePeople";
 
 class Sidenav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: this.props.open,
-    };
-  }
-
-  handleToggle = () => this.setState({ open: !this.state.open });
-
   handleNestedListToggle = item => {
     this.setState({
       open: item.state.open
@@ -106,7 +97,7 @@ class Sidenav extends React.Component {
             backgroundColor: "#303030"
           }}
         >
-          <Scrollbars
+           <Scrollbars
             renderThumbVertical={props =>
               <div {...props} className="thumb-vertical" />}
           >
@@ -120,7 +111,7 @@ class Sidenav extends React.Component {
               <CreateClassButton />
             </div>
             <InvitePeople courses={this.props.courses}/>
-          </Scrollbars>
+           </Scrollbars>
         </Drawer>
       </div>
     );

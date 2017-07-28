@@ -28,7 +28,7 @@ class CourseNotes extends Component {
     this.firepad = window.Firepad.fromCodeMirror(firepadRef, this.codeMirror, {
       richTextShortcuts: true,
       richTextToolbar: true,
-      defaultText: "Let's get coding!",
+      defaultText: "Crowdsource your notes with your classmates!",
       userId: this.props.user.uid
     });
   }

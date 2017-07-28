@@ -62,6 +62,11 @@ class Announcements extends Component {
   }
 
   announcementList() {
+    if(!this.props.announcements){
+      return <h4> You have no announcements. </h4>
+    }
+
+
     const announcementList = Map(this.props.announcements, (announcement, key) => {
       let dateCreated = moment(announcement.dateCreated).format("llll");
 
