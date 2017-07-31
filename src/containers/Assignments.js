@@ -9,12 +9,8 @@ import { Link } from "react-router-dom";
 
 import Map from "lodash/map";
 
-import RaisedButton from "material-ui/RaisedButton";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-
-import FloatingActionButton from "material-ui/FloatingActionButton";
-import ContentAdd from "material-ui/svg-icons/content/add";
 
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
@@ -28,15 +24,6 @@ const styles = {
     left: "auto",
     position: "fixed"
   },
-};
-
-const fabStyle = {
-    margin: 0,
-    top: 'auto',
-    right: 20,
-    bottom: 20,
-    left: 'auto',
-    position: 'fixed',
 };
 
 class Assignments extends Component {
@@ -62,7 +49,7 @@ class Assignments extends Component {
               Point Value: {assignment.pointValue}
             </div>
             <div>
-              Date Created: {assignment.dateCreated}
+              Date Created: {dateCreated}
             </div>
             <div>
               {assignment.description}
