@@ -27,7 +27,7 @@ class Navbar extends React.Component {
         <Avatar src={this.props.user.photoURL} />
         {/*src="images/uxceo-128.jpg"  */}
         <FlatButton
-          style={{ color: "#FFFFFF" }}
+          style={{ marginLeft:"3px", color: "#FFFFFF" }}
           containerElement={<Link to={`/dashboard/profile`} />}
           label="Profile"
         />

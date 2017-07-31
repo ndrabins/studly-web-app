@@ -7,7 +7,9 @@
   height: 100%;
 }
 
-#root > [data-reactroot] { height: 100% }
+#root > [data-reactroot] {
+  height: 100%;
+}
 
 html {
   height: 100%;
@@ -32,7 +34,6 @@ h3{
   font-size: 24px;
 } */
 
-
 /*  */
 .container {
   display: flex;
@@ -46,33 +47,42 @@ h3{
 }
 
 .firepad {
-  width: 90%;
+  width: 750px;
   height: 100vh;
   margin: 0px 30px 0px 30px;
 }
 
-/* Note: CodeMirror applies its own styles which can be customized in the same way.
-      To apply a background to the entire editor, we need to also apply it to CodeMirror. */
-.CodeMirror {
-  display: flexbox;
+#userlist {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  height: auto;
+  width: 175px;
 }
 
+/* Note: CodeMirror applies its own styles which can be customized in the same way.
+      To apply a background to the entire editor, we need to also apply it to CodeMirror. */
+/* .CodeMirror {
+  display: flexbox;
+} */
+
 .thumb-vertical {
-   position: relative;
-   display: block;
-   width: 100px;
-   height: 100px;
-   cursor: pointer;
-   border-radius: inherit;
-   background-color: #EEEEEE;
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: #eeeeee;
 }
 
 .thumb-vertical-dashboard {
-   position: relative;
-   display: block;
-   width: 100px;
-   height: 100px;
-   cursor: pointer;
-   border-radius: inherit;
-   background-color: #767778;
+  position: relative;
+  display: block;
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: inherit;
+  background-color: #767778;
 }

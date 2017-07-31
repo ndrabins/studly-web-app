@@ -5,11 +5,9 @@ import * as Actions from "../actions";
 import firebase from "firebase";
 
 const firepadContainerStyle = {
-  backgroundColor: "#CFD8DC"
-};
-
-const firepadStyle = {
-  flex: 1
+  backgroundColor: "#ECEFF1",
+  display:"flex",
+  justifyContent:"center"
 };
 
 class CourseNotes extends Component {
@@ -57,8 +55,7 @@ class CourseNotes extends Component {
   render() {
     return (
       <div id="firepad-container" style={firepadContainerStyle}>
-        <div id="firepad" style={firepadStyle}>
-          {" "}
+        <div id="firepad">
         </div>
       </div>
     );
