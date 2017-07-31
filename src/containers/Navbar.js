@@ -1,27 +1,52 @@
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import * as Actions from "../actions";
+
 import AppBar from "material-ui/AppBar";
 import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
-import Toggle from "material-ui/Toggle";
+
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
-import NavigationClose from "material-ui/svg-icons/navigation/close";
 
-import studlyLogo from "../static/studly.png";
+import Avatar from "material-ui/Avatar";
 
-import { connect } from "react-redux";
-import { Link } from "react-router-dom";
-import * as Actions from "../actions";
+import studlyLogo from "../static/studlyLogo.svg";
 
 class Navbar extends React.Component {
   handleSignout() {
-    this.props.signOutUser();
+    this.props.actions.signOutUser();
   }
 
   loggedInLinks() {
-    return <FlatButton onClick={() => this.handleSignout()} label="Log out" />;
+    return (
+      <div style={{display:'flex', justifyContent:'center', alignItems:'center' }}>
+        <Avatar src={this.props.user.photoURL} />
+        {/*src="images/uxceo-128.jpg"  */}
+        <FlatButton
+          style={{ marginLeft:"3px", color: "#FFFFFF" }}
+          containerElement={<Link to={`/dashboard/profile`} />}
+          label="Profile"
+        />
+        <IconMenu
+          iconStyle={{ color:"#FFFFFF" }}
+          iconButtonElement={
+            <IconButton>
+              <MoreVertIcon />
+            </IconButton>
+          }
+          targetOrigin={{ horizontal: "right", vertical: "top" }}
+          anchorOrigin={{ horizontal: "right", vertical: "top" }}
+        >
+          <MenuItem primaryText="Sign out" onClick={this.handleSignout.bind(this)} />
+        </IconMenu>
+      </div>
+    );
   }
+  //  <FlatButton onClick={() => this.handleSignout()} label="Log out" />
 
   loggedOutLinks() {
     return (
@@ -40,20 +65,24 @@ class Navbar extends React.Component {
     );
   }
 
+  handleTouchMenu(){
+    this.props.actions.toggleNav(this.props.sideNavOpen)
+  }
+
   render() {
     return (
       <div>
         <AppBar
-          style={{ position: "fixed", backgroundColor: "#5BC891" }}
+          onLeftIconButtonTouchTap = { this.handleTouchMenu.bind(this) }
+          style={{ position: "fixed", backgroundColor: "#303030" }}
           title={
             <span style={styles.title}>
               <Link style={{ color: "#ffffff", hover: "none" }} to="/dashboard">
-                Studly
+                <img style={{ height: "90px", width: "90px", paddingBottom:"20px"}} src={studlyLogo} />
               </Link>
             </span>
           }
           onTitleTouchTap={this.handleTouchTap}
-          iconElementLeft={<img style={{height:"50px", width:"50px" }}src={studlyLogo} />}
           iconElementRight={
             this.props.authenticated
               ? this.loggedInLinks()
@@ -73,8 +102,17 @@ const styles = {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    user: state.auth.user,
+    sideNavOpen: state.utility.sideNavOpen
+    // photoUrl : state.auth.user.photoUrl
   };
 }
 
-export default connect(mapStateToProps, Actions)(Navbar);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

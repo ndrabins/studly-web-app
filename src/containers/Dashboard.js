@@ -4,47 +4,62 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import { Route, Switch } from "react-router-dom";
+import { Scrollbars } from 'react-custom-scrollbars';
 
 import Sidenav from "./Sidenav";
-import AddCourseForm from "./forms/AddCourseForm";
+import NewCourse from "./NewCourse";
 import CreateAssignmentForm from "./forms/CreateAssignmentForm";
 
+import Announcements from "./Announcements";
 import CourseNotes from "./CourseNotes";
 import CourseChat from "./CourseChat";
 import Assignments from "./Assignments";
+import Profile from "./Profile";
+import DashboardContent from "./DashboardContent";
 
 import "../styles/app.css";
 
 class Dashboard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { drawerOpen: true };
   }
 
   componentDidMount() {
     this.props.actions.fetchAllCourses();
+    this.props.actions.fetchProfile();
   }
+
+  // handleToggle = () => this.setState({ open: !this.state.open });
+  //handleToggle={this.handleToggle.bind(this) }
 
   render() {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
-      paddingTop: "64px"
+      paddingTop: "64px",
+      height: "100%"
     };
 
-    if (this.state.drawerOpen) {
+    if (this.props.sideNavOpen) {
       contentStyle.marginLeft = 256;
+    } else {
+      contentStyle.marginLeft = 0;
     }
 
     return (
       <div style={contentStyle}>
-        <Sidenav open={this.state.drawerOpen} />
-        <Switch>
-          <Route path={`/dashboard/addCourse`} component={AddCourseForm} />
-          <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
-          <Route path={`/dashboard/chat`} component={CourseChat} />
-          <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
-          <Route path={`/dashboard/assignments`} component={Assignments} />
-        </Switch>
+        <Sidenav />
+        <Scrollbars renderThumbVertical={props => < div {...props} className="thumb-vertical-dashboard"/>}>
+          <Switch>
+            <Route path={`/dashboard/`} exact component={DashboardContent} />
+            <Route path={`/dashboard/newCourse`} component={NewCourse} />
+            <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
+            <Route path={`/dashboard/chat`} component={CourseChat} />
+            <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
+            <Route path={`/dashboard/assignments`} component={Assignments} />
+            <Route path={`/dashboard/Profile`} component={Profile} />
+            <Route path={`/dashboard/Announcements`} component={Announcements} />
+          </Switch>
+        </Scrollbars>
       </div>
     );
   }
@@ -53,7 +68,8 @@ class Dashboard extends React.Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    courses: state.courses.data
+    courses: state.courses.data,
+    sideNavOpen: state.utility.sideNavOpen
   };
 }
 

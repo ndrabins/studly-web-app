@@ -9,17 +9,10 @@ import { createAssignment } from "../../actions";
 import { TextField, DatePicker } from "redux-form-material-ui";
 // import { Control, Form } from 'react-redux-form';
 
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardText,
-  CardActions
-} from "material-ui/Card";
+import { Card, CardActions } from "material-ui/Card";
 
 import DateRange from "material-ui/svg-icons/action/date-range";
 import RaisedButton from "material-ui/RaisedButton";
-import FlatButton from "material-ui/FlatButton";
 
 const renderTextField = props =>
   <TextField
@@ -28,6 +21,10 @@ const renderTextField = props =>
     errorText={props.touched && props.error}
     {...props}
   />;
+
+const buttonStyle = {
+  margin: 12
+};
 
 const formStyle = {
   display: "flex",
@@ -43,6 +40,22 @@ const headerStyle = {
   backgroundColor: "#206E9B",
   color: "#FFF",
   height: "80px"
+};
+const validate = values => {
+  const errors = {};
+  const requiredFields = [
+    "assignmentTitle",
+    "pointValue",
+    "description",
+    "dueDate"
+  ];
+  requiredFields.forEach(field => {
+    if (!values[field]) {
+      errors[field] = "Required";
+    }
+  });
+
+  return errors;
 };
 
 class CreateAssignmentForm extends Component {
@@ -104,7 +117,7 @@ class CreateAssignmentForm extends Component {
                 display: "flex",
                 justifyContent: "center",
                 flexDirection: "row",
-                alignItems: "center",
+                alignItems: "center"
               }}
             >
               <DateRange />
@@ -117,7 +130,13 @@ class CreateAssignmentForm extends Component {
               />
             </div>
             <CardActions>
-              <FlatButton type="submit" label="Create Assignment" />
+              <RaisedButton
+                primary={true}
+                style={buttonStyle}
+                disabled={this.props.pristine || this.props.submitting}
+                type="submit"
+                label="Create Assignment"
+              />
             </CardActions>
           </form>
         </Card>
@@ -136,7 +155,7 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, { createAssignment })(
   reduxForm({
-    form: "CreateAssignmentForm"
-    // validate
+    form: "CreateAssignmentForm",
+    validate
   })(CreateAssignmentForm)
 );

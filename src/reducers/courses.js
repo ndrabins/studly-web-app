@@ -1,5 +1,6 @@
 import {
   ADD_COURSE,
+  ADD_COURSE_ERROR,
   CREATE_COURSE,
   LEAVE_COURSE,
   SELECT_COURSE,
@@ -12,7 +13,8 @@ import {
 
 const initialState = {
   data: [],
-  fetchingAllCourses: false
+  fetchingAllCourses: false,
+  joinCourseError: false,
 };
 
 export default function gifs(state = initialState, action) {
@@ -22,7 +24,15 @@ export default function gifs(state = initialState, action) {
         ...state
       };
     case ADD_COURSE:
-      return state;
+      return  {
+        ...state,
+        joinCourseError: false
+       }
+    case ADD_COURSE_ERROR:
+      return {
+        ...state,
+        joinCourseError: true
+       }
     case LEAVE_COURSE:
       return state;
     case SELECT_COURSE:

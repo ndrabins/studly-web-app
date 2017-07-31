@@ -28,7 +28,7 @@ export const createAssignment = ({
     description: description,
     dateCreated: dateCreated
   };
-  console.log(assignmentData);
+
 
   // Get a key for a new Post.
   var newAssignmentRef = firebase
@@ -45,10 +45,14 @@ export const createAssignment = ({
 };
 
 export const deleteAssignment = (courseId, assignmentId) => {
-  // console.log("Deleting ish");
+
   const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
 
-  return dispatch => assignmentRef.child(assignmentId).remove();
+
+  return dispatch => {
+    dispatch({type: DELETE_ASSIGNMENT });
+    assignmentRef.child(assignmentId).remove();
+  }
 }
 
 export const fetchAllAssignments = (courseId) => {

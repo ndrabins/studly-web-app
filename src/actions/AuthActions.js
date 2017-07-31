@@ -12,7 +12,6 @@ export function signUpUser(credentials) {
         authSuccess(dispatch, user);
       })
       .catch(error => {
-        console.log(error);
         dispatch(authError(error));
       });
 
@@ -31,7 +30,6 @@ export function signInUser(credentials) {
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(user => authSuccess(dispatch, user))
       .catch(error => {
-        console.log(error);
         dispatch(authError(error));
       });
 

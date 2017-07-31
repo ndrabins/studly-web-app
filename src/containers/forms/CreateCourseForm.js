@@ -5,9 +5,34 @@ import { connect } from "react-redux";
 import { createCourse } from "../../actions";
 
 import { TextField, DatePicker } from "redux-form-material-ui";
+import RaisedButton from "material-ui/RaisedButton";
+
+const styles = {
+  formStyle: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  button: {
+    margin: 12
+  },
+};
+
+const validate = values => {
+  const errors = {}
+  const requiredFields = [ 'courseName', 'teacherName', 'beginDate']
+  requiredFields.forEach(field => {
+    if (!values[ field ]) {
+      errors[ field ] = 'Required'
+    }
+  })
+
+  return errors
+}
 
 //TODO: refactor to react-redux-form - a much easier form library
-class AddCourse extends Component {
+class newCourseForm extends Component {
   handleFormSubmit = values => {
     this.props.createCourse(values);
   };
@@ -15,8 +40,7 @@ class AddCourse extends Component {
   render() {
     return (
       <div>
-        <div>add course</div>
-        <form onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+        <form style={styles.formStyle} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
           <div>
             <Field
               name="courseName"
@@ -43,9 +67,13 @@ class AddCourse extends Component {
             />
           </div>
 
-          <div>
-            <button type="submit">Submit</button>
-          </div>
+          <RaisedButton
+            primary={true}
+            style={styles.button}
+            disabled={this.props.pristine || this.props.submitting}
+            type="submit"
+            label="Create Course"
+          />
         </form>
       </div>
     );
@@ -60,8 +88,8 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, { createCourse })(
   reduxForm({
-    form: "addCourse"
-    // validate
-  })(AddCourse)
+    form: "newCourseForm",
+    validate
+  })(newCourseForm)
 );
 

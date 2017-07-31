@@ -1,23 +1,19 @@
 import firebase from "firebase";
-import keys from "lodash/keys";
-import forEach from "lodash/forEach";
 
 import {
   ADD_COURSE,
+  ADD_COURSE_ERROR,
   CREATE_COURSE,
   LEAVE_COURSE,
   SELECT_COURSE,
-  FETCH_ALL_COURSES_FAILURE,
   FETCH_ALL_COURSES_REQUEST,
-  FETCH_ALL_COURSES_SUCCESS,
-  FETCH_COURSE,
-  FETCH_COURSE_SUCCESS
+  FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
 export function selectCourse(courseKey) {
-    return dispatch => {
-      dispatch({ type: SELECT_COURSE, payload: courseKey});
-    }
+  return dispatch => {
+    dispatch({ type: SELECT_COURSE, payload: courseKey });
+  };
 }
 
 export const createCourse = ({ courseName, teacherName, beginDate }) => {
@@ -26,7 +22,8 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
-    dateCreated: new Date()
+    dateCreated: new Date(),
+    users: userUid
   };
 
   // Get a key for a new Post.
@@ -35,7 +32,7 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
-  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData.courseName;
 
   // // return firebase.database().ref().update(updates);
   return dispatch => {
@@ -47,11 +44,8 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
 
 export const fetchAllCourses = () => {
   const userUid = firebase.auth().currentUser.uid;
-  const courseRef = firebase.database().ref("courses/");
 
-  let data = [];
-
-  //TODO: possible refactoring needed here. Storing course information under /user/ and /course/
+  // TODO: possible refactoring needed here. Storing course information under /user/ and /course/
   return dispatch => {
     //begin request
     dispatch({ type: FETCH_ALL_COURSES_REQUEST });
@@ -60,14 +54,35 @@ export const fetchAllCourses = () => {
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
-        // let courseKeys = keys(snapshot.val());
-        // forEach(courseKeys, function(key) {
-        //   firebase.database().ref(`courses/${key}`).on("value", snapshot => {
-        //     data.push(snapshot.val());
-        //   });
-        // });
-        dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val()});
+        dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val() });
       });
-      // dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: data });
   };
 };
+
+export const addCourse = ({ courseKey }) => {
+  const userUid = firebase.auth().currentUser.uid;
+
+
+  //need to check if course exists first..
+  //if it exists retrieve course name
+
+  return dispatch => {
+    firebase.database().ref().child('courses').child(courseKey).on("value", snapshot => {
+      if(snapshot.val()){
+        let courseName = snapshot.val().courseName;
+        var addUserToCourse = {};
+        addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
+        addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
+
+         firebase.database().ref().update(addUserToCourse).then(() => {
+          dispatch({ type: ADD_COURSE });
+        });
+      }else{
+        console.log("course does not exist");
+        dispatch({ type: ADD_COURSE_ERROR });
+      }
+    });
+  };
+};
+
+//export const leaveCourse = () => {}

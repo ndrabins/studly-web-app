@@ -5,6 +5,7 @@ import { history } from "../store/configureStore";
 import { connect } from "react-redux";
 
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { StudlyTheme } from '../styles/studlyTheme';
 
 import Home from "./Home";
 import Signup from "./Signup";
@@ -42,11 +43,11 @@ const PublicRoute = ({ component: Component, authenticated, ...props }) => {
 class App extends React.Component {
   render() {
     return (
-      <MuiThemeProvider>
+      <MuiThemeProvider muiTheme={ StudlyTheme }>
         <ConnectedRouter history={history}>
           <div>
             <Navbar history={history} />
-            <div>
+            <div style={{ height: "100vh"}}>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <PublicRoute

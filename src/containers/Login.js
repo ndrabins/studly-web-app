@@ -54,7 +54,7 @@ class Login extends React.Component {
   render() {
     if (this.props.loading) {
       return (
-        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center', alignItems:'center'}}>
           <CircularProgress size={80} thickness={5} />
         </div>
       );

@@ -4,12 +4,15 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
 import { Link } from "react-router-dom";
+import { Scrollbars } from "react-custom-scrollbars";
 import Map from "lodash/map";
 
 import Drawer from "material-ui/Drawer";
 
 import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
+import FlatButton from "material-ui/FlatButton";
+import Dialog from 'material-ui/Dialog';
 
 import School from "material-ui/svg-icons/social/school";
 import QuestionAnswer from "material-ui/svg-icons/action/question-answer";
@@ -17,25 +20,12 @@ import Description from "material-ui/svg-icons/action/description";
 import Grade from "material-ui/svg-icons/action/grade";
 import VolumeUp from "material-ui/svg-icons/av/volume-up";
 import ContentInbox from "material-ui/svg-icons/content/inbox";
-import ContentSend from "material-ui/svg-icons/content/send";
+import ContentAdd from "material-ui/svg-icons/content/add";
 
 import CreateClassButton from "./CreateClassButton";
-
-const listStyle = {
-  textColor: `#ffffff !important`
-}
+import InvitePeople from "../components/InvitePeople";
 
 class Sidenav extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      open: this.props.open
-    };
-  }
-
-
-  handleToggle = () => this.setState({ open: !this.state.open });
-
   handleNestedListToggle = item => {
     this.setState({
       open: item.state.open
@@ -43,18 +33,17 @@ class Sidenav extends React.Component {
   };
 
   courseList() {
-    if(!this.props.courses){
-      return <div> You are in no courses </div>
+    if (!this.props.courses) {
+      return <div> You are in no courses </div>;
     }
-
     const courseList = Map(this.props.courses, (course, key) => {
       return (
         <ListItem
           key={key}
-          primaryText={course.courseName}
+          primaryText={course}
           leftIcon={<ContentInbox color={"#FFFFFF"} />}
           initiallyOpen={true}
-          style = {{color:"#FFFFFF"}}
+          style={{ color: "#FFFFFF" }}
           primaryTogglesNestedList={true}
           nestedItems={[
             <ListItem
@@ -62,29 +51,30 @@ class Sidenav extends React.Component {
               primaryText="Chat"
               leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
               containerElement={<Link to={`/dashboard/chat`} />}
-              style = {{color:"#FFFFFF"}}
+              style={{ color: "#FFFFFF" }}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={2}
               primaryText="Notes"
-              leftIcon={<Description color={"#FFFFFF"}/>}
-              style = {{color:"#FFFFFF"}}
+              leftIcon={<Description color={"#FFFFFF"} />}
+              style={{ color: "#FFFFFF" }}
               onClick={() => this.props.actions.selectCourse(key)}
               containerElement={<Link to={`/dashboard/${key}/notes`} />}
             />,
             <ListItem
               key={3}
               primaryText="Announcements"
-              leftIcon={<VolumeUp color={"#FFFFFF"}/>}
-              style = {{color:"#FFFFFF"}}
+              leftIcon={<VolumeUp color={"#FFFFFF"} />}
+              style={{ color: "#FFFFFF" }}
+              containerElement={<Link to={`/dashboard/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={4}
               primaryText="Assignments"
               leftIcon={<School color={"#FFFFFF"} />}
-              style = {{color:"#FFFFFF"}}
+              style={{ color: "#FFFFFF" }}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />
@@ -99,19 +89,29 @@ class Sidenav extends React.Component {
     return (
       <div>
         <Drawer
-          open={this.state.open}
+          open={this.props.sideNavOpen}
           docked={true}
-          containerStyle={{ height: "calc(100% - 64px)", top: 64, backgroundColor:"#424242" }}
+          containerStyle={{
+            height: "calc(100% - 64px)",
+            top: 64,
+            backgroundColor: "#303030"
+          }}
         >
-          <div>
-            <List>
-              <Subheader style = {{color:"#FFFFFF"}}>Courses</Subheader>
-              {this.courseList()}
-            </List>
-          </div>
-          <div style={{display: "flex", justifyContent:"center" }}>
-            <CreateClassButton />
-          </div>
+           <Scrollbars
+            renderThumbVertical={props =>
+              <div {...props} className="thumb-vertical" />}
+          >
+            <div>
+              <List>
+                <Subheader style={{ color: "#FFFFFF" }}>Courses</Subheader>
+                {this.courseList()}
+              </List>
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <CreateClassButton />
+            </div>
+            <InvitePeople courses={this.props.courses}/>
+           </Scrollbars>
         </Drawer>
       </div>
     );
@@ -123,7 +123,8 @@ function mapStateToProps(state) {
     uid: state.auth.user.uid,
     courses: state.courses.data,
     loadingCourses: state.courses.fetchingAllCourses,
-    selectedCourse: state.courses.selectedCourse
+    selectedCourse: state.courses.selectedCourse,
+    sideNavOpen: state.utility.sideNavOpen
   };
 }
 

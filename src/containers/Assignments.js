@@ -13,11 +13,21 @@ import RaisedButton from "material-ui/RaisedButton";
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 
+import FloatingActionButton from "material-ui/FloatingActionButton";
+import ContentAdd from "material-ui/svg-icons/content/add";
+
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 
-const assignmentListStyle = {
-  margin: "20px"
+const styles = {
+  buttonStyle: {
+    margin: 0,
+    top: "auto",
+    right: 20,
+    bottom: 20,
+    left: "auto",
+    position: "fixed"
+  },
 };
 
 const fabStyle = {
@@ -62,7 +72,11 @@ class Assignments extends Component {
                 <FlatButton
                   style={{ color: "#E6463B" }}
                   label="Delete Assignment"
-                  onClick={() => this.props.actions.deleteAssignment(this.props.selectedCourse, key)}
+                  onClick={() =>
+                    this.props.actions.deleteAssignment(
+                      this.props.selectedCourse,
+                      key
+                    )}
                 />
               </CardActions>
             </div>
@@ -91,17 +105,18 @@ class Assignments extends Component {
           }}
         >
           <h2>Assignments</h2>
-          <FloatingActionButton
-            label="Create Assignment"
-            containerElement={<Link to={`/dashboard/create-assignment`} />}
-            style={fabStyle}
-          >
-            <ContentAdd />
-          </FloatingActionButton>
         </div>
         <div style={{ margin: "20px" }}>
           {this.assignmentList()}
         </div>
+        <FloatingActionButton
+          style={styles.buttonStyle}
+          label="addCourse"
+          backgroundColor={"#1FA186"}
+          containerElement={<Link to={"/dashboard/create-assignment"} />}
+        >
+          <ContentAdd />
+        </FloatingActionButton>
       </div>
     );
   }
