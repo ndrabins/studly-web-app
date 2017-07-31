@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
+import Preloader from "../utils/Preloader";
 
 import moment from "moment";
 import { Link } from "react-router-dom";
@@ -9,7 +10,8 @@ import { Link } from "react-router-dom";
 import Map from "lodash/map";
 
 import RaisedButton from "material-ui/RaisedButton";
-import CircularProgress from "material-ui/CircularProgress";
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
 
 import FloatingActionButton from "material-ui/FloatingActionButton";
 import ContentAdd from "material-ui/svg-icons/content/add";
@@ -26,6 +28,15 @@ const styles = {
     left: "auto",
     position: "fixed"
   },
+};
+
+const fabStyle = {
+    margin: 0,
+    top: 'auto',
+    right: 20,
+    bottom: 20,
+    left: 'auto',
+    position: 'fixed',
 };
 
 class Assignments extends Component {
@@ -79,9 +90,7 @@ class Assignments extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <CircularProgress size={80} thickness={5} />
-        </div>
+        <Preloader />
       );
     }
 
