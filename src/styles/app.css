@@ -86,3 +86,7 @@ h3{
   border-radius: inherit;
   background-color: #767778;
 }
+
+.control-label {
+  color: #FFFFFF;
+}
