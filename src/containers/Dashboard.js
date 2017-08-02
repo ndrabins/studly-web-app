@@ -8,6 +8,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import Sidenav from "./Sidenav";
 import NewCourse from "./NewCourse";
+import Loader from "../utils/Preloader";
 import CreateAssignmentForm from "./forms/CreateAssignmentForm";
 
 import Announcements from "./Announcements";
@@ -24,12 +25,6 @@ class Dashboard extends React.Component {
     // this.props.actions.fetchStudlyData();
     this.props.actions.fetchAllCourses();
     this.props.actions.fetchProfile();
-    // this.props.actions.fetchAllAssignments2(this.props.courses);
-  }
-
-  componentDidUpdate(){
-    // console.log("updating assignments");
-    // this.props.actions.fetchAllAssignments(this.props.courses);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -50,6 +45,12 @@ class Dashboard extends React.Component {
       contentStyle.marginLeft = 256;
     } else {
       contentStyle.marginLeft = 0;
+    }
+
+    if(this.props.loading || this.props.loadingCourses){
+      return (
+        <Loader />
+      );
     }
 
     return (
@@ -76,7 +77,9 @@ function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     courses: state.courses.data,
-    sideNavOpen: state.utility.sideNavOpen
+    sideNavOpen: state.utility.sideNavOpen,
+    loading: state.assignments.loading,
+    loadingCourses: state.courses.fetchingAllCourses
   };
 }
 

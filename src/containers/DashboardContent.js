@@ -28,10 +28,23 @@ const styles = {
 };
 
 class DashboardContent extends Component {
-  getEvents() {
-    let allAssignments = this.props.assignments;
+  constructor(props) {
+    super(props);
+    this.state = {
+      events: []
+    };
+  }
 
-    let events = [];
+  getEvents() {
+    //I DON"T UNDERSTAND THIS BUG
+    //For some reason even though this.props.assignments has data this function returns nothing at the end of it...
+    //If you refresh the page tho it works???
+    //AAAAHHHHHHHHHHHH
+
+
+    // console.log("getting events");
+    let allAssignments = this.props.assignments;
+    // console.log(allAssignments);
 
     //formatting for calendar
     let assignmentEvents = Map(
@@ -51,6 +64,8 @@ class DashboardContent extends Component {
         return eventsForCourse;
       }
     );
+    // console.log(Flatten(allAssignments));
+    // console.log(Flatten(assignmentEvents));
     return Flatten(assignmentEvents);
   }
 
@@ -69,10 +84,8 @@ class DashboardContent extends Component {
 
 function mapStateToProps(state) {
   return {
-    authenticated: state.auth.authenticated,
-    courses: state.courses.data,
-    sideNavOpen: state.utility.sideNavOpen,
-    assignments: state.assignments.data
+    assignments: state.assignments.data,
+    loading: state.assignments.loading
   };
 }
 

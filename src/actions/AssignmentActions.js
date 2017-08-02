@@ -56,34 +56,23 @@ export const deleteAssignment = (courseId, assignmentId) => {
   };
 };
 
-// export const fetchAllAssignmentsOld = courseId => {
-//   const assignmentRef = firebase
-//     .database()
-//     .ref(`course-assignments/${courseId}`);
-//   return dispatch => {
-//     //begin request
-//     dispatch({ type: FETCH_ASSIGNMENTS_REQUEST });
-
-//     assignmentRef.on("value", snapshot => {
-//       dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload: snapshot.val() });
-//     });
-//   };
-// };
-
 export const fetchAllAssignments = courseKeys => {
   // const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
   let data = {};
-  Map(courseKeys, (courseName, courseKey) => {
-    let assignmentRef = firebase
-      .database()
-      .ref(`course-assignments/${courseKey}`);
-
-    assignmentRef.on("value", snapshot => {
-      data[courseKey] = snapshot.val();
-    });
-  });
 
   return dispatch => {
-    dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload:data });
+    dispatch({ type: FETCH_ASSIGNMENTS_REQUEST });
+
+    // Promise.all().
+    Map(courseKeys, (courseName, courseKey) => {
+      let assignmentRef = firebase
+        .database()
+        .ref(`course-assignments/${courseKey}`);
+
+      assignmentRef.on("value", snapshot => {
+        data[courseKey] = snapshot.val();
+      });
+    });
+    dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload: data });
   };
 };

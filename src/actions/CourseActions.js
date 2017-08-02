@@ -10,8 +10,6 @@ import {
   FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
-import { fetchAllAssignments2 } from './AssignmentActions';
-
 export function selectCourse(courseKey) {
   return dispatch => {
     dispatch({ type: SELECT_COURSE, payload: courseKey });
