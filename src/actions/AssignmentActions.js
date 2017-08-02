@@ -1,11 +1,13 @@
 import firebase from "firebase";
 import moment from "moment";
 
+import Map from "lodash/map";
+
 import {
   CREATE_ASSIGNMENT,
   FETCH_ASSIGNMENTS_REQUEST,
   FETCH_ASSIGNMENTS_SUCCESS,
-  DELETE_ASSIGNMENT,
+  DELETE_ASSIGNMENT
 } from "./Types";
 
 export const createAssignment = ({
@@ -29,7 +31,6 @@ export const createAssignment = ({
     dateCreated: dateCreated
   };
 
-
   // Get a key for a new Post.
   var newAssignmentRef = firebase
     .database()
@@ -45,18 +46,20 @@ export const createAssignment = ({
 };
 
 export const deleteAssignment = (courseId, assignmentId) => {
-
-  const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
-
+  const assignmentRef = firebase
+    .database()
+    .ref(`course-assignments/${courseId}`);
 
   return dispatch => {
-    dispatch({type: DELETE_ASSIGNMENT });
+    dispatch({ type: DELETE_ASSIGNMENT });
     assignmentRef.child(assignmentId).remove();
-  }
-}
+  };
+};
 
-export const fetchAllAssignments = (courseId) => {
-  const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
+export const fetchAllAssignmentsOld = courseId => {
+  const assignmentRef = firebase
+    .database()
+    .ref(`course-assignments/${courseId}`);
   return dispatch => {
     //begin request
     dispatch({ type: FETCH_ASSIGNMENTS_REQUEST });
@@ -64,5 +67,23 @@ export const fetchAllAssignments = (courseId) => {
     assignmentRef.on("value", snapshot => {
       dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload: snapshot.val() });
     });
+  };
+};
+
+export const fetchAllAssignments = courseKeys => {
+  // const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
+  let data = {};
+  Map(courseKeys, (courseName, courseKey) => {
+    let assignmentRef = firebase
+      .database()
+      .ref(`course-assignments/${courseKey}`);
+
+    assignmentRef.on("value", snapshot => {
+      data[courseKey] = snapshot.val();
+    });
+  });
+
+  return dispatch => {
+    dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload:data });
   };
 };

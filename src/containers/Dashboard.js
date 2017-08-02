@@ -20,17 +20,19 @@ import DashboardContent from "./DashboardContent";
 import "../styles/app.css";
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
+    // this.props.actions.fetchStudlyData();
     this.props.actions.fetchAllCourses();
     this.props.actions.fetchProfile();
+    // this.props.actions.fetchAllAssignments2(this.props.courses);
   }
 
-  // handleToggle = () => this.setState({ open: !this.state.open });
-  //handleToggle={this.handleToggle.bind(this) }
+  componentDidUpdate(){
+    console.log("updating assignments");
+    this.props.actions.fetchAllAssignments(this.props.courses);
+  }
+
+
 
   render() {
     const contentStyle = {

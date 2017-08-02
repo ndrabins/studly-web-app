@@ -27,12 +27,11 @@ const styles = {
 };
 
 class Assignments extends Component {
-  componentDidMount() {
-    this.props.actions.fetchAllAssignments(this.props.selectedCourse);
-  }
 
   assignmentList() {
-    const assignmentList = Map(this.props.assignments, (assignment, key) => {
+    let courseAssignments = this.props.assignments[this.props.selectedCourse];
+
+    const assignmentList = Map(courseAssignments, (assignment, key) => {
       var dueDate = moment(assignment.dueDate).format("llll");
       var dateCreated = moment(assignment.dateCreated).format("llll");
 

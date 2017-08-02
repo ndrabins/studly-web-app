@@ -10,6 +10,8 @@ import {
   FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
+import { fetchAllAssignments2 } from './AssignmentActions';
+
 export function selectCourse(courseKey) {
   return dispatch => {
     dispatch({ type: SELECT_COURSE, payload: courseKey });
@@ -54,7 +56,9 @@ export const fetchAllCourses = () => {
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
+
         dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val() });
+        // let courseKeys = snapshot.val().keys();
       });
   };
 };
