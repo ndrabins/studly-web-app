@@ -28,12 +28,17 @@ class Dashboard extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log("updating assignments");
-    this.props.actions.fetchAllAssignments(this.props.courses);
+    // console.log("updating assignments");
+    // this.props.actions.fetchAllAssignments(this.props.courses);
   }
 
+  componentWillReceiveProps(nextProps) {
+    const newCourses = nextProps.courses;
 
-
+    if (newCourses !== this.props.courses) {
+      this.props.actions.fetchAllAssignments(newCourses);
+    }
+  }
   render() {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
