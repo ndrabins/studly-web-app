@@ -90,3 +90,7 @@ h3{
 .control-label {
   color: #FFFFFF;
 }
+
+.form-group{
+  width: 100%
+}

@@ -5,7 +5,10 @@ import * as Actions from "../actions";
 
 import Loader from "../utils/Preloader";
 import FlatButton from 'material-ui/FlatButton';
-import ActionAndroid from 'material-ui/svg-icons/action/android';
+import Google from 'mui-icons/fontawesome/google';
+import Facebook from 'mui-icons/fontawesome/facebook-official';
+import SignIn from 'mui-icons/fontawesome/sign-in';
+
 
 const styles = {
   form: {
@@ -125,18 +128,17 @@ class Login extends React.Component {
                 style={styles.button}
                 type="submit"
                 label="Sign In"
-                labelColor="#FFFFFF"
                 backgroundColor="#1FA186"
                 hoverColor="#66CAB6"
+                icon={<SignIn />}
               />
 
               <FlatButton
                 label="Sign in with Facebook"
                 onClick={this.handleFacebookSignIn}
                 backgroundColor="#3B5998"
-                labelColor="#FFFFFF"
                 hoverColor="#5772AC"
-                icon={<ActionAndroid />}
+                icon={<Facebook />}
                 style={styles.button}
               />
               <FlatButton
@@ -144,7 +146,7 @@ class Login extends React.Component {
                 onClick={this.handleGoogleSignIn}
                 backgroundColor="#db3236"
                 hoverColor="#F0585C"
-                icon={<ActionAndroid />}
+                icon={<Google />}
                 style={styles.button}
                 />
             </div>

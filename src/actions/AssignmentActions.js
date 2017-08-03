@@ -46,6 +46,9 @@ export const createAssignment = ({
 };
 
 export const deleteAssignment = (courseId, assignmentId) => {
+  console.log(courseId);
+  console.log(assignmentId);
+
   const assignmentRef = firebase
     .database()
     .ref(`course-assignments/${courseId}`);
@@ -56,21 +59,27 @@ export const deleteAssignment = (courseId, assignmentId) => {
   };
 };
 
+
+//TODO
+//Write all assignmennts to user?
+  //that means every course update have to update EVERY user.
 export const fetchAllAssignments = courseKeys => {
-  // const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
+  // const assignmentRef = firebase.database().ref(`course-assignments/`);
   let data = {};
+  let randoData;
 
   return dispatch => {
     dispatch({ type: FETCH_ASSIGNMENTS_REQUEST });
 
     // Promise.all().
-    Map(courseKeys, (courseName, courseKey) => {
+    randoData = Map(courseKeys, (courseName, courseKey) => {
       let assignmentRef = firebase
         .database()
         .ref(`course-assignments/${courseKey}`);
 
       assignmentRef.on("value", snapshot => {
-        data[courseKey] = snapshot.val();
+         data[courseKey] = snapshot.val();
+
       });
     });
     dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload: data });
