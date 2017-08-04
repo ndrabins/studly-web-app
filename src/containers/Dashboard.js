@@ -25,15 +25,9 @@ class Dashboard extends React.Component {
     // this.props.actions.fetchStudlyData();
     this.props.actions.fetchAllCourses();
     this.props.actions.fetchProfile();
+    this.props.actions.fetchUserAssignments();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const newCourses = nextProps.courses;
-
-    if (newCourses !== this.props.courses) {
-      this.props.actions.fetchAllAssignments(newCourses);
-    }
-  }
   render() {
     const contentStyle = {
       transition: "margin-left 450ms cubic-bezier(0.23, 1, 0.32, 1)",
@@ -47,7 +41,7 @@ class Dashboard extends React.Component {
       contentStyle.marginLeft = 0;
     }
 
-    if(this.props.loading || this.props.loadingCourses){
+    if(this.props.loadingCourses){
       return (
         <Loader />
       );
@@ -78,7 +72,6 @@ function mapStateToProps(state) {
     authenticated: state.auth.authenticated,
     courses: state.courses.data,
     sideNavOpen: state.utility.sideNavOpen,
-    loading: state.assignments.loading,
     loadingCourses: state.courses.fetchingAllCourses
   };
 }

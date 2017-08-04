@@ -36,36 +36,18 @@ class DashboardContent extends Component {
   }
 
   getEvents() {
-    //I DON"T UNDERSTAND THIS BUG
-    //For some reason even though this.props.assignments has data this function returns nothing at the end of it...
-    //If you refresh the page tho it works???
-    //AAAAHHHHHHHHHHHH
-
-
-    // console.log("getting events");
     let allAssignments = this.props.assignments;
-    // console.log(allAssignments);
 
-    //formatting for calendar
     let assignmentEvents = Map(
       allAssignments,
-      (courseAssignments, courseKey) => {
-        let eventsForCourse = Map(
-          courseAssignments,
-          (assignment, assignmentKey) => {
-            assignment["title"] = assignment["assignmentTitle"];
-            let dueDate = moment(assignment.dueDate).toDate();
-            let endDate = moment(assignment.dueDate).add(1, "minute").toDate();
-            assignment["dueDate"] = dueDate;
-            assignment["endDate"] = endDate;
-            return assignment;
-          }
-        );
-        return eventsForCourse;
+      (assignment, assignmentKey) => {
+        let dueDate = moment(assignment.dueDate).toDate();
+        let endDate = moment(assignment.dueDate).add(1, "minute").toDate();
+        assignment["dueDate"] = dueDate;
+        assignment["endDate"] = endDate;
+        return assignment;
       }
     );
-    // console.log(Flatten(allAssignments));
-    // console.log(Flatten(assignmentEvents));
     return Flatten(assignmentEvents);
   }
 
@@ -84,7 +66,7 @@ class DashboardContent extends Component {
 
 function mapStateToProps(state) {
   return {
-    assignments: state.assignments.data,
+    assignments: state.assignments.userAssignments,
     loading: state.assignments.loading
   };
 }
