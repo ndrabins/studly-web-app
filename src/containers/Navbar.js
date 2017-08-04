@@ -73,6 +73,7 @@ class Navbar extends React.Component {
     return (
       <div>
         <AppBar
+          showMenuIconButton={this.props.authenticated}
           onLeftIconButtonTouchTap = { this.handleTouchMenu.bind(this) }
           style={{ position: "fixed", backgroundColor: "#303030" }}
           title={

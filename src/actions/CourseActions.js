@@ -34,7 +34,6 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
   new_course["/courses/" + newCourseKey] = courseData;
   new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData.courseName;
 
-  // // return firebase.database().ref().update(updates);
   return dispatch => {
     firebase.database().ref().update(new_course).then(() => {
       dispatch({ type: CREATE_COURSE });
@@ -54,17 +53,15 @@ export const fetchAllCourses = () => {
       .database()
       .ref(`users/${userUid}/courses`)
       .on("value", snapshot => {
+
         dispatch({ type: FETCH_ALL_COURSES_SUCCESS, payload: snapshot.val() });
+        // let courseKeys = snapshot.val().keys();
       });
   };
 };
 
 export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
-
-
-  //need to check if course exists first..
-  //if it exists retrieve course name
 
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).on("value", snapshot => {
@@ -74,9 +71,10 @@ export const addCourse = ({ courseKey }) => {
         addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
         addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
 
-         firebase.database().ref().update(addUserToCourse).then(() => {
+        firebase.database().ref().update(addUserToCourse).then(() => {
           dispatch({ type: ADD_COURSE });
         });
+        //Need to take all course-assignments for course and append it to user-assignemnts/{userUID}
       }else{
         console.log("course does not exist");
         dispatch({ type: ADD_COURSE_ERROR });

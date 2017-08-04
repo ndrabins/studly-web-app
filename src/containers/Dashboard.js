@@ -8,6 +8,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 
 import Sidenav from "./Sidenav";
 import NewCourse from "./NewCourse";
+import Loader from "../utils/Preloader";
 import CreateAssignmentForm from "./forms/CreateAssignmentForm";
 
 import Announcements from "./Announcements";
@@ -20,17 +21,12 @@ import DashboardContent from "./DashboardContent";
 import "../styles/app.css";
 
 class Dashboard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
+    // this.props.actions.fetchStudlyData();
     this.props.actions.fetchAllCourses();
     this.props.actions.fetchProfile();
+    this.props.actions.fetchUserAssignments();
   }
-
-  // handleToggle = () => this.setState({ open: !this.state.open });
-  //handleToggle={this.handleToggle.bind(this) }
 
   render() {
     const contentStyle = {
@@ -43,6 +39,12 @@ class Dashboard extends React.Component {
       contentStyle.marginLeft = 256;
     } else {
       contentStyle.marginLeft = 0;
+    }
+
+    if(this.props.loadingCourses){
+      return (
+        <Loader />
+      );
     }
 
     return (
@@ -69,7 +71,8 @@ function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
     courses: state.courses.data,
-    sideNavOpen: state.utility.sideNavOpen
+    sideNavOpen: state.utility.sideNavOpen,
+    loadingCourses: state.courses.fetchingAllCourses
   };
 }
 

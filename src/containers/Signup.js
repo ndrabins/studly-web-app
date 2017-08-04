@@ -2,8 +2,46 @@ import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import * as Actions from "../actions";
+import Loader from "../utils/Preloader";
 
-import CircularProgress from "material-ui/CircularProgress";
+import FlatButton from "material-ui/FlatButton";
+import Google from 'mui-icons/fontawesome/google';
+import Facebook from 'mui-icons/fontawesome/facebook-official';
+import SignUp from 'mui-icons/fontawesome/user-plus';
+
+
+
+const styles = {
+  form: {
+    width:"400px",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+    flexDirection:"column",
+  },
+  login: {
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+    height:"100%",
+    flexDirection:"column",
+    backgroundColor:"#303030"
+  },
+  buttons:{
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"column",
+    width:"400px",
+  },
+  button:{
+    margin:"10px",
+    width:"300px",
+    color: "#FFFFFF"
+  }
+}
 
 const validate = values => {
   const errors = {};
@@ -34,9 +72,18 @@ class Signup extends React.Component {
     this.props.signUpUser(values);
   };
 
+  handleGoogleSignIn = () => {
+    this.props.loginWithGoogle();
+  };
+  handleFacebookSignIn = () => {
+    this.props.loginWithFacebook();
+  };
+
   renderField = ({ input, label, type, meta: { touched, error } }) =>
     <fieldset className={`form-group ${touched && error ? "has-error" : ""}`}>
-      <label className="control-label">{label}</label>
+      <label className="control-label">
+        {label}
+      </label>
       <div>
         <input
           {...input}
@@ -44,7 +91,11 @@ class Signup extends React.Component {
           className="form-control"
           type={type}
         />
-        {touched && error && <div className="help-block">{error}</div>}
+        {touched &&
+          error &&
+          <div className="help-block">
+            {error}
+          </div>}
       </div>
     </fieldset>;
 
@@ -61,43 +112,65 @@ class Signup extends React.Component {
 
   render() {
     if (this.props.loading) {
-      return (
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <CircularProgress size={80} thickness={5} />
-        </div>
-      );
+      return <Loader />;
     }
 
     return (
-      <div className="container">
-        <div className="col-md-6">
-          <h2 className="text-center">Sign Up</h2>
+      <div style={styles.login}>
 
-          {this.renderAuthenticationError()}
+        {this.renderAuthenticationError()}
 
-          <form style={{marginTop:"80px" }} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
-            <Field
-              name="email"
-              type="text"
-              component={this.renderField}
-              label="Email"
-            />
-            <Field
-              name="password"
-              type="password"
-              component={this.renderField}
-              label="Password"
-            />
-            <Field
-              name="passwordConfirmation"
-              type="password"
-              component={this.renderField}
-              label="Password Confirmation"
-            />
+        <form
+          style={styles.form}
+          onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
+        >
+          <Field
+            name="email"
+            type="text"
+            component={this.renderField}
+            label="Email"
+          />
+          <Field
+            name="password"
+            type="password"
+            component={this.renderField}
+            label="Password"
+          />
+          <Field
+            name="passwordConfirmation"
+            type="password"
+            component={this.renderField}
+            label="Password Confirmation"
+          />
 
-            <button action="submit" className="btn btn-primary">Sign up</button>
-          </form>
-        </div>
+          <div style={styles.buttons}>
+              <FlatButton
+                style={styles.button}
+                type="submit"
+                label="Sign Up"
+                backgroundColor="#1FA186"
+                hoverColor="#66CAB6"
+                icon={<SignUp />}
+              />
+
+              <FlatButton
+                label="Sign up with Facebook"
+                onClick={this.handleFacebookSignIn}
+                backgroundColor="#3B5998"
+                hoverColor="#5772AC"
+                icon={<Facebook />}
+                style={styles.button}
+              />
+              <FlatButton
+                label="Sign up with Google"
+                onClick={this.handleGoogleSignIn}
+                backgroundColor="#db3236"
+                hoverColor="#F0585C"
+                icon={<Google />}
+                style={styles.button}
+                />
+            </div>
+        </form>
       </div>
     );
   }

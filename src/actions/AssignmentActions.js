@@ -1,11 +1,15 @@
 import firebase from "firebase";
 import moment from "moment";
 
+import Map from "lodash/map";
+
 import {
   CREATE_ASSIGNMENT,
   FETCH_ASSIGNMENTS_REQUEST,
   FETCH_ASSIGNMENTS_SUCCESS,
-  DELETE_ASSIGNMENT,
+  FETCH_USER_ASSIGNMENTS_REQUEST,
+  FETCH_USER_ASSIGNMENTS_SUCCESS,
+  DELETE_ASSIGNMENT
 } from "./Types";
 
 export const createAssignment = ({
@@ -22,47 +26,73 @@ export const createAssignment = ({
 
   var assignmentData = {
     courseId: courseId,
-    assignmentTitle: assignmentTitle,
+    title: assignmentTitle,
     dueDate: dueDateString,
     pointValue: pointValue,
     description: description,
     dateCreated: dateCreated
   };
 
+  var newAssignmentKey = firebase.database().ref().child(`course-assignments/${courseId}`).push().key;
 
-  // Get a key for a new Post.
-  var newAssignmentRef = firebase
-    .database()
-    .ref()
-    .child(`course-assignments/${courseId}`)
-    .push();
-
+  var new_assignment = {};
+  new_assignment[`course-assignments/${courseId}/${newAssignmentKey}`] = assignmentData;
+  //Find all users in the course and update all their personal assignments
   return dispatch => {
-    newAssignmentRef.set(assignmentData).then(() => {
-      dispatch({ type: CREATE_ASSIGNMENT });
+
+    const courseUsersRef = firebase.database().ref(`courses/${courseId}/users`);
+    courseUsersRef.once("value", snapshot => {
+      Map(snapshot.val(), (user, userUid) => {
+        new_assignment[`user-assignments/${userUid}/${newAssignmentKey}`] = assignmentData;
+      });
+      firebase.database().ref().update(new_assignment).then(() => {
+        dispatch({ type: CREATE_ASSIGNMENT });
+      });
     });
-  };
+  }
 };
 
 export const deleteAssignment = (courseId, assignmentId) => {
+  var delete_assignment = {};
+  delete_assignment[`course-assignments/${courseId}/${assignmentId}`] = null;
 
-  const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
-
-
+  //Delete assignment for all users in course
   return dispatch => {
-    dispatch({type: DELETE_ASSIGNMENT });
-    assignmentRef.child(assignmentId).remove();
+    const courseUsersRef = firebase.database().ref(`courses/${courseId}/users`);
+    courseUsersRef.once("value", snapshot => {
+      Map(snapshot.val(), (user, userUid) => {
+        delete_assignment[`user-assignments/${userUid}/${assignmentId}`] = null;
+      });
+      firebase.database().ref().update(delete_assignment).then(() => {
+        dispatch({ type: DELETE_ASSIGNMENT });
+      });
+    });
   }
-}
+};
 
-export const fetchAllAssignments = (courseId) => {
-  const assignmentRef = firebase.database().ref(`course-assignments/${courseId}`);
+export const fetchCourseAssignments = courseKey => {
+  const courseRef = firebase.database().ref(`course-assignments/${courseKey}`);
+
   return dispatch => {
-    //begin request
     dispatch({ type: FETCH_ASSIGNMENTS_REQUEST });
 
-    assignmentRef.on("value", snapshot => {
+    courseRef.on("value", snapshot => {
       dispatch({ type: FETCH_ASSIGNMENTS_SUCCESS, payload: snapshot.val() });
     });
   };
 };
+
+export const fetchUserAssignments = () => {
+  const userUid = firebase.auth().currentUser.uid;
+
+  const allUserAssignmentsRef = firebase.database().ref(`user-assignments/${userUid}/`);
+
+  return dispatch => {
+    dispatch({ type: FETCH_USER_ASSIGNMENTS_REQUEST });
+
+    allUserAssignmentsRef.on("value", snapshot => {
+      dispatch({ type: FETCH_USER_ASSIGNMENTS_SUCCESS, payload: snapshot.val() });
+    });
+  };
+}
+

@@ -27,19 +27,21 @@ const styles = {
 };
 
 class Assignments extends Component {
-  componentDidMount() {
-    this.props.actions.fetchAllAssignments(this.props.selectedCourse);
+  componentDidMount(){
+    this.props.actions.fetchCourseAssignments(this.props.selectedCourse);
   }
 
   assignmentList() {
-    const assignmentList = Map(this.props.assignments, (assignment, key) => {
+    let courseAssignments = this.props.assignments;
+
+    const assignmentList = Map(courseAssignments, (assignment, key) => {
       var dueDate = moment(assignment.dueDate).format("llll");
       var dateCreated = moment(assignment.dateCreated).format("llll");
 
       return (
         <Card key={key}>
           <CardHeader
-            title={assignment.assignmentTitle}
+            title={assignment.title}
             subtitle={`Due Date: ${dueDate}`}
             actAsExpander={true}
             showExpandableButton={true}

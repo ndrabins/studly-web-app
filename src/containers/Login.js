@@ -3,7 +3,45 @@ import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import * as Actions from "../actions";
 
-import CircularProgress from 'material-ui/CircularProgress';
+import Loader from "../utils/Preloader";
+import FlatButton from 'material-ui/FlatButton';
+import Google from 'mui-icons/fontawesome/google';
+import Facebook from 'mui-icons/fontawesome/facebook-official';
+import SignIn from 'mui-icons/fontawesome/sign-in';
+
+
+const styles = {
+  form: {
+    width:"400px",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+    flexDirection:"column",
+  },
+  login: {
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    alignSelf:"center",
+    height:"100%",
+    flexDirection:"column",
+    backgroundColor:"#303030"
+  },
+  buttons:{
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    flexDirection:"column",
+    width:"400px",
+  },
+  button:{
+    margin:"10px",
+    width:"300px",
+    color:"#FFFFFF"
+  }
+}
+
 
 const validate = values => {
   const errors = {};
@@ -25,6 +63,13 @@ class Login extends React.Component {
   handleFormSubmit = values => {
     this.props.signInUser(values);
   };
+
+  handleGoogleSignIn = () => {
+    this.props.loginWithGoogle();
+  }
+  handleFacebookSignIn = () => {
+    this.props.loginWithFacebook();
+  }
 
   renderField = ({ input, label, type, meta: { touched, error } }) =>
     <fieldset className={`form-group ${touched && error ? "has-error" : ""}`}>
@@ -53,21 +98,16 @@ class Login extends React.Component {
 
   render() {
     if (this.props.loading) {
-      return (
-        <div style={{display: 'flex', justifyContent: 'center', alignItems:'center'}}>
-          <CircularProgress size={80} thickness={5} />
-        </div>
+       return (
+        <Loader />
       );
     }
 
     return (
-      <div className="container">
-        <div className="col-md-6">
-          <h2 className="text-center">Log In</h2>
-
+        <div style={styles.login}>
           {this.renderAuthenticationError()}
 
-          <form style={{marginTop:"80px" }} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+          <form style={styles.form} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
             <Field
               name="email"
               component={this.renderField}
@@ -83,10 +123,35 @@ class Login extends React.Component {
               label="Password"
             />
 
-            <button action="submit" className="btn btn-primary">Sign In</button>
+            <div style={styles.buttons}>
+              <FlatButton
+                style={styles.button}
+                type="submit"
+                label="Sign In"
+                backgroundColor="#1FA186"
+                hoverColor="#66CAB6"
+                icon={<SignIn />}
+              />
+
+              <FlatButton
+                label="Sign in with Facebook"
+                onClick={this.handleFacebookSignIn}
+                backgroundColor="#3B5998"
+                hoverColor="#5772AC"
+                icon={<Facebook />}
+                style={styles.button}
+              />
+              <FlatButton
+                label="Sign in with Google"
+                onClick={this.handleGoogleSignIn}
+                backgroundColor="#db3236"
+                hoverColor="#F0585C"
+                icon={<Google />}
+                style={styles.button}
+                />
+            </div>
           </form>
         </div>
-      </div>
     );
   }
 }
