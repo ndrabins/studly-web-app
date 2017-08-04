@@ -11,11 +11,23 @@ import Map from "lodash/map";
 
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
+import NoAssignments from "../static/homework.svg"
 
 import { Card, CardActions, CardHeader, CardText } from "material-ui/Card";
 import FlatButton from "material-ui/FlatButton";
 
 const styles = {
+  assignmentStyle: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  assignmentDetail: {
+    width: "80%",
+    margin: "0px",
+    padding: "10px"
+  },
   buttonStyle: {
     margin: 0,
     top: "auto",
@@ -34,12 +46,21 @@ class Assignments extends Component {
   assignmentList() {
     let courseAssignments = this.props.assignments;
 
+    if(!courseAssignments){
+      return (
+        <div style={styles.assignmentStyle}>
+          <h3>You don't have any assignments yet! </h3>
+          <img src={NoAssignments} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
+        </div>
+      );
+    }
+
     const assignmentList = Map(courseAssignments, (assignment, key) => {
       var dueDate = moment(assignment.dueDate).format("llll");
       var dateCreated = moment(assignment.dateCreated).format("llll");
 
       return (
-        <Card key={key}>
+        <Card style={styles.assignmentDetail} key={key}>
           <CardHeader
             title={assignment.title}
             subtitle={`Due Date: ${dueDate}`}
@@ -84,20 +105,9 @@ class Assignments extends Component {
     }
 
     return (
-      <div>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
-          <h2>Assignments</h2>
-        </div>
-        <div style={{ margin: "20px" }}>
-          {this.assignmentList()}
-        </div>
+      <div style={styles.assignmentStyle}>
+        <h2>Assignments</h2>
+        {this.assignmentList()}
         <FloatingActionButton
           style={styles.buttonStyle}
           label="addCourse"

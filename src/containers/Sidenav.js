@@ -24,6 +24,24 @@ import ContentAdd from "material-ui/svg-icons/content/add";
 
 import CreateClassButton from "./CreateClassButton";
 import InvitePeople from "../components/InvitePeople";
+import CoursesVector from "../static/workspace.svg"
+
+const styles = {
+  imageDiv: {
+    display:"flex",
+    justifyContent:"center",
+    marginBottom: "100px",
+    marginTop:"70px",
+    flexDirection:"column",
+    alignItems: "center",
+  },
+  noCourses: {
+    display:"flex",
+    justifyContent:"center",
+    color:"#FFFFFF",
+    textAlign: "center"
+  }
+}
 
 class Sidenav extends React.Component {
   handleNestedListToggle = item => {
@@ -34,8 +52,14 @@ class Sidenav extends React.Component {
 
   courseList() {
     if (!this.props.courses) {
-      return <div> You are in no courses </div>;
+      return (
+      <div style={styles.imageDiv}>
+        <h3 style={styles.noCourses}>You aren't in any courses yet. Join or create one below! </h3>
+        <img src={CoursesVector} style={{height:"50%", width:"50%" }}></img>
+      </div>
+      );
     }
+
     const courseList = Map(this.props.courses, (course, key) => {
       return (
         <ListItem

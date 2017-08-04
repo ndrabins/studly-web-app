@@ -15,6 +15,8 @@ import MenuItem from 'material-ui/MenuItem';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
+import NoAnnouncementVector from "../static/megaphone.svg"
+
 import CreateAnnouncementForm from "./forms/CreateAnnouncementForm";
 
 
@@ -63,7 +65,12 @@ class Announcements extends Component {
 
   announcementList() {
     if(!this.props.announcements){
-      return <h4> You have no announcements. </h4>
+      return (
+        <div style={styles.announcementStyle}>
+          <h3>You don't have any announcements yet! </h3>
+          <img src={NoAnnouncementVector} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
+        </div>
+      );
     }
 
 

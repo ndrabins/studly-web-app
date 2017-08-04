@@ -18,12 +18,14 @@ export function selectCourse(courseKey) {
 
 export const createCourse = ({ courseName, teacherName, beginDate }) => {
   const userUid = firebase.auth().currentUser.uid;
+  let user = {}
+  user[userUid] = true;
   var courseData = {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
     dateCreated: new Date(),
-    users: userUid
+    users: user
   };
 
   // Get a key for a new Post.
@@ -62,19 +64,25 @@ export const fetchAllCourses = () => {
 
 export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
+  const courseAssignmentRef = firebase.database().ref(`course-assignments/${courseKey}/`);
 
   return dispatch => {
-    firebase.database().ref().child('courses').child(courseKey).on("value", snapshot => {
+    firebase.database().ref().child('courses').child(courseKey).once("value", snapshot => {
+    //check if course exists
+      let courseName = snapshot.val().courseName;
       if(snapshot.val()){
-        let courseName = snapshot.val().courseName;
-        var addUserToCourse = {};
-        addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
-        addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
+        courseAssignmentRef.once("value", snapshot => {
+          //when user joins a course, all the assignments need to be updated in user-assignments
+          let assignments = snapshot.val()
+          var addUserToCourse = {};
+          addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
+          addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
+          addUserToCourse[`user-assignments/${userUid}/`] = assignments;
 
-        firebase.database().ref().update(addUserToCourse).then(() => {
-          dispatch({ type: ADD_COURSE });
+          firebase.database().ref().update(addUserToCourse).then(() => {
+            dispatch({ type: ADD_COURSE });
+          });
         });
-        //Need to take all course-assignments for course and append it to user-assignemnts/{userUID}
       }else{
         console.log("course does not exist");
         dispatch({ type: ADD_COURSE_ERROR });
