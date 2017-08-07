@@ -27,6 +27,7 @@ class MyCalendar extends Component {
         startAccessor="dueDate"
         endAccessor="endDate"
         defaultView="week"
+        scrollToTime={Date.now()}
         onSelectEvent={event => alert(event.title)}
       />
     );

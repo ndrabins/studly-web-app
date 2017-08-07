@@ -28,5 +28,5 @@ const LIGHT_GREY = "#EEEEEE";
 export const StudlyTheme = getMuiTheme({
   svgIcon: {
     color: "#FFFFFF"
-  }
+  },
 });
