@@ -64,7 +64,7 @@ class Sidenav extends React.Component {
       return (
         <ListItem
           key={key}
-          primaryText={course}
+          primaryText={course.courseName}
           leftIcon={<ContentInbox color={"#FFFFFF"} />}
           initiallyOpen={true}
           style={{ color: "#FFFFFF" }}

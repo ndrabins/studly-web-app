@@ -1,0 +1,18 @@
+.current-time-color{
+  color: #000000
+}
+
+.rbc-current-time-indicator::before{
+ background-color:#3498db
+}
+.rbc-current-time-indicator{
+  background-color:#3498db
+}
+
+.rbc-event {
+  border: 1px solid #767778 !important;
+}
+
+.rbc-today {
+  background-color: #ecf0f1;
+}

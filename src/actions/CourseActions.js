@@ -16,7 +16,7 @@ export function selectCourse(courseKey) {
   };
 }
 
-export const createCourse = ({ courseName, teacherName, beginDate }) => {
+export const createCourse = ({ courseName, teacherName, beginDate, courseColor }) => {
   const userUid = firebase.auth().currentUser.uid;
   let user = {}
   user[userUid] = true;
@@ -24,17 +24,24 @@ export const createCourse = ({ courseName, teacherName, beginDate }) => {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
+    courseColor: courseColor,
     dateCreated: new Date(),
     users: user
   };
 
+  var userCourseData = {
+    courseName: courseName,
+    teacherName: teacherName,
+    courseColor: courseColor,
+    dateCreated: new Date(),
+  }
   // Get a key for a new Post.
   var newCourseKey = firebase.database().ref().child("courses").push().key;
 
   // // Write the new post's data simultaneously in the posts list and the user's post list.
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
-  new_course["/users/" + userUid + "/courses/" + newCourseKey] = courseData.courseName;
+  new_course["/users/" + userUid + "/courses/" + newCourseKey] = userCourseData;
 
   return dispatch => {
     firebase.database().ref().update(new_course).then(() => {
@@ -84,7 +91,6 @@ export const addCourse = ({ courseKey }) => {
           });
         });
       }else{
-        console.log("course does not exist");
         dispatch({ type: ADD_COURSE_ERROR });
       }
     });

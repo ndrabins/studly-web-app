@@ -45,6 +45,7 @@ export const createAssignment = ({
       Map(snapshot.val(), (user, userUid) => {
         new_assignment[`user-assignments/${userUid}/${newAssignmentKey}`] = assignmentData;
       });
+    }).then(() =>{
       firebase.database().ref().update(new_assignment).then(() => {
         dispatch({ type: CREATE_ASSIGNMENT });
       });

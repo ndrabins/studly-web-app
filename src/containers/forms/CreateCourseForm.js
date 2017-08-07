@@ -6,6 +6,7 @@ import { createCourse } from "../../actions";
 
 import { TextField, DatePicker } from "redux-form-material-ui";
 import RaisedButton from "material-ui/RaisedButton";
+import { CirclePicker } from "react-color";
 
 const styles = {
   formStyle: {
@@ -16,31 +17,46 @@ const styles = {
   },
   button: {
     margin: 12
-  },
+  }
 };
 
 const validate = values => {
-  const errors = {}
-  const requiredFields = [ 'courseName', 'teacherName', 'beginDate']
+  const errors = {};
+  const requiredFields = ["courseName", "teacherName", "beginDate"];
   requiredFields.forEach(field => {
-    if (!values[ field ]) {
-      errors[ field ] = 'Required'
+    if (!values[field]) {
+      errors[field] = "Required";
     }
-  })
+  });
 
-  return errors
-}
+  return errors;
+};
+
+//Custom colors on picker
+// const colors = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#f1c40f","#e67e22", "#e74c3c"]
 
 //TODO: refactor to react-redux-form - a much easier form library
 class newCourseForm extends Component {
+  state = {
+    courseColor: "#1abc9b"
+  };
+  handleChangeComplete = color => {
+    this.setState({ courseColor: color.hex });
+  };
+
   handleFormSubmit = values => {
+    // console.log(this.state.courseColor);
+    values["courseColor"]=this.state.courseColor;
     this.props.createCourse(values);
   };
 
   render() {
     return (
       <div>
-        <form style={styles.formStyle} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
+        <form
+          style={styles.formStyle}
+          onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
+        >
           <div>
             <Field
               name="courseName"
@@ -65,6 +81,15 @@ class newCourseForm extends Component {
               mode="landscape"
               hintText="What day does your course begin?"
             />
+          </div>
+
+          <div>
+            <h5>Choose your course color!</h5>
+            <CirclePicker
+              color={this.state.courseColor}
+              onChangeComplete={this.handleChangeComplete}
+            />
+              {/* colors={colors} */}
           </div>
 
           <RaisedButton
@@ -92,4 +117,3 @@ export default connect(mapStateToProps, { createCourse })(
     validate
   })(newCourseForm)
 );
-

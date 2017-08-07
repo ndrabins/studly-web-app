@@ -48,7 +48,6 @@ class CreateAnnouncement extends Component {
     values["courseId"] = this.props.selectedCourse;
     this.props.createAnnouncement(values);
     this.props.unmountMe();
-    console.log("submitting");
   };
 
   render() {

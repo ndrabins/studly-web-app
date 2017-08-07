@@ -3,6 +3,9 @@ import BigCalendar from "react-big-calendar";
 import moment from "moment";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 
+//import custom css
+import "../styles/dashboardCalendar.css";
+
 BigCalendar.momentLocalizer(moment);
 
 //This is the structure events needs to be passed into calendar
@@ -15,11 +18,24 @@ BigCalendar.momentLocalizer(moment);
 //   },
 // ];
 
+
+
 class MyCalendar extends Component {
+  eventStyleGetter(event, start, end, isSelected) {
+    // console.log(event);
+    var backgroundColor = event.hexColor;
+    var style = {
+        backgroundColor: backgroundColor,
+    };
+    return {
+        style: style
+    };
+  }
 
   render() {
     return (
       <BigCalendar
+        style={{height: '100%'}}
         selectable
         events={this.props.events}
         step={60}
@@ -27,8 +43,9 @@ class MyCalendar extends Component {
         startAccessor="dueDate"
         endAccessor="endDate"
         defaultView="week"
-        scrollToTime={Date.now()}
+        scrollToTime={new Date()}
         onSelectEvent={event => alert(event.title)}
+        eventPropGetter={(this.eventStyleGetter)}
       />
     );
   }

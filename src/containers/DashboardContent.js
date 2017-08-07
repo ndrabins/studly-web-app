@@ -23,6 +23,7 @@ const styles = {
     flex: 1,
     height: "100%",
     border: "1px solid black",
+    display: 'block',
     margin: "3px"
   }
 };
@@ -41,10 +42,13 @@ class DashboardContent extends Component {
     let assignmentEvents = Map(
       allAssignments,
       (assignment, assignmentKey) => {
+        let eventColor = this.props.courses[assignment.courseId].courseColor;
+
         let dueDate = moment(assignment.dueDate).toDate();
-        let endDate = moment(assignment.dueDate).add(1, "minute").toDate();
+        let endDate = moment(assignment.dueDate).add(1, "hour").toDate();
         assignment["dueDate"] = dueDate;
         assignment["endDate"] = endDate;
+        assignment["hexColor"] = eventColor; //this will change to be different for each course..
         return assignment;
       }
     );
@@ -67,7 +71,8 @@ class DashboardContent extends Component {
 function mapStateToProps(state) {
   return {
     assignments: state.assignments.userAssignments,
-    loading: state.assignments.loading
+    loading: state.assignments.loading,
+    courses: state.courses.data,
   };
 }
 
