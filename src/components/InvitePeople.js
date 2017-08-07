@@ -55,7 +55,7 @@ class invitePeople extends Component {
     const inviteList = Map(this.props.courses, (course, key) => {
       return (
         <Paper style={styles.courseInviteStyle} rounded={false} zDepth={0} key={key}>
-          <h4>{course}</h4>
+          <h4>{course.courseName}</h4>
           <h4 style={{color:"#767778"}}>{key}</h4>
 
           <CopyToClipboard text={key}>

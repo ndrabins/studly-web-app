@@ -33,7 +33,8 @@ const validate = values => {
 };
 
 //Custom colors on picker
-// const colors = ["#1abc9c","#2ecc71","#3498db","#9b59b6","#f1c40f","#e67e22", "#e74c3c"]
+const colors = ["#1abc9c","#16a085","#2ecc71", "#27ae60","#3498db","#2980b9",
+                "#9b59b6","#8e44ad","#f1c40f", "#f39c12", "#e67e22", "#e74c3c"];
 
 //TODO: refactor to react-redux-form - a much easier form library
 class newCourseForm extends Component {
@@ -88,8 +89,8 @@ class newCourseForm extends Component {
             <CirclePicker
               color={this.state.courseColor}
               onChangeComplete={this.handleChangeComplete}
+              colors={colors}
             />
-              {/* colors={colors} */}
           </div>
 
           <RaisedButton

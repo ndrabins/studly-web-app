@@ -37,8 +37,6 @@ const headerStyle = {
   justifyContent: "center",
   flexDirection: "column",
   alignItems: "center",
-  backgroundColor: "#206E9B",
-  color: "#FFF",
   height: "80px"
 };
 const validate = values => {
@@ -86,7 +84,7 @@ class CreateAssignmentForm extends Component {
       >
         <Card style={{ width: "60%", margin: "30px" }}>
           <div style={headerStyle}>
-            <h1>Create Assignment</h1>
+            <h3>Create Assignment</h3>
           </div>
           <form
             onSubmit={this.props.handleSubmit(this.handleFormSubmit)}
@@ -96,13 +94,11 @@ class CreateAssignmentForm extends Component {
               name="assignmentTitle"
               component={TextField}
               hintText="Assignment Title"
-              style={{ width: "40%" }}
             />
             <Field
               name="pointValue"
               component={TextField}
               hintText="Point Value"
-              style={{ width: "20%" }}
             />
             <Field
               name="description"
@@ -110,7 +106,6 @@ class CreateAssignmentForm extends Component {
               label="Assignment Description"
               multiLine={true}
               rows={5}
-              style={{ width: "60%" }}
             />
             <div
               style={{

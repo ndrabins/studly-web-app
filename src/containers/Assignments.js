@@ -66,6 +66,7 @@ class Assignments extends Component {
             subtitle={`Due Date: ${dueDate}`}
             actAsExpander={true}
             showExpandableButton={true}
+            iconStyle={{color:"#000000"}}
           />
           <CardText style={{}} expandable={true}>
             <div>

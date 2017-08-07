@@ -29,4 +29,9 @@ export const StudlyTheme = getMuiTheme({
   svgIcon: {
     color: "#FFFFFF"
   },
+  palette: {
+    primary1Color: "#2E81BA",
+    primary2Color: "#E6463B",
+    primary3Color: "#E47B29",
+  }
 });
