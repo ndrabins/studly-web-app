@@ -5,14 +5,13 @@ import { bindActionCreators } from "redux";
 
 import * as Actions from "../../actions";
 
-import Dropzone from "react-dropzone";
-
 import Avatar from "material-ui/Avatar";
 
 import { TextField, SelectField } from "redux-form-material-ui";
 import MenuItem from "material-ui/MenuItem";
 
 import RaisedButton from "material-ui/RaisedButton";
+import ImageUploader from "../../components/ImageUploader";
 
 //fields
 //Name, School, Displayname, grade (dropdown), field of study
@@ -107,15 +106,7 @@ class ProfileForm extends Component {
     if (!this.state.isEditing) {
       return (
         <div>
-          <Dropzone
-            multiple={false}
-            accept="image/*"
-            onDrop={this.onImageDrop.bind(this)}
-          >
-            <p>
-              Drop an image or click to select a new profile picture to upload.
-            </p>
-          </Dropzone>
+          <ImageUploader />
         </div>
       );
     } else {

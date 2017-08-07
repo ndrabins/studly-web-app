@@ -24,13 +24,13 @@ class Navbar extends React.Component {
   loggedInLinks() {
     return (
       <div style={{display:'flex', justifyContent:'center', alignItems:'center' }}>
-        <Avatar src={this.props.user.photoURL} />
+        {/* <Avatar src={this.props.user.photoURL} /> */}
         {/*src="images/uxceo-128.jpg"  */}
-        <FlatButton
+        {/* <FlatButton
           style={{ marginLeft:"3px", color: "#FFFFFF" }}
           containerElement={<Link to={`/dashboard/profile`} />}
           label="Profile"
-        />
+        /> */}
         <IconMenu
           iconStyle={{ color:"#FFFFFF" }}
           iconButtonElement={
