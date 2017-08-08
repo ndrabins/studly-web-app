@@ -67,7 +67,7 @@ class Sidenav extends React.Component {
           primaryText={course.courseName}
           leftIcon={<ContentInbox color={"#FFFFFF"} />}
           initiallyOpen={true}
-          style={{ color: "#FFFFFF" }}
+          style={{ color: this.props.courses[key].courseColor}}
           primaryTogglesNestedList={true}
           nestedItems={[
             <ListItem

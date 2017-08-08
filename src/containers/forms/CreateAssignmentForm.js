@@ -115,7 +115,7 @@ class CreateAssignmentForm extends Component {
                 alignItems: "center"
               }}
             >
-              <DateRange />
+              <DateRange style={{color:"#000000" }} />
               <Field
                 name="dueDate"
                 component={DatePicker}

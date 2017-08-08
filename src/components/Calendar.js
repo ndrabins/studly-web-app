@@ -38,7 +38,7 @@ class MyCalendar extends Component {
         style={{height: '100%'}}
         selectable
         events={this.props.events}
-        step={60}
+        step={120}
         timeslots={1}
         startAccessor="dueDate"
         endAccessor="endDate"

@@ -31,7 +31,7 @@ export const StudlyTheme = getMuiTheme({
   },
   palette: {
     primary1Color: "#2E81BA",
-    primary2Color: "#E6463B",
-    primary3Color: "#E47B29",
+    primary2Color: "#E47B29",
+    primary3Color: "#1FA186",
   }
 });
