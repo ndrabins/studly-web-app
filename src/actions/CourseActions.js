@@ -20,13 +20,19 @@ export const createCourse = ({ courseName, teacherName, beginDate, courseColor }
   const userUid = firebase.auth().currentUser.uid;
   let user = {}
   user[userUid] = true;
+
+  // Get a key for a new Post.
+  var newCourseKey = firebase.database().ref().child("courses").push().key;
+  var classroomChatKey = firebase.database().ref().child(`course-chat/${newCourseKey}`).push().key;
+
   var courseData = {
     courseOwnerUid: userUid,
     courseName: courseName,
     teacherName: teacherName,
     courseColor: courseColor,
     dateCreated: new Date(),
-    users: user
+    users: user,
+    classChatId: classroomChatKey,
   };
 
   var userCourseData = {
@@ -35,13 +41,28 @@ export const createCourse = ({ courseName, teacherName, beginDate, courseColor }
     courseColor: courseColor,
     dateCreated: new Date(),
   }
-  // Get a key for a new Post.
-  var newCourseKey = firebase.database().ref().child("courses").push().key;
 
-  // // Write the new post's data simultaneously in the posts list and the user's post list.
+  var generalChatData = {
+    createdAt: new Date(),
+    createdByUserId: userUid,
+    type: "public",
+    name: "Classroom Chat",
+    id: classroomChatKey
+  }
+
+  var userData = {
+    displayName : firebase.auth().currentUser.displayName,
+    avatar: firebase.auth().currentUser.photoURL
+  }
+
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
   new_course["/users/" + userUid + "/courses/" + newCourseKey] = userCourseData;
+
+  //When creating a new course, a general chat channel should be made for the course
+  new_course[`course-chat/${newCourseKey}/${classroomChatKey}`] = generalChatData;
+  //default teacher should be in the general chat
+  new_course[`channel-members/${classroomChatKey}/${userUid}`] = userData;
 
   return dispatch => {
     firebase.database().ref().update(new_course).then(() => {
