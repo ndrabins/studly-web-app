@@ -2,55 +2,73 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
-import firebase from "firebase";
+
+import TextField from "material-ui/TextField";
+
+//TODO
+//Split up each of these into separate components
+
+const styles = {
+  chatRoom: {
+    display: "flex",
+    flexDirection: "row",
+    height: "100%"
+  },
+  channel: {
+    display: "flex",
+    flex: 1,
+    backgroundColor: "#34495e"
+  },
+  messages: {
+    display: "flex",
+    flex: 3,
+    backgroundColor: "#FFFFFF",
+    margin: "5px",
+    flexDirection: "column"
+  },
+  messageFeed: {
+    display: "flex",
+    height: "100%",
+    backgroundColor: "#767778"
+  },
+  messageEntry: {
+    alignSelf: "flex-end",
+    margin: "3px"
+  },
+  members: {
+    display: "flex",
+    flex: 1,
+    backgroundColor: "#34495e"
+  }
+};
 
 class CourseChat extends Component {
   componentDidMount() {
     // Get a Firebase Database ref
-    var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
-
-    // // Create a Firechat instance
-    this.chat = new window.FirechatUI(
-      chatRef,
-      document.getElementById("firechat-wrapper")
-    );
-
-    let userName = "Anonymous";
-
-    if(this.props.user.displayName){
-      userName = this.props.user.displayName;
-    }
-
-    this.chat.setUser(this.props.user.uid, userName, function(user) {
-      this.chat.resumeSession();
-    });
-  }
-
-  componentDidUpdate() {
-    var chatRef = firebase.database().ref(`course-chat/${this.props.selectedCourse}`);
-
-    this.chat = new window.FirechatUI(
-      chatRef,
-      document.getElementById("firechat-wrapper")
-    );
-
-    let userName = "Anonymous";
-
-    if(this.props.user.displayName){
-      userName = this.props.user.displayName;
-    }
-
-    this.chat.setUser(this.props.user.uid, userName, function(user) {
-      this.chat.resumeSession();
-    });
+    // var chatRef = firebase
+    //   .database()
+    //   .ref(`course-chat/${this.props.selectedCourse}`);
   }
 
   render() {
-    const chatStyle = {
-      margin: "30px"
-    };
-
-    return <div style={chatStyle} id="firechat-wrapper" />;
+    return (
+      <div style={styles.chatRoom}>
+        <div style={styles.channel}>CHANNELS</div>
+        <div style={styles.messages}>
+          <div style={styles.messageFeed} />
+          <TextField
+            style={styles.messageEntry}
+            floatingLabelText="Enter Message"
+            floatingLabelFixed={true}
+            multiLine={true}
+            rows={1}
+            rowsMax={4}
+            fullWidth={true}
+          />
+        </div>
+        <div style={styles.members}>MEMBERS</div>
+      </div>
+    );
   }
 }
 
