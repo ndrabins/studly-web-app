@@ -7,7 +7,6 @@ import {
   FETCH_ALL_COURSES_REQUEST,
   FETCH_ALL_COURSES_FAILURE,
   FETCH_ALL_COURSES_SUCCESS,
-  FETCH_COURSE,
   FETCH_COURSE_SUCCESS
 } from "../actions/Types";
 
@@ -15,6 +14,7 @@ const initialState = {
   data: [],
   fetchingAllCourses: false,
   joinCourseError: false,
+  selectedCourseData: null,
 };
 
 export default function gifs(state = initialState, action) {
@@ -53,10 +53,11 @@ export default function gifs(state = initialState, action) {
         data: action.payload,
         fetchingAllCourses: false
       };
-    case FETCH_COURSE:
-      return state;
     case FETCH_COURSE_SUCCESS:
-      return state;
+      return {
+        ...state,
+        selectedCourseData: action.payload
+      };
     default:
       return state;
   }

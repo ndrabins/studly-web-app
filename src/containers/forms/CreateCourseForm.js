@@ -46,7 +46,6 @@ class newCourseForm extends Component {
   };
 
   handleFormSubmit = values => {
-    // console.log(this.state.courseColor);
     values["courseColor"]=this.state.courseColor;
     this.props.createCourse(values);
   };

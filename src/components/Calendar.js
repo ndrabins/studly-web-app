@@ -22,7 +22,6 @@ BigCalendar.momentLocalizer(moment);
 
 class MyCalendar extends Component {
   eventStyleGetter(event, start, end, isSelected) {
-    // console.log(event);
     var backgroundColor = event.hexColor;
     var style = {
         backgroundColor: backgroundColor,

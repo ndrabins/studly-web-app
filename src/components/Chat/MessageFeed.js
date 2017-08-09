@@ -62,12 +62,18 @@ const styles = {
 
 class MessageFeed extends Component {
   renderMessages() {
-    let messageList = Map(this.props.messageList, (message, key) => {
-      //render differently if it is current users messages
-      var diff = moment(message.timestamp).diff(moment(), 'minutes');
-      let timestamp = moment().add(diff, 'minutes').calendar();
-      // let timestamp = moment(message.timestamp).format('lll');
+    var lastUser = null;
 
+    let messageList = Map(this.props.messageList, (message, key) => {
+      let diff = moment(message.timestamp).diff(moment(), 'minutes');
+      let timestamp = moment().add(diff, 'minutes').calendar();
+      // console.log(message.userId);
+      // if(lastUser === message.userId){
+      //   console.log("previous user");
+      // }
+      // lastUser = message.userId;
+
+      //render differently if it is current users messages
       if(message.userId === this.props.userId){
         return (
         <div style={styles.myMessages} key={key}>

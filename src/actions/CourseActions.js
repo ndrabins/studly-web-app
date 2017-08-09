@@ -6,13 +6,22 @@ import {
   CREATE_COURSE,
   LEAVE_COURSE,
   SELECT_COURSE,
+  FETCH_COURSE_SUCCESS,
   FETCH_ALL_COURSES_REQUEST,
   FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
 export function selectCourse(courseKey) {
+  const courseRef = firebase.database().ref(`courses/${courseKey}`);
+
+
   return dispatch => {
     dispatch({ type: SELECT_COURSE, payload: courseKey });
+
+    courseRef.once("value", snapshot => {
+      dispatch({ type: FETCH_COURSE_SUCCESS, payload: snapshot.val() });
+    });
+
   };
 }
 
@@ -103,7 +112,6 @@ export const addCourse = ({ courseKey }) => {
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).once("value", snapshot => {
     //check if course exists
-    console.log(snapshot.val());
       var classroomChatKey =  snapshot.val().classChatId;
       var userCourseData = {
         courseName: snapshot.val().courseName,

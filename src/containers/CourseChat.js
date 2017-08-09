@@ -28,8 +28,14 @@ class CourseChat extends Component {
 
   componentDidMount() {
     this.props.actions.fetchCourseChannels(this.props.selectedCourse);
-    // this.props.actions.fetchChannelMessages(this.props.selectedCourse);
     // this.props.actions.fetchChannelMembers()
+  }
+
+  componentDidUpdate(prevProps) {
+  // only update chart if the data has changed
+    if (prevProps.selectedCourseData !== this.props.selectedCourseData) {
+      this.selectChannel(this.props.selectedCourseData.classChatId);
+    }
   }
 
   selectChannel = (channelID) => {
@@ -39,7 +45,7 @@ class CourseChat extends Component {
   render() {
     return (
       <div style={styles.chatRoom}>
-        <Channels channels={this.props.channels} selectChannel={this.selectChannel}/>
+        <Channels channels={this.props.channels} selectChannel={this.selectChannel} selectedChanel={this.props.selectedChannel} />
         <MessageFeed selectedChannel={this.props.selectedChannel} messageList={this.props.messages} userId={this.props.user.uid} />
         <ChannelMembers />
       </div>
@@ -53,6 +59,7 @@ function mapStateToProps(state) {
     selectedCourse: state.courses.selectedCourse,
     channels: state.chat.channels,
     selectedChannel: state.chat.selectedChannel,
+    selectedCourseData: state.courses.selectedCourseData,
     messages: state.chat.messages
   };
 }

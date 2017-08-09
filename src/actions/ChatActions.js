@@ -38,7 +38,6 @@ import {
 } from "./Types.js";
 
 export const fetchCourseChannels = courseId => {
-  console.log("fetching course channels");
   return dispatch => {
     dispatch({ type: FETCH_COURSE_CHANNELS_REQUEST });
 
@@ -63,7 +62,6 @@ export const selectChannel = channelId => {
     dispatch({ type: SELECT_CHANNEL, payload: channelId});
 
     messageRef.on("value", snapshot => {
-      console.log(snapshot.val());
       dispatch({
         type: FETCH_CHANNEL_MESSAGES_SUCCESS,
         payload: snapshot.val()
