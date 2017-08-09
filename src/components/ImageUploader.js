@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import DropzoneComponent from 'react-dropzone-component';
 
 import "../../node_modules/react-dropzone-component/styles/filepicker.css";

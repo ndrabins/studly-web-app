@@ -40,7 +40,7 @@ class CourseChat extends Component {
     return (
       <div style={styles.chatRoom}>
         <Channels channels={this.props.channels} selectChannel={this.selectChannel}/>
-        <MessageFeed selectedChannel={this.props.selectedChannel} messageList={this.props.messages} />
+        <MessageFeed selectedChannel={this.props.selectedChannel} messageList={this.props.messages} userId={this.props.user.uid} />
         <ChannelMembers />
       </div>
     );

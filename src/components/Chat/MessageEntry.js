@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
-
+import { Scrollbars } from "react-custom-scrollbars";
 
 import TextField from "material-ui/TextField";
 
 const styles = {
   messageEntry: {
     alignSelf: "flex-end",
-    margin: "3px"
+    marginTop:-10
   }
 };
 
@@ -29,6 +29,9 @@ class MessageEntry extends Component {
   };
 
   sendMessage = () => {
+    if(this.state.value === ''){
+      return;
+    }
     this.props.actions.createMessage(this.state.value, this.props.selectedChannel)
 
     this.setState({
@@ -38,7 +41,7 @@ class MessageEntry extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{borderTop: "1px solid #767778", paddingLeft:"5px", paddingRight:"5px"}}>
         <TextField
           disabled={this.props.selectedChannel===null}
           value={this.state.value}

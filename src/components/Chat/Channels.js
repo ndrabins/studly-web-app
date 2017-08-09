@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import Map from "lodash/map";
 
-import {List, ListItem} from 'material-ui/List';
+import { List, ListItem } from "material-ui/List";
+import Avatar from "material-ui/Avatar";
+import { transparent } from "material-ui/styles/colors";
 
 const styles = {
   channelDiv: {
@@ -16,7 +18,7 @@ const styles = {
     marginLeft: "10px"
   },
   channel: {
-    marginLeft: "30px"
+   color:"#FFFFFF"
   }
 };
 
@@ -24,7 +26,22 @@ class Channels extends Component {
   renderChannels() {
     let channelList = Map(this.props.channels, (channel, key) => {
       return (
-        <ListItem primaryText={channel.name} key={key} onClick={() => this.props.selectChannel(key)} />
+        <ListItem
+          leftAvatar={
+            <Avatar
+              color={"#FFFFFF"}
+              backgroundColor={transparent}
+              style={{ left: 8 }}
+            >
+              #
+            </Avatar>
+          }
+          style={styles.channel}
+          innerDivStyle={{paddingLeft: 40}}
+          primaryText={channel.name}
+          key={key}
+          onClick={() => this.props.selectChannel(key)}
+        />
       );
     });
     return channelList;

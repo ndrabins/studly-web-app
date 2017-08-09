@@ -90,22 +90,40 @@ export const fetchAllCourses = () => {
   };
 };
 
+//should be renamed joinCourse
 export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
   const courseAssignmentRef = firebase.database().ref(`course-assignments/${courseKey}/`);
 
+   var userData = {
+    displayName : firebase.auth().currentUser.displayName,
+    avatar: firebase.auth().currentUser.photoURL
+  }
+
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).once("value", snapshot => {
     //check if course exists
-      let courseName = snapshot.val().courseName;
+    console.log(snapshot.val());
+      var classroomChatKey =  snapshot.val().classChatId;
+      var userCourseData = {
+        courseName: snapshot.val().courseName,
+        teacherName: snapshot.val().teacherName,
+        courseColor: snapshot.val().courseColor,
+        dateCreated:  snapshot.val().dateCreated
+      }
+
+
       if(snapshot.val()){
         courseAssignmentRef.once("value", snapshot => {
           //when user joins a course, all the assignments need to be updated in user-assignments
           let assignments = snapshot.val()
           var addUserToCourse = {};
           addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
-          addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = courseName;
-          addUserToCourse[`user-assignments/${userUid}/`] = assignments;
+          addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = userCourseData;
+          addUserToCourse[`/user-assignments/${userUid}/`] = assignments;
+
+          //when user joins a course they should be
+          addUserToCourse[`/channel-members/${classroomChatKey}/${userUid}`] = userData;
 
           firebase.database().ref().update(addUserToCourse).then(() => {
             dispatch({ type: ADD_COURSE });
