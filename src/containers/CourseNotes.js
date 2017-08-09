@@ -7,7 +7,9 @@ import firebase from "firebase";
 const firepadContainerStyle = {
   backgroundColor: "#ECEFF1",
   display:"flex",
-  justifyContent:"center"
+  justifyContent:"center",
+  flexDirection: "column",
+  alignItems:"center",
 };
 
 class CourseNotes extends Component {
@@ -55,6 +57,7 @@ class CourseNotes extends Component {
   render() {
     return (
       <div id="firepad-container" style={firepadContainerStyle}>
+        <h1>Collaborative Notepad</h1>
         <div id="firepad">
         </div>
       </div>

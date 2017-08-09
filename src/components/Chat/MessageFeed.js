@@ -11,101 +11,96 @@ import Map from "lodash/map";
 const styles = {
   messages: {
     display: "flex",
-    flex: 3,
+    flex: 5,
     flexDirection: "column",
   },
   messageFeed: {
     height: "100%",
-    backgroundColor: "#ecf0f1",
+    backgroundColor: "#FFFFFF",
     overflow: "auto",
   },
-  otherUserMessages:{
+  userMessages:{
     display:"flex",
     flexDirection: "row",
-    padding: "5px",
+    paddingLeft: "5px",
+    paddingRight: "5px"
   },
-  myMessages:{
-    display:"flex",
-    flexDirection: "row",
-    padding: "5px",
-    justifyContent:"flex-end",
-    marginRight:"10px"
-  },
-  myMessageContent:{
-    borderRadius: "15px",
-    padding: "5px",
-    display:"flex",
-    flexDirection: "Column",
-    backgroundColor: "#e67e22",
-    width:"50%",
-    color:"#FFFFFF"
-  },
-  otherMessageContent:{
+  messageContent:{
     borderRadius: "15px",
     backgroundColor: "#FFFFFF",
-    padding: "5px",
+    paddingLeft: "5px",
+    paddingRight:"5px",
     display:"flex",
     flexDirection: "Column",
-    width:"50%",
+  },
+  samePreviousMessageContent:{
+    marginLeft: "69px",
+    borderRadius: "15px",
+    backgroundColor: "#FFFFFF",
+    display:"flex",
+    flexDirection: "Column",
   },
   text:{
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     paddingLeft: "5px",
-    paddingRight: "5px",
+    paddingRight: "50px",
+    marginBottom: "3px",
   },
   avatar:{
     alignSelf: "center",
-    marginRight:"4px"
+    marginRight:"4px",
+    marginLeft:"15px"
   }
 };
 
 class MessageFeed extends Component {
   renderMessages() {
     var lastUser = null;
+    var previousTimeStamp = null;
+    var enoughTimeHasPassed = false;
 
     let messageList = Map(this.props.messageList, (message, key) => {
       let diff = moment(message.timestamp).diff(moment(), 'minutes');
       let timestamp = moment().add(diff, 'minutes').calendar();
-      // console.log(message.userId);
-      // if(lastUser === message.userId){
-      //   console.log("previous user");
-      // }
-      // lastUser = message.userId;
 
-      //render differently if it is current users messages
-      if(message.userId === this.props.userId){
+      //don't render avatar,time,name unless 5 minutes have passed.
+      if (previousTimeStamp !== null){
+        let recentDiff = moment(message.timestamp).diff(previousTimeStamp, 'minutes');
+        if(recentDiff < 5){
+          enoughTimeHasPassed = true;
+        }else{
+          enoughTimeHasPassed=false;
+        }
+      }
+      //render differently if last message is by the same user AND within 5 minutes
+      if(lastUser === message.userId && enoughTimeHasPassed){
         return (
-        <div style={styles.myMessages} key={key}>
-          <div style={styles.myMessageContent}>
-            <h6>{timestamp}</h6>
+          <div key={key} style={styles.samePreviousMessageContent}>
             <p style={styles.text}>{message.message}</p>
-          </div>
-          <Avatar
-            style={{alignSelf: "center", marginLeft:"4px"}}
-            src={message.avatar}
-            size={40}
-          />
-        </div>
-        );
-      }else {
-        return (
-          <div style={styles.otherUserMessages} key={key}>
-            <Avatar
-              style={styles.avatar}
-              src={message.avatar}
-              size={40}
-            />
-            <div style={styles.otherMessageContent}>
-              <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-                <h5 style={{fontWeight:"bold" }}>{message.displayName} </h5>
-                <h6>{timestamp}</h6>
-              </div>
-              <p style={styles.text}>{message.message}</p>
-            </div>
           </div>
         );
       }
+
+      lastUser = message.userId;
+      previousTimeStamp = message.timestamp;
+
+      return (
+        <div style={styles.userMessages} key={key}>
+          <Avatar
+            style={styles.avatar}
+            src={message.avatar}
+            size={40}
+          />
+          <div style={styles.messageContent}>
+            <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
+              <h5 style={{fontWeight:"bold", paddingLeft:"5px" }}>{message.displayName} </h5>
+              <h6 style={{marginLeft:"3px", color:"#767778" }}>{timestamp}</h6>
+            </div>
+            <p style={styles.text}>{message.message}</p>
+          </div>
+        </div>
+      );
     });
     return messageList;
   }

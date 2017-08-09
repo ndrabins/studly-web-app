@@ -8,8 +8,9 @@ import { transparent } from "material-ui/styles/colors";
 const styles = {
   channelDiv: {
     display: "flex",
-    flex: 1,
-    backgroundColor: "#2c3e50",
+    // flex: 1,
+    width:"270px",
+    backgroundColor: "#476264",
     flexDirection: "column",
     padding: "15px",
     color: "#EEEEEE"
