@@ -7,6 +7,8 @@ import { transparent } from "material-ui/styles/colors";
 
 import ContentAdd from "material-ui/svg-icons/content/add";
 
+import CreateChannel from "./CreateChannel";
+
 const styles = {
   channelDiv: {
     display: "flex",
@@ -25,11 +27,6 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     justifyContent:"space-between"
-  },
-  addChannelSvg:{
-    display: "flex",
-    alignSelf: "center",
-    cursor: "pointer"
   },
   channel: {
    color:"#FFFFFF"
@@ -66,11 +63,12 @@ class Channels extends Component {
       <div style={styles.channelDiv}>
         <div style={styles.channelHeader}>
           <h3 style={styles.header}> Channels </h3>
-          <ContentAdd style={styles.addChannelSvg} hoverColor={"#303030"}/>
+          <CreateChannel />
         </div>
         <List>
           {this.renderChannels()}
         </List>
+
 
         <h3 style={styles.header}> Direct Messages </h3>
       </div>
