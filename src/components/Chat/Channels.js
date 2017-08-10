@@ -19,6 +19,7 @@ const styles = {
   },
   header: {
     marginLeft: "10px",
+    fontSize: "18px"
   },
   channelHeader:{
     display: "flex",
@@ -64,14 +65,14 @@ class Channels extends Component {
     return (
       <div style={styles.channelDiv}>
         <div style={styles.channelHeader}>
-          <h4 style={styles.header}> Channels </h4>
+          <h3 style={styles.header}> Channels </h3>
           <ContentAdd style={styles.addChannelSvg} hoverColor={"#303030"}/>
         </div>
         <List>
           {this.renderChannels()}
         </List>
 
-        <h4 style={styles.header}> Direct Messages </h4>
+        <h3 style={styles.header}> Direct Messages </h3>
       </div>
     );
   }

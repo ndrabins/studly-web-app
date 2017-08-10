@@ -133,6 +133,10 @@ class Sidenav extends React.Component {
           }}
         >
            <Scrollbars
+            hideTracksWhenNotNeeded={true}
+            autoHide={true}
+            autoHideTimeout={1000}
+            autoHideDuration={200}
             renderThumbVertical={props =>
               <div {...props} className="thumb-vertical" />}
           >
