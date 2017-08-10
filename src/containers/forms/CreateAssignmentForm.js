@@ -6,7 +6,7 @@ import { Redirect } from "react-router";
 
 import { createAssignment } from "../../actions";
 
-import { TextField, DatePicker } from "redux-form-material-ui";
+import { TextField, DatePicker, TimePicker } from "redux-form-material-ui";
 // import { Control, Form } from 'react-redux-form';
 
 import { Card, CardActions } from "material-ui/Card";
@@ -45,7 +45,8 @@ const validate = values => {
     "assignmentTitle",
     "pointValue",
     "description",
-    "dueDate"
+    "dueDate",
+    "dueTime"
   ];
   requiredFields.forEach(field => {
     if (!values[field]) {
@@ -66,6 +67,13 @@ class CreateAssignmentForm extends Component {
 
   handleFormSubmit = values => {
     values["courseId"] = this.props.selectedCourse;
+
+    //combining due time and due date
+    var dayDue = values["dueDate"];
+    var timeDue = values["dueTime"];
+    var datetime = new Date(dayDue.getFullYear(), dayDue.getMonth(), dayDue.getDate(),
+               timeDue.getHours(), timeDue.getMinutes(), timeDue.getSeconds());
+    values["dueDate"] = datetime;
     this.props.createAssignment(values);
     this.setState({ fireRedirect: true });
   };
@@ -124,6 +132,12 @@ class CreateAssignmentForm extends Component {
                 hintText="Due Date"
               />
             </div>
+            <Field
+              name="dueTime"
+              component={TimePicker}
+              format={null}
+              hintText="Due at what time?"
+            />
             <CardActions>
               <RaisedButton
                 primary={true}

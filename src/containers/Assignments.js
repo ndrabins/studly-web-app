@@ -26,7 +26,9 @@ const styles = {
   assignmentDetail: {
     width: "80%",
     margin: "0px",
-    padding: "10px"
+    padding: "10px",
+    whiteSpace: "pre-line",
+    wordWrap: "break-word",
   },
   buttonStyle: {
     margin: 0,
