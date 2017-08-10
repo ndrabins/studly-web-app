@@ -128,9 +128,13 @@ export const addCourse = ({ courseKey }) => {
           var addUserToCourse = {};
           addUserToCourse[`/courses/${courseKey}/users/${userUid}`] = true;
           addUserToCourse[`/users/${userUid}/courses/${courseKey}`] = userCourseData;
-          addUserToCourse[`/user-assignments/${userUid}/`] = assignments;
 
-          //when user joins a course they should be
+          //for each on assignments
+          Map(assignments, (assignment, newAssignmentKey) => {
+            addUserToCourse[`user-assignments/${userUid}/${newAssignmentKey}`] = assignment;
+          });
+
+          //when user joins a course they should be in course chat
           addUserToCourse[`/channel-members/${classroomChatKey}/${userUid}`] = userData;
 
           firebase.database().ref().update(addUserToCourse).then(() => {

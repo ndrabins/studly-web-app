@@ -40,6 +40,17 @@ const styles = {
     justifyContent:"center",
     color:"#FFFFFF",
     textAlign: "center"
+  },
+  courseName: {
+    fontFamily: "Roboto",
+    fontSize: "18px",
+    fontWeight: "700"
+  },
+  subCategories: {
+    fontFamily: "Roboto",
+    fontSize: "16px",
+    fontWeight: "400",
+    color: "#FFFFFF"
   }
 }
 
@@ -67,7 +78,7 @@ class Sidenav extends React.Component {
           primaryText={course.courseName}
           leftIcon={<ContentInbox color={"#FFFFFF"} />}
           initiallyOpen={true}
-          style={{ color: this.props.courses[key].courseColor}}
+          style={{ ...styles.courseName, color: this.props.courses[key].courseColor} }
           primaryTogglesNestedList={true}
           nestedItems={[
             <ListItem
@@ -75,14 +86,14 @@ class Sidenav extends React.Component {
               primaryText="Chat"
               leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
               containerElement={<Link to={`/dashboard/chat`} />}
-              style={{ color: "#FFFFFF" }}
+              style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={2}
               primaryText="Notes"
               leftIcon={<Description color={"#FFFFFF"} />}
-              style={{ color: "#FFFFFF" }}
+              style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
               containerElement={<Link to={`/dashboard/${key}/notes`} />}
             />,
@@ -90,7 +101,7 @@ class Sidenav extends React.Component {
               key={3}
               primaryText="Announcements"
               leftIcon={<VolumeUp color={"#FFFFFF"} />}
-              style={{ color: "#FFFFFF" }}
+              style={styles.subCategories}
               containerElement={<Link to={`/dashboard/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
@@ -98,7 +109,7 @@ class Sidenav extends React.Component {
               key={4}
               primaryText="Assignments"
               leftIcon={<School color={"#FFFFFF"} />}
-              style={{ color: "#FFFFFF" }}
+              style={styles.subCategories}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />

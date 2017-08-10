@@ -12,7 +12,7 @@ const styles = {
     display: "flex",
     // flex: 1,
     width:"270px",
-    backgroundColor: "#476264",
+    backgroundColor: "#3F3F3F",
     flexDirection: "column",
     padding: "15px",
     color: "#EEEEEE"

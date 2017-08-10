@@ -67,7 +67,7 @@ class Announcements extends Component {
     if(!this.props.announcements){
       return (
         <div style={styles.announcementStyle}>
-          <h3>You don't have any announcements yet! </h3>
+          <h3 style={{fontWeight:400 }} >You don't have any announcements yet! </h3>
           <img src={NoAnnouncementVector} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
         </div>
       );
@@ -91,7 +91,7 @@ class Announcements extends Component {
                 <MenuItem primaryText="Delete" onClick={() => this.props.actions.deleteAnnouncement(this.props.selectedCourse, key)} />
               </IconMenu>
             </div>
-            <h6 style={{marginTop:"0px" }}>{dateCreated}</h6>
+            <h6 style={{marginTop:"0px", fontWeight:400 }}>{dateCreated}</h6>
             <p>{announcement.description}</p>
 
           </div>
@@ -104,7 +104,7 @@ class Announcements extends Component {
   render() {
     return (
       <div style={styles.announcementStyle}>
-        <h2>Announcements</h2>
+        <h1>Announcements</h1>
         {this.state.renderAnnoucementForm ? <CreateAnnouncementForm unmountMe={this.handleChildUnmount} /> : null}
 
         {this.announcementList()}

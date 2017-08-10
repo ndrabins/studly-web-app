@@ -20,19 +20,27 @@ body {
   position: relative;
 }
 
+p {
+  font-family: 'Roboto', sans-serif;
+	font-size: 14px;
+}
+
 /*Studly Style guide  */
-/* h1 {
-  font-family: "Raleway Heavy";
+ h1 {
+  font-family: "Raleway", sans-serif;
   font-size: 36px;
+  font-weight: 900;
 }
 h2 {
-  font-family: "Raleway Heavy";
+  font-family: "Raleway", sans-serif;
   font-size: 28px;
+  font-weight: 900;
 }
 h3{
-  font-family: "Raleway Bold";
+  font-family: "Raleway", sans-serif;
   font-size: 24px;
-} */
+  font-weight: 700;
+}
 
 /*  */
 .container {

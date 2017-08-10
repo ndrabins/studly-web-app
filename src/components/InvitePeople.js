@@ -16,6 +16,11 @@ const styles = {
     display: "flex",
     alignSelf: "center",
   },
+  inviteLabelStyle:{
+    fontFamily: "Roboto",
+    fontSize: "18px",
+    fontWeight: "500"
+  },
   courseInviteStyle: {
     padding: "10px",
     display: "flex",
@@ -28,7 +33,7 @@ const styles = {
     margin:"10px",
     justifyContent: "space-between",
     alignItems:"center"
-  }
+  },
 };
 
 
@@ -81,6 +86,7 @@ class invitePeople extends Component {
       <div style={{ display: "flex", justifyContent: "center" }}>
         <FlatButton
           style={styles.inviteStyle}
+          labelStyle = { styles.inviteLabelStyle}
           label="invite people"
           labelPosition="before"
           icon={<ContentAdd />}

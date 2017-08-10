@@ -66,15 +66,17 @@ class Assignments extends Component {
           <CardHeader
             title={assignment.title}
             subtitle={`Due Date: ${dueDate}`}
+            subtitleStyle = {{fontSize:"12px",fontWeight:400}}
             actAsExpander={true}
             showExpandableButton={true}
             iconStyle={{color:"#000000"}}
+            titleStyle={{fontSize:"18px", fontWeight:500}}
           />
-          <CardText style={{}} expandable={true}>
+          <CardText expandable={true}>
             <div>
               Point Value: {assignment.pointValue}
             </div>
-            <div>
+            <div style={{fontSize:"12px",fontWeight:400 }}>
               Date Created: {dateCreated}
             </div>
             <div>
@@ -109,7 +111,7 @@ class Assignments extends Component {
 
     return (
       <div style={styles.assignmentStyle}>
-        <h2>Assignments</h2>
+        <h1>Assignments</h1>
         {this.assignmentList()}
         <FloatingActionButton
           style={styles.buttonStyle}
