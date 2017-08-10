@@ -47,7 +47,7 @@ class MessageEntry extends Component {
           onChange={this.handleChange}
           style={styles.messageEntry}
           floatingLabelText="Enter Message"
-          floatingLabelFixed={true}
+
           multiLine={true}
           rows={1}
           rowsMax={4}

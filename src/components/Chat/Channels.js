@@ -5,6 +5,8 @@ import { List, ListItem } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
 import { transparent } from "material-ui/styles/colors";
 
+import ContentAdd from "material-ui/svg-icons/content/add";
+
 const styles = {
   channelDiv: {
     display: "flex",
@@ -16,7 +18,17 @@ const styles = {
     color: "#EEEEEE"
   },
   header: {
-    marginLeft: "10px"
+    marginLeft: "10px",
+  },
+  channelHeader:{
+    display: "flex",
+    flexDirection: "row",
+    justifyContent:"space-between"
+  },
+  addChannelSvg:{
+    display: "flex",
+    alignSelf: "center",
+    cursor: "pointer"
   },
   channel: {
    color:"#FFFFFF"
@@ -51,7 +63,10 @@ class Channels extends Component {
   render() {
     return (
       <div style={styles.channelDiv}>
-        <h4 style={styles.header}> Channels </h4>
+        <div style={styles.channelHeader}>
+          <h4 style={styles.header}> Channels </h4>
+          <ContentAdd style={styles.addChannelSvg} hoverColor={"#303030"}/>
+        </div>
         <List>
           {this.renderChannels()}
         </List>
