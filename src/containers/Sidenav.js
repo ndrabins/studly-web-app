@@ -142,7 +142,7 @@ class Sidenav extends React.Component {
           >
             <div>
               <List>
-                <Subheader style={{ color: "#FFFFFF" }}>Courses</Subheader>
+
                 {this.courseList()}
               </List>
             </div>

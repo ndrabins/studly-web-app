@@ -40,7 +40,7 @@ class MessageEntry extends Component {
 
   render() {
     return (
-      <div style={{borderTop: "1px solid #767778", paddingLeft:"5px", paddingRight:"5px"}}>
+      <div style={{borderTop: "1px solid #767778", paddingLeft:"15px", paddingRight:"15px", paddingBottom:"15px"}}>
         <TextField
           disabled={this.props.selectedChannel===null}
           value={this.state.value}
