@@ -2,68 +2,66 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
-import firebase from "firebase";
 
-const firepadContainerStyle = {
-  backgroundColor: "#ECEFF1",
-  display:"flex",
-  justifyContent:"center",
-  flexDirection: "column",
-  alignItems:"center",
+import ReactQuill from "react-quill";
+import theme from "react-quill/dist/quill.snow.css";
+
+const NoteContainer = {
+  display: "flex",
+  justifyContent: "center",
+  margin:30,
+  height: "100%"
 };
 
 class CourseNotes extends Component {
-  componentDidMount() {
-    let firepadRef = firebase
-      .database()
-      .ref(`/courses/${this.props.selectedCourse}`);
-
-    // Create CodeMirror (with lineWrapping on).
-    this.codeMirror = window.CodeMirror(document.getElementById("firepad"), {
-      lineWrapping: true,
-      autoRefresh: true
-    });
-
-    // Create Firepad (with rich text toolbar and shortcuts enabled).
-    this.firepad = window.Firepad.fromCodeMirror(firepadRef, this.codeMirror, {
-      richTextShortcuts: true,
-      richTextToolbar: true,
-      defaultText: "Crowdsource your notes with your classmates!",
-      userId: this.props.user.uid
-    });
+  constructor(props) {
+    super(props);
+    this.state = { text: "" }; // You can also pass a Quill Delta here
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidUpdate() {
-    //Delete old firepad, clear codemirror text so that new
-    //firepad can be instantiated
-    this.firepad.dispose();
-    this.codeMirror.clearHistory();
-    this.codeMirror.setValue("");
-
-    let firepadRef = firebase
-      .database()
-      .ref(`/courses/${this.props.selectedCourse}`)
-
-
-    // Create firepad with new ref
-    this.firepad = window.Firepad.fromCodeMirror(firepadRef, this.codeMirror, {
-      richTextShortcuts: true,
-      richTextToolbar: true,
-      defaultText: "Create your course notes here!",
-      userId: this.props.user.uid
-    });
+  handleChange(value) {
+    this.setState({ text: value });
   }
 
   render() {
+    const modules = {
+      toolbar: [
+        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+        [{'color':[]}],
+        [{'list': 'ordered'}, {'list': 'bullet'},
+        {'indent': '-1'}, {'indent': '+1'}],
+        [{ 'align': [] }],
+        ['link', 'image', 'video'],
+        ['clean']
+      ]
+    };
+
+    const formats = [
+        'header', 'font', 'size',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent', 'align',
+        'link', 'image', 'video', 'color'
+    ];
+
     return (
-      <div id="firepad-container" style={firepadContainerStyle}>
-        <h1>Collaborative Notepad</h1>
-        <div id="firepad">
+      <div style={NoteContainer}>
+        <div style={{ width: "75%"}}>
+          <ReactQuill
+            theme="snow"
+            value={this.state.text}
+            onChange={this.handleChange}
+            modules={modules}
+            formats={formats}
+            scrollingContainer="#scrolling-container"
+          />
         </div>
       </div>
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     user: state.auth.user,

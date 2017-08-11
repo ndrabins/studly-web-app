@@ -50,15 +50,6 @@ h3{
   align-items: center;
   flex: 1;
 }
-.powered-by-firepad {
-  height: 0px;
-}
-
-.firepad {
-  width: 750px;
-  height: 100vh;
-  margin: 0px 30px 0px 30px;
-}
 
 #userlist {
   position: absolute;
@@ -101,4 +92,13 @@ h3{
 
 .form-group{
   width: 100%
+}
+
+.ql-container {
+  height: auto !important;
+}
+
+.ql-editor {
+  min-height: 60vh !important;
+  height: auto !important;
 }
