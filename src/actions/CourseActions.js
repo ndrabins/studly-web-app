@@ -11,6 +11,8 @@ import {
   FETCH_ALL_COURSES_SUCCESS
 } from "./Types";
 
+import Map from "lodash/map";
+
 export function selectCourse(courseKey) {
   const courseRef = firebase.database().ref(`courses/${courseKey}`);
 
@@ -70,8 +72,12 @@ export const createCourse = ({ courseName, teacherName, beginDate, courseColor }
 
   //When creating a new course, a general chat channel should be made for the course
   new_course[`course-chat/${newCourseKey}/${classroomChatKey}`] = generalChatData;
+
   //default teacher should be in the general chat
-  new_course[`channel-members/${classroomChatKey}/${userUid}`] = userData;
+  //don't need this because we are making every channel public and with all members of a course.
+
+  //this will be needed when we have private channels/messaging
+  // new_course[`channel-members/${classroomChatKey}/${userUid}`] = userData;
 
   return dispatch => {
     firebase.database().ref().update(new_course).then(() => {
@@ -135,7 +141,8 @@ export const addCourse = ({ courseKey }) => {
           });
 
           //when user joins a course they should be in course chat
-          addUserToCourse[`/channel-members/${classroomChatKey}/${userUid}`] = userData;
+          //this will be needed when we have private channels/messaging
+          // addUserToCourse[`/channel-members/${classroomChatKey}/${userUid}`] = userData;
 
           firebase.database().ref().update(addUserToCourse).then(() => {
             dispatch({ type: ADD_COURSE });

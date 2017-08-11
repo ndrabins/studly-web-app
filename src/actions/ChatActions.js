@@ -1,5 +1,6 @@
 //Data structure
 /*
+  //Since all public channels have all members in them we do not need to keep track of users in the channel
   course-chat/
     {courseId}/
       {channelId}/
@@ -17,6 +18,8 @@
         message
         timestamp
         avatar
+
+  //this doesn't need to be updated till we implement private/direct chat
 
   channel-members/
     {channelId}/
@@ -54,6 +57,28 @@ export const fetchCourseChannels = courseId => {
 };
 
 export const fetchChannelMembers = channelId => {};
+
+export const createChannel = ({courseId, name}) => {
+  const userId = firebase.auth().currentUser.uid;
+  const channelRef = firebase.database().ref(`course-chat/${courseId}`);
+  // const channelKey = firebase.database().ref().child(`course-chat/${courseId}`).push().key;
+  const channelKey = channelRef.push().key;
+
+  let channelData = {
+    createdAt: new Date(),
+    createdByUserId: userId,
+    type: "public",
+    name: name,
+    id: channelKey
+  }
+
+  console.log(channelData);
+  return dispatch => {
+    channelRef.child(`${channelKey}`).set(channelData).then(() => {
+      dispatch({ type: SELECT_CHANNEL });
+    });
+  };
+};
 
 export const selectChannel = channelId => {
   const messageRef = firebase.database().ref(`channel-messages/${channelId}`);

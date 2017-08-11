@@ -5,8 +5,6 @@ import { List, ListItem } from "material-ui/List";
 import Avatar from "material-ui/Avatar";
 import { transparent } from "material-ui/styles/colors";
 
-import ContentAdd from "material-ui/svg-icons/content/add";
-
 import CreateChannel from "./CreateChannel";
 
 const styles = {
@@ -21,7 +19,8 @@ const styles = {
   },
   header: {
     marginLeft: "10px",
-    fontSize: "18px"
+    fontSize: "18px",
+    marginTop: "10px",
   },
   channelHeader:{
     display: "flex",
@@ -70,7 +69,7 @@ class Channels extends Component {
         </List>
 
 
-        <h3 style={styles.header}> Direct Messages </h3>
+        {/* <h3 style={styles.header}> Direct Messages </h3> */}
       </div>
     );
   }

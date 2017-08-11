@@ -11,17 +11,12 @@ import Drawer from "material-ui/Drawer";
 
 import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
-import FlatButton from "material-ui/FlatButton";
-import Dialog from 'material-ui/Dialog';
 
 import School from "material-ui/svg-icons/social/school";
 import QuestionAnswer from "material-ui/svg-icons/action/question-answer";
 import Description from "material-ui/svg-icons/action/description";
-import Grade from "material-ui/svg-icons/action/grade";
 import VolumeUp from "material-ui/svg-icons/av/volume-up";
-import ContentInbox from "material-ui/svg-icons/content/inbox";
-import ContentAdd from "material-ui/svg-icons/content/add";
-
+import Book from 'mui-icons/fontawesome/book';
 import CreateClassButton from "./CreateClassButton";
 import InvitePeople from "../components/InvitePeople";
 import CoursesVector from "../static/workspace.svg"
@@ -61,6 +56,10 @@ class Sidenav extends React.Component {
     });
   };
 
+  toggleList = () => {
+    console.log("toggling");
+  }
+
   courseList() {
     if (!this.props.courses) {
       return (
@@ -76,10 +75,11 @@ class Sidenav extends React.Component {
         <ListItem
           key={key}
           primaryText={course.courseName}
-          leftIcon={<ContentInbox color={"#FFFFFF"} />}
-          initiallyOpen={true}
+          leftIcon={<Book color={"#FFFFFF"} />}
+          initiallyOpen={false}
           style={{ ...styles.courseName, color: this.props.courses[key].courseColor} }
           primaryTogglesNestedList={true}
+          onNestedListToggle={this.toggleList}
           nestedItems={[
             <ListItem
               key={1}

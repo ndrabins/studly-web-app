@@ -21,15 +21,15 @@ const styles = {
   },
   userMessages:{
     display:"flex",
+    width:"97%",
     flexDirection: "row",
     paddingLeft: "5px",
-    paddingRight: "5px"
   },
   messageContent:{
+    width:"95%",
     borderRadius: "15px",
     backgroundColor: "#FFFFFF",
     paddingLeft: "5px",
-    paddingRight:"5px",
     display:"flex",
     flexDirection: "Column",
   },
@@ -44,11 +44,10 @@ const styles = {
     whiteSpace: "pre-line",
     wordWrap: "break-word",
     paddingLeft: "5px",
-    paddingRight: "50px",
     marginBottom: "3px",
   },
   avatar:{
-    alignSelf: "center",
+    marginTop:"9px",
     marginRight:"4px",
     marginLeft:"15px"
   }
@@ -94,8 +93,8 @@ class MessageFeed extends Component {
           />
           <div style={styles.messageContent}>
             <div style={{display:"flex", flexDirection:"row", alignItems:"center"}}>
-              <h5 style={{fontWeight:"bold", paddingLeft:"5px" }}>{message.displayName} </h5>
-              <h6 style={{marginLeft:"3px", color:"#767778" }}>{timestamp}</h6>
+              <h5 style={{fontWeight:"bold", paddingLeft:"5px", marginBottom:"3px" }}>{message.displayName} </h5>
+              <h6 style={{marginLeft:"3px", color:"#767778", marginBottom:"3px"}}>{timestamp}</h6>
             </div>
             <p style={styles.text}>{message.message}</p>
           </div>

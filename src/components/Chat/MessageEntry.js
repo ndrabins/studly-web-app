@@ -47,10 +47,9 @@ class MessageEntry extends Component {
           onChange={this.handleChange}
           style={styles.messageEntry}
           floatingLabelText="Enter Message"
-
           multiLine={true}
           rows={1}
-          rowsMax={4}
+          rowsMax={8}
           fullWidth={true}
           onKeyPress={ev => {
             if (ev.key === "Enter" && !ev.shiftKey) {
