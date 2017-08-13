@@ -3,9 +3,24 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
-import ReactQuill from "react-quill";
-import theme from "react-quill/dist/quill.snow.css";
+import PrivateNote from "../components/Notes/PrivateNote";
+import CollaborativeNote from "../components/Notes/CollaborativeNote";
+import NoteList from "../components/Notes/NoteList";
 
+
+const styles = {
+  NoteContainer: {
+    display: "flex",
+    justifyContent: "center",
+    margin:30,
+    height: "100%"
+  },
+  CourseNotes: {
+    display: "flex",
+    flexDirection: "row",
+    height: "100%"
+  },
+}
 const NoteContainer = {
   display: "flex",
   justifyContent: "center",
@@ -14,48 +29,15 @@ const NoteContainer = {
 };
 
 class CourseNotes extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { text: "" }; // You can also pass a Quill Delta here
-    this.handleChange = this.handleChange.bind(this);
-  }
 
-  handleChange(value) {
-    this.setState({ text: value });
-  }
 
   render() {
-    const modules = {
-      toolbar: [
-        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{'color':[]}],
-        [{'list': 'ordered'}, {'list': 'bullet'},
-        {'indent': '-1'}, {'indent': '+1'}],
-        [{ 'align': [] }],
-        ['link', 'image', 'video'],
-        ['clean']
-      ]
-    };
-
-    const formats = [
-        'header', 'font', 'size',
-        'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent', 'align',
-        'link', 'image', 'video', 'color'
-    ];
-
     return (
-      <div style={NoteContainer}>
-        <div style={{ width: "75%"}}>
-          <ReactQuill
-            theme="snow"
-            value={this.state.text}
-            onChange={this.handleChange}
-            modules={modules}
-            formats={formats}
-            scrollingContainer="#scrolling-container"
-          />
+      <div style={styles.CourseNotes} >
+        <NoteList />
+        {/* <PrivateNote /> */}
+        <div style={styles.NoteContainer}>
+          <CollaborativeNote />
         </div>
       </div>
     );
