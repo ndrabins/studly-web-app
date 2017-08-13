@@ -11,19 +11,11 @@ import NoteList from "../components/Notes/NoteList";
 
 
 const styles = {
-  NoteContainer: {
-    display: "flex",
-    flex:1,
-    justifyContent: "center",
-    padding:30,
-    height: "100%",
-
-  },
   CourseNotes: {
     display: "flex",
     flex:1,
     flexDirection: "row",
-    height: "100%"
+    height: "100%",
   },
 }
 
@@ -32,10 +24,8 @@ class CourseNotes extends Component {
     return (
       <div style={styles.CourseNotes} >
         <NoteList />
-          <div style={styles.NoteContainer}>
-             <PrivateNote />
-             {/* <CollaborativeNote /> */}
-          </div>
+        {/* <CollaborativeNote /> */}
+        <PrivateNote />
       </div>
     );
   }

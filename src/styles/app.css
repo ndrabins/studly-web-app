@@ -104,10 +104,13 @@ h3{
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   background: #fefcfc;
+  /* flex: 1;
+  display: flex;
+  flex-flow: column nowrap; */
 }
 
 /* Snow Theme */
- .ql-snow.ql-toolbar {
+.ql-snow.ql-toolbar {
   display: block;
   background: #eaecec;
   border-top-left-radius: 0.5em;

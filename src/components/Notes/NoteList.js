@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import { Scrollbars } from "react-custom-scrollbars";
+
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
@@ -9,11 +11,13 @@ import Paper from 'material-ui/Paper';
 const styles = {
   notesDiv: {
     display: "flex",
-    // flex: 1,
-    width:"256px",
+    flex: 1,
+    height:"100%",
+    // width:"256px",
     backgroundColor: "#FFFFFF",
     flexDirection: "column",
-    color: "#EEEEEE"
+    color: "#EEEEEE",
+    overflow:"auto",
   },
   header: {
     fontSize: "20px",
@@ -36,6 +40,7 @@ class NoteList extends Component {
   render() {
     return (
       <Paper style={styles.notesDiv}>
+        <Scrollbars >
           <List>
             <Subheader style={styles.header}>Collaborative Note</Subheader>
             <ListItem
@@ -60,7 +65,32 @@ class NoteList extends Component {
               secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
               secondaryTextLines={2}
             />
+            <ListItem
+              style={styles.noteListItem}
+              primaryText="Pythagorans Theorem"
+              secondaryText="Math was invented by franklin B Roosevelt"
+              secondaryTextLines={2}
+            />
+            <ListItem
+              style={styles.noteListItem}
+              primaryText="History of Math"
+              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
+              secondaryTextLines={2}
+            />
+            <ListItem
+              style={styles.noteListItem}
+              primaryText="Pythagorans Theorem"
+              secondaryText="Math was invented by franklin B Roosevelt"
+              secondaryTextLines={2}
+            />
+            <ListItem
+              style={styles.noteListItem}
+              primaryText="History of Math"
+              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
+              secondaryTextLines={2}
+            />
           </List>
+          </Scrollbars>
       </Paper>
     );
   }
