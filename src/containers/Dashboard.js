@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
           <Switch>
             <Route path={`/dashboard/`} exact component={DashboardContent} />
             <Route path={`/dashboard/newCourse`} component={NewCourse} />
-            <Route path={`/dashboard/:courseId/notes`} component={CourseNotes} />
+            <Route path={`/dashboard/notes`} component={CourseNotes} />
             <Route path={`/dashboard/chat`} component={CourseChat} />
             <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
             <Route path={`/dashboard/assignments`} component={Assignments} />

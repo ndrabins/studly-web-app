@@ -6,6 +6,10 @@ import * as Actions from "../../actions";
 import ReactQuill from "react-quill";
 import theme from "react-quill/dist/quill.snow.css";
 
+const fontColors = ["#1abc9c","#16a085","#2ecc71", "#27ae60","#3498db","#2980b9",
+                "#9b59b6","#8e44ad","#f1c40f", "#f39c12", "#e67e22", "#e74c3c", "#c0392b", "#FFFFFF", "#000000", "#7f8c8d", "#ecf0f1", ];
+
+
 class PrivateNote extends Component {
   constructor(props) {
     super(props);
@@ -17,29 +21,35 @@ class PrivateNote extends Component {
     this.setState({ text: value });
   }
 
+
+
   render() {
     const modules = {
       toolbar: [
         [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
         ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{'color':[]}],
+        [{'color': fontColors}],
         [{'list': 'ordered'}, {'list': 'bullet'},
         {'indent': '-1'}, {'indent': '+1'}],
         [{ 'align': [] }],
         ['link', 'image', 'video'],
-        ['clean']
+        ['formula', 'clean']
       ]
     };
+
+    //Add images to formats and toolbar when ready
+    //'image'
 
     const formats = [
         'header', 'font', 'size',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent', 'align',
-        'link', 'image', 'video', 'color'
+        'link', 'image', 'video', 'color',
+        'formula',
     ];
 
     return (
-        <div style={{ width: "75%"}}>
+        <div>
           <ReactQuill
             placeholder="Take some notes"
             theme="snow"

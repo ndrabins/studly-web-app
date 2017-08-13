@@ -6,10 +6,7 @@ import firebase from "firebase";
 
 const firepadContainerStyle = {
   display:"flex",
-  justifyContent:"center",
   flexDirection: "column",
-  borderRadius: "15px",
-  border:"1px solid #CECECE",
   height:"100%"
 };
 
@@ -17,7 +14,7 @@ class CourseNotes extends Component {
   componentDidMount() {
     let firepadRef = firebase
       .database()
-      .ref(`/courses/${this.props.selectedCourse}`);
+      .ref(`/collaborative-note/${this.props.selectedCourse}`);
 
     // Create CodeMirror (with lineWrapping on).
     this.codeMirror = window.CodeMirror(document.getElementById("firepad"), {
@@ -43,7 +40,7 @@ class CourseNotes extends Component {
 
     let firepadRef = firebase
       .database()
-      .ref(`/courses/${this.props.selectedCourse}`)
+      .ref(`/collaborative-note/${this.props.selectedCourse}`)
 
 
     // Create firepad with new ref
@@ -57,7 +54,9 @@ class CourseNotes extends Component {
 
   render() {
     return (
-      <div id="firepad">
+      <div style={firepadContainerStyle}>
+        <div id="firepad">
+        </div>
       </div>
     );
   }

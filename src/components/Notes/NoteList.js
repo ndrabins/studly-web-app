@@ -13,14 +13,10 @@ const styles = {
     width:"256px",
     backgroundColor: "#FFFFFF",
     flexDirection: "column",
-    padding: "15px",
-    paddingTop: "12px",
     color: "#EEEEEE"
   },
   header: {
-    marginLeft: "10px",
-    fontSize: "18px",
-    marginTop: "10px",
+    fontSize: "20px",
     fontFamily: "Roboto, sans-serif"
   },
   root: {
@@ -45,7 +41,7 @@ class NoteList extends Component {
             <ListItem
               style={styles.noteListItem}
               primaryText="Class Note"
-              secondaryText="Change your Google+ profile photo"
+              secondaryText="Crowdsource your notes with your classmates!"
               secondaryTextLines={2}
             />
           </List>
@@ -54,14 +50,14 @@ class NoteList extends Component {
             <Subheader style={styles.header}>Private Notes</Subheader>
             <ListItem
               style={styles.noteListItem}
-              primaryText="Profile photo"
-              secondaryText="Change your Google+ profile photo"
+              primaryText="Pythagorans Theorem"
+              secondaryText="Math was invented by franklin B Roosevelt"
               secondaryTextLines={2}
             />
             <ListItem
               style={styles.noteListItem}
-              primaryText="Profile photo"
-              secondaryText="Change your Google+ profile photo"
+              primaryText="History of Math"
+              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
               secondaryTextLines={2}
             />
           </List>
