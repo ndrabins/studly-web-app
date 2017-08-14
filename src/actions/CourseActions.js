@@ -61,10 +61,10 @@ export const createCourse = ({ courseName, teacherName, beginDate, courseColor }
     id: classroomChatKey
   }
 
-  var userData = {
-    displayName : firebase.auth().currentUser.displayName,
-    avatar: firebase.auth().currentUser.photoURL
-  }
+  // var userData = {
+  //   displayName : firebase.auth().currentUser.displayName,
+  //   avatar: firebase.auth().currentUser.photoURL
+  // }
 
   var new_course = {};
   new_course["/courses/" + newCourseKey] = courseData;
@@ -110,15 +110,15 @@ export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
   const courseAssignmentRef = firebase.database().ref(`course-assignments/${courseKey}/`);
 
-   var userData = {
-    displayName : firebase.auth().currentUser.displayName,
-    avatar: firebase.auth().currentUser.photoURL
-  }
+  //  var userData = {
+  //   displayName : firebase.auth().currentUser.displayName,
+  //   avatar: firebase.auth().currentUser.photoURL
+  // }
 
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).once("value", snapshot => {
     //check if course exists
-      var classroomChatKey =  snapshot.val().classChatId;
+      // var classroomChatKey =  snapshot.val().classChatId;
       var userCourseData = {
         courseName: snapshot.val().courseName,
         teacherName: snapshot.val().teacherName,

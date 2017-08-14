@@ -4,6 +4,8 @@ import { bindActionCreators } from "redux";
 import * as Actions from "../../actions";
 
 import ReactQuill from "react-quill";
+
+// eslint-disable-next-line
 import theme from "react-quill/dist/quill.snow.css";
 
 const fontColors = ["#1abc9c","#16a085","#2ecc71", "#27ae60","#3498db","#2980b9",

@@ -95,7 +95,7 @@ class Sidenav extends React.Component {
               leftIcon={<Description color={"#FFFFFF"} />}
               style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
-              containerElement={<Link to={`/dashboard/notes`} />}
+              containerElement={<Link to={`/dashboard/notes/collaborative`} />}
             />,
             <ListItem
               key={3}

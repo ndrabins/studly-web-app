@@ -21,7 +21,7 @@ body {
 }
 
 p {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Roboto', sans-serif !important;
 	font-size: 14px;
 }
 
@@ -102,7 +102,11 @@ h3{
   overflow-y: scroll;
 }
 
- .ql-container {
+.ql-editor ul li::before {
+  font-size: 18px;
+}
+
+.ql-container {
   border-bottom-left-radius: 0.5em;
   border-bottom-right-radius: 0.5em;
   background: #fefcfc;

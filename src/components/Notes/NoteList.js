@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 
 import { Scrollbars } from "react-custom-scrollbars";
 
+import { Link } from "react-router-dom";
+
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
-import Checkbox from 'material-ui/Checkbox';
 import Paper from 'material-ui/Paper';
 
 const styles = {
@@ -48,6 +49,7 @@ class NoteList extends Component {
               primaryText="Class Note"
               secondaryText="Crowdsource your notes with your classmates!"
               secondaryTextLines={2}
+              containerElement={<Link to={`/dashboard/notes/collaborative`} />}
             />
           </List>
           <Divider />
@@ -58,36 +60,7 @@ class NoteList extends Component {
               primaryText="Pythagorans Theorem"
               secondaryText="Math was invented by franklin B Roosevelt"
               secondaryTextLines={2}
-            />
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="History of Math"
-              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
-              secondaryTextLines={2}
-            />
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="Pythagorans Theorem"
-              secondaryText="Math was invented by franklin B Roosevelt"
-              secondaryTextLines={2}
-            />
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="History of Math"
-              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
-              secondaryTextLines={2}
-            />
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="Pythagorans Theorem"
-              secondaryText="Math was invented by franklin B Roosevelt"
-              secondaryTextLines={2}
-            />
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="History of Math"
-              secondaryText="Pythagoras learned some stuff real good. Pythagoras learned some stuff real good"
-              secondaryTextLines={2}
+              containerElement={<Link to={`/dashboard/notes/private`} />}
             />
           </List>
           </Scrollbars>

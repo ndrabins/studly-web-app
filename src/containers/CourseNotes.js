@@ -5,6 +5,8 @@ import * as Actions from "../actions";
 
 import { Scrollbars } from "react-custom-scrollbars";
 
+import { Route, Switch } from "react-router-dom";
+
 import PrivateNote from "../components/Notes/PrivateNote";
 import CollaborativeNote from "../components/Notes/CollaborativeNote";
 import NoteList from "../components/Notes/NoteList";
@@ -24,8 +26,12 @@ class CourseNotes extends Component {
     return (
       <div style={styles.CourseNotes} >
         <NoteList />
-        {/* <CollaborativeNote /> */}
-        <PrivateNote />
+        <Switch>
+          <Route path={`/dashboard/notes/collaborative`} component={CollaborativeNote} />
+          <Route path={`/dashboard/notes/private`} component={PrivateNote} />
+        </Switch>
+         {/* <CollaborativeNote /> */}
+         {/* <PrivateNote /> */}
       </div>
     );
   }
