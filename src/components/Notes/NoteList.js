@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions";
 
 import { Scrollbars } from "react-custom-scrollbars";
 
 import { Link } from "react-router-dom";
+import Map from "lodash/map";
 
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
+
+import CreateNote from './CreateNote';
 
 const styles = {
   notesDiv: {
@@ -21,8 +27,15 @@ const styles = {
     overflow:"auto",
   },
   header: {
-    fontSize: "20px",
+    fontSize: "16px",
     fontFamily: "Roboto, sans-serif"
+  },
+  privateNotesHeader: {
+    fontSize: "16px",
+    fontFamily: "Roboto, sans-serif",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent:"space-between"
   },
   root: {
     display: 'flex',
@@ -35,15 +48,30 @@ const styles = {
   },
 }
 
-        // <h3 style={styles.header}> Collaborative Note </h3>
-        // <h3 style={styles.header}> Private Notes </h3>
 class NoteList extends Component {
+  renderPrivateNotes() {
+    let privateNotes = Map(this.props.privateNotes, (note, key) => {
+      return (
+        <ListItem
+          key={key}
+          style={styles.noteListItem}
+          primaryText={note.title}
+          secondaryText={note.content}
+          secondaryTextLines={2}
+          containerElement={<Link to={`/dashboard/notes/private`} />}
+        />
+        );
+    });
+
+    return privateNotes;
+  }
+
   render() {
     return (
       <Paper style={styles.notesDiv}>
         <Scrollbars >
           <List>
-            <Subheader style={styles.header}>Collaborative Note</Subheader>
+            <Subheader style={styles.header}>Collaborative Note </Subheader>
             <ListItem
               style={styles.noteListItem}
               primaryText="Class Note"
@@ -54,14 +82,8 @@ class NoteList extends Component {
           </List>
           <Divider />
           <List>
-            <Subheader style={styles.header}>Private Notes</Subheader>
-            <ListItem
-              style={styles.noteListItem}
-              primaryText="Pythagorans Theorem"
-              secondaryText="Math was invented by franklin B Roosevelt"
-              secondaryTextLines={2}
-              containerElement={<Link to={`/dashboard/notes/private`} />}
-            />
+            <Subheader style={styles.privateNotesHeader}>Private Notes <CreateNote /></Subheader>
+            {this.renderPrivateNotes()}
           </List>
           </Scrollbars>
       </Paper>
@@ -69,4 +91,16 @@ class NoteList extends Component {
   }
 }
 
-export default NoteList;
+function mapStateToProps(state) {
+  return {
+    privateNotes : state.notes.privateNotes
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: bindActionCreators(Actions, dispatch)
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteList);

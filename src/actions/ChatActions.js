@@ -71,7 +71,6 @@ export const createChannel = ({courseId, name}) => {
     id: channelKey
   }
 
-  console.log(channelData);
   return dispatch => {
     channelRef.child(`${channelKey}`).set(channelData).then(() => {
       dispatch({ type: SELECT_CHANNEL });

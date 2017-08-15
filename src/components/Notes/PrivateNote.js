@@ -38,8 +38,9 @@ class PrivateNote extends Component {
     const modules = {
       toolbar: [
         [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
-        ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-        [{'color': fontColors}],
+        ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
+        [{'color': fontColors}, {'background': fontColors}],
+        [{ 'script': 'sub'}, { 'script': 'super' }],
         [{'list': 'ordered'}, {'list': 'bullet'},
         {'indent': '-1'}, {'indent': '+1'}],
         [{ 'align': [] }],
@@ -55,8 +56,8 @@ class PrivateNote extends Component {
     const formats = [
         'header', 'font', 'size',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
-        'list', 'bullet', 'indent', 'align',
-        'link', 'image', 'video', 'color',
+        'list', 'bullet', 'indent', 'align', 'code-block',
+        'link', 'image', 'video', 'color', 'script', 'background',
         'formula',
     ];
 

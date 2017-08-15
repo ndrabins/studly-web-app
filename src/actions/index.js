@@ -5,3 +5,4 @@ export * from './ProfileActions';
 export * from './AnnouncementActions';
 export * from './ChatActions';
 export * from './UtilActions';
+export * from './NoteActions';

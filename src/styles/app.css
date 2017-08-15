@@ -20,10 +20,10 @@ body {
   position: relative;
 }
 
-p {
+/* p {
   font-family: 'Roboto', sans-serif !important;
 	font-size: 14px;
-}
+} */
 
 /*Studly Style guide  */
  h1 {
@@ -100,11 +100,12 @@ h3{
    min-height: 75vh !important;
   max-height: 75vh !important;
   overflow-y: scroll;
+  font-size: 16px;
 }
 
-.ql-editor ul li::before {
+/* .ql-editor ul li::before {
   font-size: 18px;
-}
+} */
 
 .ql-container {
   border-bottom-left-radius: 0.5em;

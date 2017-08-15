@@ -22,6 +22,11 @@ const styles = {
 }
 
 class CourseNotes extends Component {
+  componentDidMount(){
+    this.props.actions.fetchPrivateNotes(this.props.selectedCourse);
+  }
+
+
   render() {
     return (
       <div style={styles.CourseNotes} >
@@ -30,8 +35,6 @@ class CourseNotes extends Component {
           <Route path={`/dashboard/notes/collaborative`} component={CollaborativeNote} />
           <Route path={`/dashboard/notes/private`} component={PrivateNote} />
         </Switch>
-         {/* <CollaborativeNote /> */}
-         {/* <PrivateNote /> */}
       </div>
     );
   }
