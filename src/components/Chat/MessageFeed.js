@@ -13,6 +13,8 @@ const styles = {
     display: "flex",
     flex: 5,
     flexDirection: "column",
+    fontFamily: "Roboto, sans-serif",
+    fontSize: "14px",
   },
   messageFeed: {
     height: "100%",

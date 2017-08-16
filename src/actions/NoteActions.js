@@ -5,6 +5,8 @@ import {
   CREATE_NOTE,
   FETCH_NOTES_REQUEST,
   FETCH_NOTES_SUCCESS,
+  SELECT_NOTE,
+  SAVE_NOTE,
 } from "./Types.js";
 
 
@@ -21,6 +23,7 @@ export const createNote = (courseId) => {
     createdByUserId: userId,
     title: "New Note",
     content: "",
+    courseId: courseId,
   };
 
   console.log(noteData);
@@ -31,6 +34,18 @@ export const createNote = (courseId) => {
     });
   };
 };
+
+export const saveNote = (updatedNote, noteKey) => {
+  const userId = firebase.auth().currentUser.uid;
+  const courseId = updatedNote.courseId;
+  const noteRef = firebase.database().ref(`privateNotes/${courseId}/${userId}/${noteKey}`);
+
+  return dispatch => {
+    noteRef.set(updatedNote).then(() => {
+      dispatch({ type: SAVE_NOTE });
+    });
+  };
+}
 
 export const fetchPrivateNotes = (courseId) => {
   const userId = firebase.auth().currentUser.uid;
@@ -47,4 +62,13 @@ export const fetchPrivateNotes = (courseId) => {
       });
     });
   };
+}
+
+export const selectNote = (noteKey) => {
+  return dispatch => {
+    dispatch({
+      type: SELECT_NOTE,
+      payload: noteKey
+    });
+  }
 }

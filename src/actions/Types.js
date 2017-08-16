@@ -68,7 +68,9 @@ export const DELETE_MESSAGE = 'DELETE_MESSAGE';
 export const CREATE_NOTE = "CREATE_NOTE";
 export const DELETE_NOTE = "DELETE_NOTE";
 
-export const UPDATE_NOTE = "UPDATE_NOTE";
+export const SAVE_NOTE = "SAVE_NOTE";
+export const SELECT_NOTE = "SELECT_NOTE";
 
 export const FETCH_NOTES_REQUEST = "FETCH_NOTES_REQUEST";
 export const FETCH_NOTES_SUCCESS = "FETCH_NOTES_SUCCESS";
+

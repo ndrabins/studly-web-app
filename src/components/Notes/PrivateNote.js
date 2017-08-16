@@ -5,6 +5,8 @@ import * as Actions from "../../actions";
 
 import ReactQuill from "react-quill";
 
+import RaisedButton from "material-ui/RaisedButton";
+
 // eslint-disable-next-line
 import theme from "react-quill/dist/quill.snow.css";
 
@@ -24,15 +26,36 @@ const styles = {
 class PrivateNote extends Component {
   constructor(props) {
     super(props);
-    this.state = { text: "" }; // You can also pass a Quill Delta here
+    let noteContent = this.props.privateNotes[this.props.selectedNote].content;
+
+    this.state =  {
+      text: noteContent,
+    }; // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
+    this.saveNote = this.saveNote.bind(this);
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.selectedNote !== this.props.selectedNote){
+      let noteContent = this.props.privateNotes[nextProps.selectedNote].content;
+
+      this.handleChange(noteContent);
+    }
+  }
+
+  //this.props.privateNotes[this.props.select]
   handleChange(value) {
     this.setState({ text: value });
   }
 
+  saveNote(){
+    let noteKey = this.props.selectedNote;
+    console.log("saving");
 
+    let updatedNote = this.props.privateNotes[noteKey]
+    updatedNote["content"] = this.state.text;
+    this.props.actions.saveNote(updatedNote, noteKey);
+  }
 
   render() {
     const modules = {
@@ -44,26 +67,22 @@ class PrivateNote extends Component {
         [{'list': 'ordered'}, {'list': 'bullet'},
         {'indent': '-1'}, {'indent': '+1'}],
         [{ 'align': [] }],
-        ['link', 'image', 'video'],
+        [ 'image', 'video'],
         ['formula', 'clean']
       ]
     };
-
-    //Add images to formats and toolbar when ready
-    //'image'
-
 
     const formats = [
         'header', 'font', 'size',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent', 'align', 'code-block',
-        'link', 'image', 'video', 'color', 'script', 'background',
+         'image', 'video', 'color', 'script', 'background',
         'formula',
     ];
 
-
     return (
       <div style={styles.privateNoteContainer}>
+        <RaisedButton label="Save" onClick={this.saveNote}/>
         <ReactQuill
           placeholder="Take some notes"
           theme="snow"
@@ -81,7 +100,8 @@ class PrivateNote extends Component {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    selectedCourse: state.courses.selectedCourse
+    selectedNote: state.notes.selectedNote,
+    privateNotes : state.notes.privateNotes,
   };
 }
 

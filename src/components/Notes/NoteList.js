@@ -59,6 +59,7 @@ class NoteList extends Component {
           secondaryText={note.content}
           secondaryTextLines={2}
           containerElement={<Link to={`/dashboard/notes/private`} />}
+          onClick={() => this.props.actions.selectNote(key)}
         />
         );
     });
