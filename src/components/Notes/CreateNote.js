@@ -24,7 +24,7 @@ class CreateNote extends Component {
 
   render() {
     return (
-        <ContentAdd style={styles.addButton} onTouchTap={this.handleClick}/>
+        <ContentAdd style={styles.addButton} onTouchTap={this.handleClick} hoverColor={"#2D7EB5"}/>
     );
   }
 }

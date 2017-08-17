@@ -72,7 +72,7 @@ class CreateChannel extends Component {
 
     return (
       <div>
-        <ContentAdd style={styles.addChannelSvg} hoverColor={"#EEEEEE"} onTouchTap={this.handleOpen}/>
+        <ContentAdd style={styles.addChannelSvg} hoverColor={"#1FA186"} onTouchTap={this.handleOpen}/>
         <Dialog
           contentStyle={styles.contentStyle}
           bodyStyle={styles.dialogStyle}

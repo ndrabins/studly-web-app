@@ -64,7 +64,7 @@ class JoinCourse extends Component {
             <Field
               name="courseKey"
               component={TextField}
-              hintText="Course ID"
+              hintText="Course Key"
               errorText={this.props.error}
             />
           </div>

@@ -48,7 +48,7 @@ class CourseChat extends Component {
   render() {
     return (
       <div style={styles.chatRoom}>
-        <Channels channels={this.props.channels} selectChannel={this.selectChannel} selectedChanel={this.props.selectedChannel} />
+        <Channels channels={this.props.channels} selectChannel={this.selectChannel} selectedChannel={this.props.selectedChannel} />
         <MessageFeed selectedChannel={this.props.selectedChannel} messageList={this.props.messages} userId={this.props.user.uid} />
         {/* <ChannelMembers /> */}
       </div>

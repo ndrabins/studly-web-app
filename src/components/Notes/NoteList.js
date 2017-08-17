@@ -46,15 +46,28 @@ const styles = {
     fontSize: "16px",
     fontWeight: "400",
   },
+  selectedNote: {
+    fontFamily: "Roboto",
+    fontSize: "16px",
+    fontWeight: "400",
+    border: "2px solid",
+    borderLeft: "10px solid",
+    borderColor: "#2E81BA"
+  },
 }
 
 class NoteList extends Component {
   renderPrivateNotes() {
     let privateNotes = Map(this.props.privateNotes, (note, key) => {
+      let renderedStyle = styles.noteListItem;
+      if(key===this.props.selectedNote){
+        renderedStyle = styles.selectedNote;
+      }
+
       return (
         <ListItem
           key={key}
-          style={styles.noteListItem}
+          style={renderedStyle}
           primaryText={note.title}
           secondaryText={note.preview}
           secondaryTextLines={2}
@@ -68,17 +81,28 @@ class NoteList extends Component {
   }
 
   render() {
+    let renderedStyle = styles.noteListItem;
+    if(this.props.selectedNote===null){
+      renderedStyle = styles.selectedNote;
+    }
+
     return (
       <Paper style={styles.notesDiv}>
-        <Scrollbars >
+        <Scrollbars
+          hideTracksWhenNotNeeded={true}
+          autoHide={true}
+          autoHideTimeout={1000}
+          autoHideDuration={200}
+        >
           <List>
             <Subheader style={styles.header}>Collaborative Note </Subheader>
             <ListItem
-              style={styles.noteListItem}
+              style={renderedStyle}
               primaryText="Class Note"
               secondaryText="Crowdsource your notes with your classmates!"
               secondaryTextLines={2}
               containerElement={<Link to={`/dashboard/notes/collaborative`} />}
+              onClick={() => this.props.actions.selectNote(null)}
             />
           </List>
           <Divider />
@@ -94,7 +118,8 @@ class NoteList extends Component {
 
 function mapStateToProps(state) {
   return {
-    privateNotes : state.notes.privateNotes
+    privateNotes : state.notes.privateNotes,
+    selectedNote: state.notes.selectedNote,
   };
 }
 

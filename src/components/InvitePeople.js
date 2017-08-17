@@ -26,14 +26,25 @@ const styles = {
     display: "flex",
     margin:"10px",
     justifyContent: "space-between",
-    alignItems:"center"
+    alignItems:"center",
+    fontFamily:"Roboto",
+    fontSize:"16px",
+    fontWeight:"bold",
   },
   courseHeaderStyle: {
     display: "flex",
     margin:"10px",
     justifyContent: "space-between",
-    alignItems:"center"
+    alignItems:"center",
+    fontFamily:"Roboto",
+    fontSize:"16px",
+    fontWeight:"bold",
   },
+  titleStyle:{
+    fontFamily:"Raleway",
+    fontSize:"24px",
+    fontWeight:"bold",
+  }
 };
 
 
@@ -60,8 +71,8 @@ class invitePeople extends Component {
     const inviteList = Map(this.props.courses, (course, key) => {
       return (
         <Paper style={styles.courseInviteStyle} rounded={false} zDepth={0} key={key}>
-          <h4>{course.courseName}</h4>
-          <h4 style={{color:"#767778"}}>{key}</h4>
+          <p>{course.courseName}</p>
+          <p style={{color:"#767778"}}>{key}</p>
 
           <CopyToClipboard text={key}>
             <RaisedButton className="copyButton" backgroundColor="#F57C00" labelColor="#FFFFFF" label="Copy"/>
@@ -94,15 +105,17 @@ class invitePeople extends Component {
         />
         <Dialog
           title="Invite your friends to your class!"
+          titleStyle={styles.titleStyle}
           actions={dialogActions}
           modal={false}
           open={this.state.dialogOpen}
           onRequestClose={this.handleClose}
+          autoScrollBodyContent={true}
         >
           <div style={styles.courseHeaderStyle}>
-            <h4>Course Name</h4>
-            <h4>Course Key</h4>
-            <h4>Copy to Clipboard</h4>
+            <p>Course Name</p>
+            <p>Course Key</p>
+            <p>Copy to Clipboard</p>
           </div>
           <Divider />
           {this.inviteList()}

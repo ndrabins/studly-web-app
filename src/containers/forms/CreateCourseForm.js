@@ -84,7 +84,7 @@ class newCourseForm extends Component {
           </div>
 
           <div>
-            <h5>Choose your course color!</h5>
+            <p>Choose your course color!</p>
             <CirclePicker
               color={this.state.courseColor}
               onChangeComplete={this.handleChangeComplete}

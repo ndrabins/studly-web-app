@@ -9,6 +9,7 @@ import moment from 'moment';
 import Map from "lodash/map";
 
 import NoMessages from "../../static/chat.svg"
+import OldDude from "../../static/professor.svg"
 
 const styles = {
   messages: {
@@ -103,11 +104,17 @@ class MessageFeed extends Component {
       lastUser = message.userId;
       previousTimeStamp = message.timestamp;
 
+      if (!message.avatar){
+        var avatar = OldDude;
+      }else{
+        avatar = message.avatar;
+      }
+
       return (
         <div style={styles.userMessages} key={key}>
           <Avatar
             style={styles.avatar}
-            src={message.avatar}
+            src={avatar}
             size={40}
           />
           <div style={styles.messageContent}>

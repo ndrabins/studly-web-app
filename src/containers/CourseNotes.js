@@ -3,8 +3,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as Actions from "../actions";
 
-import { Scrollbars } from "react-custom-scrollbars";
-
 import { Route, Switch } from "react-router-dom";
 
 import PrivateNote from "../components/Notes/PrivateNote";
