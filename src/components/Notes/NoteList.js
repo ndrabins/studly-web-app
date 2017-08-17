@@ -56,7 +56,7 @@ class NoteList extends Component {
           key={key}
           style={styles.noteListItem}
           primaryText={note.title}
-          secondaryText={note.content}
+          secondaryText={note.preview}
           secondaryTextLines={2}
           containerElement={<Link to={`/dashboard/notes/private`} />}
           onClick={() => this.props.actions.selectNote(key)}

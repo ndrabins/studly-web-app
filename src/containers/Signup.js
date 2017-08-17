@@ -52,6 +52,10 @@ const validate = values => {
     errors.email = "Invalid email address";
   }
 
+  if (!values.displayName) {
+    errors.displayName = "Please enter a display name.";
+  }
+
   if (!values.password) {
     errors.password = "Please enter a password.";
   }
@@ -131,6 +135,12 @@ class Signup extends React.Component {
             label="Email"
           />
           <Field
+            name="displayName"
+            type="text"
+            component={this.renderField}
+            label="Display Name"
+          />
+          <Field
             name="password"
             type="password"
             component={this.renderField}
@@ -142,6 +152,7 @@ class Signup extends React.Component {
             component={this.renderField}
             label="Password Confirmation"
           />
+
 
           <div style={styles.buttons}>
               <FlatButton

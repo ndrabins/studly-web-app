@@ -23,10 +23,9 @@ export const createNote = (courseId) => {
     createdByUserId: userId,
     title: "New Note",
     content: "",
+    preview: "",
     courseId: courseId,
   };
-
-  console.log(noteData);
 
   return dispatch => {
     noteRef.child(`${noteKey}`).set(noteData).then(() => {

@@ -7,11 +7,13 @@ import firebase from "firebase";
 const firepadContainerStyle = {
   display:"flex",
   flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
+  justifyContent: "stretch",
+  alignItems: "stretch",
   flex:3,
+  paddingTop: "30px",
+  paddingRight: "30px",
+  paddingLeft:"30px",
   height:"100%",
-  padding:30,
 };
 
 class CourseNotes extends Component {

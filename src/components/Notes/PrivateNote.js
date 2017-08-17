@@ -6,6 +6,7 @@ import * as Actions from "../../actions";
 import ReactQuill from "react-quill";
 
 import RaisedButton from "material-ui/RaisedButton";
+import TextField from "material-ui/TextField";
 
 // eslint-disable-next-line
 import theme from "react-quill/dist/quill.snow.css";
@@ -17,29 +18,61 @@ const styles = {
    privateNoteContainer: {
     width:"75%",
     padding:30,
+    paddingTop: 0,
     // flexDirection:"column",
     // wordWrap: "break-word",
     // flexWrap: "wrap"
   },
+  titleBar:{
+    display:"flex",
+    justifyContent:"space-between"
+  },
+  button: {
+    display:"flex",
+    // justifyContent:"flex-end",
+    alignItems:"flex-end",
+    paddingBottom: "10px",
+  }
 }
 
 class PrivateNote extends Component {
   constructor(props) {
     super(props);
     let noteContent = this.props.privateNotes[this.props.selectedNote].content;
+    let title = this.props.privateNotes[this.props.selectedNote].title;
 
     this.state =  {
       text: noteContent,
+      title: title,
     }; // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
     this.saveNote = this.saveNote.bind(this);
+    this.handleChangeTitle = this.handleChangeTitle.bind(this);
+
+    this.quillRef = null;      // Quill instance
+    this.reactQuillRef = null; // ReactQuill component
+  }
+
+  componentDidMount() {
+    this.attachQuillRefs()
+  }
+
+  componentDidUpdate() {
+    this.attachQuillRefs()
+  }
+
+  attachQuillRefs = () => {
+    if (typeof this.reactQuillRef.getEditor !== 'function') return;
+    this.quillRef = this.reactQuillRef.getEditor();
   }
 
   componentWillReceiveProps(nextProps){
     if(nextProps.selectedNote !== this.props.selectedNote){
       let noteContent = this.props.privateNotes[nextProps.selectedNote].content;
+      let title = this.props.privateNotes[nextProps.selectedNote].title;
 
       this.handleChange(noteContent);
+      this.setState({ title: title });
     }
   }
 
@@ -48,12 +81,22 @@ class PrivateNote extends Component {
     this.setState({ text: value });
   }
 
+  handleChangeTitle = (event) => {
+    this.setState({
+      title: event.target.value,
+    });
+  }
+
   saveNote(){
     let noteKey = this.props.selectedNote;
-    console.log("saving");
 
     let updatedNote = this.props.privateNotes[noteKey]
     updatedNote["content"] = this.state.text;
+    updatedNote["title"] = this.state.title;
+    updatedNote["preview"] = this.quillRef.getText().slice(0,200);
+
+    // console.log(this.quillRef.getText());
+
     this.props.actions.saveNote(updatedNote, noteKey);
   }
 
@@ -82,14 +125,39 @@ class PrivateNote extends Component {
 
     return (
       <div style={styles.privateNoteContainer}>
-        <RaisedButton label="Save" onClick={this.saveNote}/>
+        <div style={styles.titleBar}>
+          <TextField
+            value={this.state.title}
+            name="title"
+            floatingLabelText="Title"
+            onChange={this.handleChangeTitle}
+            onKeyDown={ev => {
+              if (ev.key === "s" && ev.ctrlKey) {
+                  ev.preventDefault();
+                  this.saveNote();
+                }
+              }}
+          />
+          <div style={styles.button}>
+            <RaisedButton primary={true} label="Save"
+              onClick={this.saveNote}
+            />
+          </div>
+        </div>
         <ReactQuill
+          ref={(el) => { this.reactQuillRef = el }}
           placeholder="Take some notes"
           theme="snow"
           value={this.state.text}
           onChange={this.handleChange}
           modules={modules}
           formats={formats}
+          onKeyDown={ev => {
+            if (ev.key === "s" && ev.ctrlKey) {
+              ev.preventDefault();
+              this.saveNote();
+            }
+          }}
         />
       </div>
     );

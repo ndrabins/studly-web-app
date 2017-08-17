@@ -85,6 +85,8 @@ export function signUpUser(credentials) {
       .createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then(user => {
         authSuccess(dispatch, user);
+        // .updateProfile({displayName: values["displayName"]}
+        firebase.auth().currentUser.updateProfile({displayName: credentials.displayName});
       })
       .catch(error => {
         dispatch(authError(error));
