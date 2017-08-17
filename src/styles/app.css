@@ -143,3 +143,8 @@ h3{
   line-height: 40px;
   background-color: #EAECEC;
 }
+
+a.firepad-btn:hover{
+  background-color: #2e81ba;
+  border-color: #2e81ba;
+}

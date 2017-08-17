@@ -59,6 +59,12 @@ class Announcements extends Component {
     this.props.actions.fetchAnnouncements(this.props.selectedCourse);
   }
 
+    componentDidUpdate(prevProps) {
+    if (prevProps.selectedCourse !== this.props.selectedCourse){
+      this.props.actions.fetchAnnouncements(this.props.selectedCourse);
+    }
+  }
+
   handleChildUnmount(){
     this.setState({renderAnnoucementForm: false});
   }

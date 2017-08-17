@@ -26,6 +26,11 @@ class CourseNotes extends Component {
     this.props.actions.fetchPrivateNotes(this.props.selectedCourse);
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.selectedCourse !== this.props.selectedCourse){
+      this.props.actions.fetchPrivateNotes(nextProps.selectedCourse);
+    }
+  }
 
   render() {
     return (

@@ -36,6 +36,9 @@ class CourseChat extends Component {
     if (prevProps.selectedCourseData !== this.props.selectedCourseData) {
       this.selectChannel(this.props.selectedCourseData.classChatId);
     }
+    if (prevProps.selectedCourse !== this.props.selectedCourse){
+      this.props.actions.fetchCourseChannels(this.props.selectedCourse);
+    }
   }
 
   selectChannel = (channelID) => {

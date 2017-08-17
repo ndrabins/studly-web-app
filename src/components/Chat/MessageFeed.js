@@ -8,6 +8,8 @@ import moment from 'moment';
 
 import Map from "lodash/map";
 
+import NoMessages from "../../static/chat.svg"
+
 const styles = {
   messages: {
     display: "flex",
@@ -52,6 +54,12 @@ const styles = {
     marginTop:"9px",
     marginRight:"4px",
     marginLeft:"15px"
+  },
+  emptyFeed:{
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "center"
   }
 };
 
@@ -60,6 +68,15 @@ class MessageFeed extends Component {
     var lastUser = null;
     var previousTimeStamp = null;
     var enoughTimeHasPassed = false;
+
+    if(!this.props.messageList){
+      return (
+        <div style={styles.emptyFeed}>
+          <h3>Start chatting! </h3>
+          <img src={NoMessages} style={{height:"30%", width:"30%" }}></img>
+        </div>
+      )
+    }
 
     let messageList = Map(this.props.messageList, (message, key) => {
       let diff = moment(message.timestamp).diff(moment(), 'minutes');

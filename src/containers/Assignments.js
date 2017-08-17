@@ -45,6 +45,12 @@ class Assignments extends Component {
     this.props.actions.fetchCourseAssignments(this.props.selectedCourse);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedCourse !== this.props.selectedCourse){
+      this.props.actions.fetchCourseAssignments(this.props.selectedCourse);
+    }
+  }
+
   assignmentList() {
     let courseAssignments = this.props.assignments;
 
