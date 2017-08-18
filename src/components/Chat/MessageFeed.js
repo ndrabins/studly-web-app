@@ -74,7 +74,7 @@ class MessageFeed extends Component {
       return (
         <div style={styles.emptyFeed}>
           <h3>Start chatting! </h3>
-          <img src={NoMessages} style={{height:"30%", width:"30%" }}></img>
+          <img alt="" src={NoMessages} style={{height:"30%", width:"30%" }}></img>
         </div>
       )
     }

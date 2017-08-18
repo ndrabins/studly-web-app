@@ -9,7 +9,6 @@ import Map from "lodash/map";
 
 import Drawer from "material-ui/Drawer";
 
-import Subheader from "material-ui/Subheader";
 import { List, ListItem } from "material-ui/List";
 
 import School from "material-ui/svg-icons/social/school";
@@ -46,6 +45,12 @@ const styles = {
     fontSize: "16px",
     fontWeight: "400",
     color: "#FFFFFF"
+  },
+  selectedSubCategory:{
+    fontFamily: "Roboto",
+    fontSize: "16px",
+    fontWeight: "400",
+    color: "#000000"
   }
 }
 
@@ -65,12 +70,18 @@ class Sidenav extends React.Component {
       return (
       <div style={styles.imageDiv}>
         <h3 style={styles.noCourses}>You aren't in any courses yet. Join or create one below! </h3>
-        <img src={CoursesVector} style={{height:"50%", width:"50%" }}></img>
+        <img alt="" src={CoursesVector} style={{height:"50%", width:"50%" }}></img>
       </div>
       );
     }
 
     const courseList = Map(this.props.courses, (course, key) => {
+      let subcategoryStyle = styles.subCategories;
+      // if(this.props.selectedCourse === key){
+      //   console.log("setting selected style");
+      //   subcategoryStyle = styles.selectedSubCategory;
+      // }
+
       return (
         <ListItem
           key={key}
@@ -86,14 +97,14 @@ class Sidenav extends React.Component {
               primaryText="Chat"
               leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
               containerElement={<Link to={`/dashboard/chat`} />}
-              style={styles.subCategories}
+              style={subcategoryStyle}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={2}
               primaryText="Notes"
               leftIcon={<Description color={"#FFFFFF"} />}
-              style={styles.subCategories}
+              style={subcategoryStyle}
               onClick={() => this.props.actions.selectCourse(key)}
               containerElement={<Link to={`/dashboard/notes/collaborative`} />}
             />,
@@ -101,7 +112,7 @@ class Sidenav extends React.Component {
               key={3}
               primaryText="Announcements"
               leftIcon={<VolumeUp color={"#FFFFFF"} />}
-              style={styles.subCategories}
+              style={subcategoryStyle}
               containerElement={<Link to={`/dashboard/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
@@ -109,7 +120,7 @@ class Sidenav extends React.Component {
               key={4}
               primaryText="Assignments"
               leftIcon={<School color={"#FFFFFF"} />}
-              style={styles.subCategories}
+              style={subcategoryStyle}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />

@@ -30,6 +30,10 @@ class CourseNotes extends Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.actions.selectNote(null);
+  }
+
   render() {
     return (
       <div style={styles.CourseNotes} >

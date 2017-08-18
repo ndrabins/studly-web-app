@@ -103,7 +103,7 @@ class PrivateNote extends Component {
   render() {
     const modules = {
       toolbar: [
-        [{ 'header': '1'}, {'header': '2'}, { 'font': [] }],
+        [{ 'header': '1'}, {'header': '2'}],
         ['bold', 'italic', 'underline', 'strike', 'blockquote', 'code-block'],
         [{'color': fontColors}, {'background': fontColors}],
         [{ 'script': 'sub'}, { 'script': 'super' }],
@@ -116,7 +116,7 @@ class PrivateNote extends Component {
     };
 
     const formats = [
-        'header', 'font', 'size',
+        'header', 'size',
         'bold', 'italic', 'underline', 'strike', 'blockquote',
         'list', 'bullet', 'indent', 'align', 'code-block',
          'image', 'video', 'color', 'script', 'background',

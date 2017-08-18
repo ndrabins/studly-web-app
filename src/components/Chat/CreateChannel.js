@@ -95,19 +95,21 @@ class CreateChannel extends Component {
               floatingLabelText="Channel Name"
               floatingLabelFixed={true}
               style={{width:"100%"}}
+              underlineFocusStyle={{ borderColor:"#1E9B81"}}
+              floatingLabelFocusStyle={{ color:"#1E9B81"}}
               autoFocus
               errorText={this.props.error}
             />
             <div style={styles.buttonDiv}>
               <FlatButton
                 label="Cancel"
-                primary={true}
                 onTouchTap={this.handleClose}
               />
               <RaisedButton
+                backgroundColor={"#1E9B81"}
+                labelColor={"#FFFFFF"}
                 type="submit"
                 label="Create Channel"
-                primary={true}
               />
             </div>
           </form>

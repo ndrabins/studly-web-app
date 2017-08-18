@@ -58,7 +58,7 @@ class Assignments extends Component {
       return (
         <div style={styles.assignmentStyle}>
           <h3>You don't have any assignments yet! </h3>
-          <img src={NoAssignments} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
+          <img alt="" src={NoAssignments} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
         </div>
       );
     }

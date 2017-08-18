@@ -74,7 +74,7 @@ class Announcements extends Component {
       return (
         <div style={styles.announcementStyle}>
           <h3 style={{fontWeight:400 }} >You don't have any announcements yet! </h3>
-          <img src={NoAnnouncementVector} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
+          <img alt="" src={NoAnnouncementVector} style={{height:"50%", width:"50%", marginTop:"100px" }}></img>
         </div>
       );
     }
