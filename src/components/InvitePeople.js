@@ -8,6 +8,11 @@ import RaisedButton from "material-ui/RaisedButton";
 import Divider from "material-ui/Divider";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
+import Avatar from 'material-ui/Avatar';
+import IconSend from "material-ui/svg-icons/content/send";
+
+import RocketShip from "../static/rocket-ship.svg"
+
 const styles = {
   inviteStyle: {
     color: "#FFFFFF",
@@ -15,11 +20,6 @@ const styles = {
     marginBottom: "50px",
     display: "flex",
     alignSelf: "center",
-  },
-  inviteLabelStyle:{
-    fontFamily: "Roboto",
-    fontSize: "18px",
-    fontWeight: "500"
   },
   courseInviteStyle: {
     padding: "10px",
@@ -44,29 +44,25 @@ const styles = {
     fontFamily:"Raleway",
     fontSize:"24px",
     fontWeight:"bold",
+  },
+  emptyInvites:{
+    display: "flex",
+    justifyContent: "center",
+    flexDirection:"column",
+    alignItems:"center",
+    padding:20,
   }
 };
 
 
 class invitePeople extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dialogOpen: false
-    };
-  }
-
-  handleOpen = () => {
-    this.setState({ dialogOpen: true });
-  };
-
-  handleClose = () => {
-    this.setState({ dialogOpen: false });
-  };
-
   inviteList() {
     if (!this.props.courses) {
-      return <div> You are in no courses, join some to start inviting! </div>;
+      return (
+      <div style={styles.emptyInvites}>
+        <h3>You are in no courses, join some to start inviting! </h3>
+        <img alt="" src={RocketShip} style={{marginTop:10,height:200, width:200 }}></img>
+      </div>);
     }
     const inviteList = Map(this.props.courses, (course, key) => {
       return (
@@ -89,27 +85,19 @@ class invitePeople extends Component {
       <FlatButton
         label="Close"
         primary={true}
-        onTouchTap={this.handleClose}
+        onTouchTap={this.props.closeInviteDialog}
       />,
     ]
 
     return (
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <FlatButton
-          style={styles.inviteStyle}
-          labelStyle = { styles.inviteLabelStyle}
-          label="invite people"
-          labelPosition="before"
-          icon={<ContentAdd />}
-          onTouchTap={this.handleOpen}
-        />
+      <div style={{ display: "flex", flexDirection:"column"}}>
         <Dialog
           title="Invite your friends to your class!"
           titleStyle={styles.titleStyle}
           actions={dialogActions}
           modal={false}
-          open={this.state.dialogOpen}
-          onRequestClose={this.handleClose}
+          open={this.props.dialogStatus}
+          onRequestClose={this.props.closeInviteDialog}
           autoScrollBodyContent={true}
         >
           <div style={styles.courseHeaderStyle}>

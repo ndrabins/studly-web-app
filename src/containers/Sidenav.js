@@ -19,6 +19,7 @@ import Book from 'mui-icons/fontawesome/book';
 import CreateClassButton from "./CreateClassButton";
 import InvitePeople from "../components/InvitePeople";
 import CoursesVector from "../static/workspace.svg"
+import MenuSpeedDial from "../components/MenuSpeedDial";
 
 const styles = {
   imageDiv: {
@@ -157,10 +158,11 @@ class Sidenav extends React.Component {
                 {this.courseList()}
               </List>
             </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
+            {/* <div style={{ display: "flex", justifyContent: "center" }}>
               <CreateClassButton />
             </div>
-            <InvitePeople courses={this.props.courses}/>
+            <InvitePeople courses={this.props.courses}/> */}
+            <MenuSpeedDial courses={this.props.courses}/>
            </Scrollbars>
         </Drawer>
       </div>

@@ -10,6 +10,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     flexDirection: "row",
+    flexWrap: "wrap",
   },
   row: {
     padding: "20px",
