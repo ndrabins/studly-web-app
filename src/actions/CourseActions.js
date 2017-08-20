@@ -1,4 +1,5 @@
 import firebase from "firebase";
+import {reset} from 'redux-form';
 
 import {
   ADD_COURSE,
@@ -80,6 +81,7 @@ export const createCourse = ({ courseName, teacherName, beginDate, courseColor }
   // new_course[`channel-members/${classroomChatKey}/${userUid}`] = userData;
 
   return dispatch => {
+    dispatch(reset('newCourseForm')); //clear form data
     firebase.database().ref().update(new_course).then(() => {
       dispatch({ type: CREATE_COURSE });
     });
@@ -126,6 +128,7 @@ export const addCourse = ({ courseKey }) => {
         dateCreated:  snapshot.val().dateCreated
       }
 
+      dispatch(reset('joinCourse')); //clear form data
 
       if(snapshot.val()){
         courseAssignmentRef.once("value", snapshot => {

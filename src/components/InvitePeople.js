@@ -3,13 +3,11 @@ import Map from "lodash/map";
 import FlatButton from "material-ui/FlatButton";
 import Dialog from "material-ui/Dialog";
 import Paper from "material-ui/Paper";
-import ContentAdd from "material-ui/svg-icons/content/add";
 import RaisedButton from "material-ui/RaisedButton";
 import Divider from "material-ui/Divider";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import Avatar from 'material-ui/Avatar';
-import IconSend from "material-ui/svg-icons/content/send";
+import Snackbar from 'material-ui/Snackbar';
 
 import RocketShip from "../static/rocket-ship.svg"
 
@@ -56,6 +54,13 @@ const styles = {
 
 
 class invitePeople extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      snackbar: false,
+    };
+  }
+
   inviteList() {
     if (!this.props.courses) {
       return (
@@ -71,7 +76,7 @@ class invitePeople extends Component {
           <p style={{color:"#767778"}}>{key}</p>
 
           <CopyToClipboard text={key}>
-            <RaisedButton className="copyButton" backgroundColor="#F57C00" labelColor="#FFFFFF" label="Copy"/>
+            <RaisedButton className="copyButton" backgroundColor="#F57C00" labelColor="#FFFFFF" label="Copy" onClick={this.handleCopy}/>
           </CopyToClipboard>
         </Paper>
       );
@@ -79,6 +84,18 @@ class invitePeople extends Component {
 
     return inviteList;
   }
+
+  handleCopy = () => {
+    this.setState({
+      snackbar: true,
+    });
+  };
+
+  handleRequestClose = () => {
+    this.setState({
+      snackbar: false,
+    });
+  };
 
   render() {
     const dialogActions = [
@@ -107,6 +124,12 @@ class invitePeople extends Component {
           </div>
           <Divider />
           {this.inviteList()}
+          <Snackbar
+            open={this.state.snackbar}
+            message="Copied"
+            autoHideDuration={2000}
+            onRequestClose={this.handleRequestClose}
+          />
         </Dialog>
       </div>
     );

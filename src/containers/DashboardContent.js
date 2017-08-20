@@ -7,6 +7,7 @@ import Map from "lodash/map";
 import Flatten from "lodash/flatten";
 
 import Calendar from "../components/Calendar";
+import AdsSection from "./AdsSection";
 
 const styles = {
   container: {
@@ -15,8 +16,12 @@ const styles = {
   },
   calendarContainer: {
     color: "#303030",
-    margin: "20px",
-    height: "100%"
+    margin: "10px",
+    height: "100%",
+    flexDirection: "row",
+    display:"flex",
+    justifyContent: "stretch",
+    flexWrap: "wrap"
   },
   dayContainer: {
     backgroundColor: "#EEEEEE",
@@ -62,6 +67,7 @@ class DashboardContent extends Component {
         <h4>Here is your schedule for the week</h4>
         <div style={styles.calendarContainer}>
           <Calendar events={this.getEvents()} />
+          {/* <AdsSection /> */}
         </div>
       </div>
     );

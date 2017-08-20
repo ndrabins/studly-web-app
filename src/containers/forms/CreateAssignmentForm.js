@@ -80,6 +80,7 @@ class CreateAssignmentForm extends Component {
 
   // assignmentTitle, courseId, dueDate, pointValue, description
   render() {
+    // eslint-disable-next-line
     const { from } = this.props.location.state || "/";
     const { fireRedirect } = this.state;
 

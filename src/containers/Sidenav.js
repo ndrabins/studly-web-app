@@ -16,8 +16,6 @@ import QuestionAnswer from "material-ui/svg-icons/action/question-answer";
 import Description from "material-ui/svg-icons/action/description";
 import VolumeUp from "material-ui/svg-icons/av/volume-up";
 import Book from 'mui-icons/fontawesome/book';
-import CreateClassButton from "./CreateClassButton";
-import InvitePeople from "../components/InvitePeople";
 import CoursesVector from "../static/workspace.svg"
 import MenuSpeedDial from "../components/MenuSpeedDial";
 

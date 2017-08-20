@@ -34,7 +34,7 @@ class MyCalendar extends Component {
   render() {
     return (
       <BigCalendar
-        style={{height: '100%'}}
+        style={{height: '100%', display:"flex", flex:5, marginRight: 10}}
         selectable
         events={this.props.events}
         step={120}

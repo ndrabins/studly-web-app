@@ -21,7 +21,7 @@ export const createNote = (courseId) => {
     createdAt: dateNow,
     updatedAt: dateNow,
     createdByUserId: userId,
-    title: "New Note",
+    title: moment().format('MMMM Do YYYY'),
     content: "",
     preview: "",
     courseId: courseId,
