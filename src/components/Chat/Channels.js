@@ -94,10 +94,10 @@ class Channels extends Component {
             {this.renderChannels()}
           </List>
         </Scrollbars>
-        {/* <div style={styles.channelHeader}>
-          <h3 style={styles.header}> Members </h3> */}
-          {/* {this.renderClassMembers()} */}
-        {/* </div> */}
+         {/* <div style={styles.channelHeader}>
+          <h3 style={styles.header}> Members </h3>
+           {this.renderClassMembers()}
+          </div>   */}
 
 
         {/* <h3 style={styles.header}> Direct Messages </h3> */}

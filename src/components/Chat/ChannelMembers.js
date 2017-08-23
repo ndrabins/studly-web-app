@@ -4,7 +4,7 @@ const styles = {
   members: {
     display: "flex",
     flex: 1,
-    backgroundColor: "#2c3e50",
+    backgroundColor: "#3F3F3F",
     flexDirection:"column",
     padding: "15px",
     color: "#EEEEEE",
