@@ -85,7 +85,7 @@ class Sidenav extends React.Component {
               key={1}
               primaryText="Chat"
               leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
-              containerElement={<Link to={`/dashboard/chat`} />}
+              containerElement={<Link to={`/chat`} />}
               style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
@@ -95,14 +95,14 @@ class Sidenav extends React.Component {
               leftIcon={<Description color={"#FFFFFF"} />}
               style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
-              containerElement={<Link to={`/dashboard/notes/collaborative`} />}
+              containerElement={<Link to={`/notes/collaborative`} />}
             />,
             <ListItem
               key={3}
               primaryText="Announcements"
               leftIcon={<VolumeUp color={"#FFFFFF"} />}
               style={styles.subCategories}
-              containerElement={<Link to={`/dashboard/announcements`} />}
+              containerElement={<Link to={`/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
@@ -110,7 +110,7 @@ class Sidenav extends React.Component {
               primaryText="Assignments"
               leftIcon={<School color={"#FFFFFF"} />}
               style={styles.subCategories}
-              containerElement={<Link to={`/dashboard/assignments`} />}
+              containerElement={<Link to={`/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />
           ]}

@@ -71,7 +71,7 @@ class NoteList extends Component {
           primaryText={note.title}
           secondaryText={note.preview}
           secondaryTextLines={2}
-          containerElement={<Link to={`/dashboard/notes/private`} />}
+          containerElement={<Link to={`/notes/private`} />}
           onClick={() => this.props.actions.selectNote(key)}
         />
         );
@@ -101,7 +101,7 @@ class NoteList extends Component {
               primaryText="Class Note"
               secondaryText="Crowdsource your notes with your classmates!"
               secondaryTextLines={2}
-              containerElement={<Link to={`/dashboard/notes/collaborative`} />}
+              containerElement={<Link to={`/notes/collaborative`} />}
               onClick={() => this.props.actions.selectNote(null)}
             />
           </List>

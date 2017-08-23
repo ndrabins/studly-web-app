@@ -39,8 +39,8 @@ class CourseNotes extends Component {
       <div style={styles.CourseNotes} >
         <NoteList />
         <Switch>
-          <Route path={`/dashboard/notes/collaborative`} component={CollaborativeNote} />
-          <Route path={`/dashboard/notes/private`} component={PrivateNote} />
+          <Route path={`/notes/collaborative`} component={CollaborativeNote} />
+          <Route path={`/notes/private`} component={PrivateNote} />
         </Switch>
       </div>
     );

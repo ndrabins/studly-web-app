@@ -66,7 +66,7 @@ class MenuSpeedDial extends Component {
 
   // style={{width:"70%"}}
   onCreateCourse() {
-    this.props.history.push(`/dashboard/newCourse`);
+    this.props.history.push(`/newCourse`);
   }
 
   openInviteDialog() {

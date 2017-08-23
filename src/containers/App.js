@@ -7,7 +7,6 @@ import { connect } from "react-redux";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { StudlyTheme } from '../styles/studlyTheme';
 
-import Home from "./Home";
 import Signup from "./Signup";
 import Login from "./Login";
 import Dashboard from "./Dashboard";
@@ -35,7 +34,7 @@ const PublicRoute = ({ component: Component, authenticated, ...props }) => {
       render={props =>
         authenticated === false
           ? <Component {...props} />
-          : <Redirect to="/dashboard" />}
+          : <Redirect to="/" />}
     />
   );
 };
@@ -49,7 +48,6 @@ class App extends React.Component {
             <Navbar history={history} />
             <div style={{ height: "100vh"}}>
               <Switch>
-                <Route exact path="/" component={Home} />
                 <PublicRoute
                   authenticated={this.props.authenticated}
                   path="/signup"
@@ -62,10 +60,10 @@ class App extends React.Component {
                 />
                 <PrivateRoute
                   authenticated={this.props.authenticated}
-                  path="/dashboard"
+                  path="/"
                   component={Dashboard}
                 />
-                <Route path="/" component={Error_404} />
+                {/* <Route path="/" component={Error_404} /> */}
               </Switch>
             </div>
           </div>

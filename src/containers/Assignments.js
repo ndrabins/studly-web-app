@@ -123,7 +123,7 @@ class Assignments extends Component {
           style={styles.buttonStyle}
           label="addCourse"
           backgroundColor={"#1FA186"}
-          containerElement={<Link to={"/dashboard/create-assignment"} />}
+          containerElement={<Link to={"/create-assignment"} />}
         >
           <ContentAdd />
         </FloatingActionButton>

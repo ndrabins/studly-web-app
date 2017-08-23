@@ -52,14 +52,14 @@ class Dashboard extends React.Component {
         <Sidenav />
         <Scrollbars renderThumbVertical={props => < div {...props} className="thumb-vertical-dashboard"/>}>
           <Switch>
-            <Route path={`/dashboard/`} exact component={DashboardContent} />
-            <Route path={`/dashboard/newCourse`} component={NewCourse} />
-            <Route path={`/dashboard/notes`} component={CourseNotes} />
-            <Route path={`/dashboard/chat`} component={CourseChat} />
-            <Route path={`/dashboard/create-assignment`} component={CreateAssignmentForm} />
-            <Route path={`/dashboard/assignments`} component={Assignments} />
-            <Route path={`/dashboard/Profile`} component={Profile} />
-            <Route path={`/dashboard/Announcements`} component={Announcements} />
+            <Route path={`/`} exact component={DashboardContent} />
+            <Route path={`/newCourse`} component={NewCourse} />
+            <Route path={`/notes`} component={CourseNotes} />
+            <Route path={`/chat`} component={CourseChat} />
+            <Route path={`/create-assignment`} component={CreateAssignmentForm} />
+            <Route path={`/assignments`} component={Assignments} />
+            <Route path={`/Profile`} component={Profile} />
+            <Route path={`/Announcements`} component={Announcements} />
           </Switch>
         </Scrollbars>
       </div>

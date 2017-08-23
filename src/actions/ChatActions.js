@@ -60,7 +60,6 @@ export const fetchChannelMembers = channelId => {};
 export const createChannel = ({courseId, name}) => {
   const userId = firebase.auth().currentUser.uid;
   const channelRef = firebase.database().ref(`course-chat/${courseId}`);
-  // const channelKey = firebase.database().ref().child(`course-chat/${courseId}`).push().key;
   const channelKey = channelRef.push().key;
 
   let channelData = {

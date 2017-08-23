@@ -150,7 +150,7 @@ class CreateAssignmentForm extends Component {
             </CardActions>
           </form>
         </Card>
-        {fireRedirect && <Redirect to={"/dashboard/assignments"} />}
+        {fireRedirect && <Redirect to={"/assignments"} />}
       </div>
     );
   }

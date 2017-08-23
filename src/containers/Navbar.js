@@ -28,7 +28,7 @@ class Navbar extends React.Component {
         {/*src="images/uxceo-128.jpg"  */}
         {/* <FlatButton
           style={{ marginLeft:"3px", color: "#FFFFFF" }}
-          containerElement={<Link to={`/dashboard/profile`} />}
+          containerElement={<Link to={`/profile`} />}
           label="Profile"
         /> */}
         <IconMenu
@@ -78,7 +78,7 @@ class Navbar extends React.Component {
           style={{ position: "fixed", backgroundColor: "#303030" }}
           title={
             <span style={styles.title}>
-              <Link style={{ color: "#ffffff", hover: "none" }} to="/dashboard">
+              <Link style={{ color: "#ffffff", hover: "none" }} to="/">
                 <img style={{ height: "90px", width: "90px", paddingBottom:"20px"}} src={studlyLogo} />
               </Link>
             </span>
