@@ -1,6 +1,111 @@
 {
   "rules": {
-    ".read": "auth != null",
-    ".write": "auth != null"
+     // By default, make all data private unless specified otherwise.
+    ".read": false,
+    ".write": false,
+
+    "users": {
+      "$userid": {
+        /* You may freely modify your own user info. */
+        ".read": "auth != null",
+        ".write": "$userid === auth.uid"
+      }
+    },
+
+    "privateNotes":{
+      "$courseId":{
+        "$userid":{
+          /* only the owner of the private note can read/write to it */
+          ".read": "$userid === auth.uid",
+    			".write": "$userid === auth.uid"
+        }
+      }
+    },
+
+    "courses":{
+      ".read":"auth != null",
+      "$courseId":{
+       ".read": "root.child('courses/' + $courseId + '/users/' + auth.uid).exists()",
+    	 ".write": "auth !== null && (!data.exists() || data.child('courseOwnerUid').val() === auth.uid)",
+        "users":{
+          //a user can join a course
+          ".write": "auth != null"
+        }
+      }
+    },
+
+    "collaborative-note":{
+      /* taken from firepad github security rules */
+      "$courseId":{
+       "history": {
+          ".read": "root.child('courses/' + $courseId + '/users/' + auth.uid).exists()",
+          "$revision": {
+            /* Allow writing a revision as long as it doesn't already exist and  you write your auth.uid as the 'a' field. */
+            /* Also don't allow changes unless a member of course*/
+            ".write": "data.val() === null && newData.child('a').val() === auth.uid && root.child('courses/' + $courseId + '/users/' + auth.uid).exists()"
+          }
+        },
+        "users": {
+          ".read": "auth != null",
+          "$userid": {
+            /* You may freely modify your own user info. */
+            ".write": "$userid === auth.uid"
+          }
+        },
+        "checkpoint": {
+          ".read": "root.child('courses/' + $courseId + '/users/' + auth.uid).exists()",
+          /* You may write a checkpoint as long as you're writing your auth.uid as the 'a' field and you
+             also wrote the revision that you're checkpointing. */
+          ".write": "newData.child('a').val() === auth.uid && root.child('history').child(newData.child('id').val()).child('a').val() === auth.uid"
+        }
+      }
+    },
+
+    "user-assignments" : {
+      "$userId":{
+        ".read": "$userId === auth.uid",
+    		".write": "auth != null"
+        //NOT DONE
+//         "$assignmentId":{
+//           only able to write to assignments if user exists in course
+//           ".write":"root.child('courses/' + newData.child('courseId').val() + '/Users/' + auth.uid).exists()",
+//         },
+      }
+    },
+
+    //if user is a member of course they can create a channel
+    "course-chat":{
+//       "$courseId":{
+//         "channelId":{
+
+//         }
+//       }
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+
+    //if user is a member of the course that the channel is a part of they can read and write messages
+    "channel-messages":{
+      ".read": "auth != null",
+    	".write": "auth != null"
+    },
+
+    "course-assignments":{
+      "$courseId":{
+        ".read": "auth != null",
+        "$assignmentId":{
+          ".write":"root.child('courses/' + $courseId + '/users/' + auth.uid).exists()"
+        }
+      }
+    },
+
+    "course-announcements":{
+      "$courseId":{
+        ".read": "root.child('courses/' + $courseId + '/users/' + auth.uid).exists()",
+        "$announcementId":{
+          ".write":"root.child('courses/' + $courseId + '/users/' + auth.uid).exists()"
+        }
+      }
+    }
   }
 }

@@ -7,8 +7,6 @@ import RaisedButton from "material-ui/RaisedButton";
 import Divider from "material-ui/Divider";
 import CopyToClipboard from 'react-copy-to-clipboard';
 
-import Snackbar from 'material-ui/Snackbar';
-
 import RocketShip from "../static/rocket-ship.svg"
 
 const styles = {
@@ -57,7 +55,6 @@ class invitePeople extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      snackbar: false,
     };
   }
 
@@ -84,18 +81,6 @@ class invitePeople extends Component {
 
     return inviteList;
   }
-
-  handleCopy = () => {
-    this.setState({
-      snackbar: true,
-    });
-  };
-
-  handleRequestClose = () => {
-    this.setState({
-      snackbar: false,
-    });
-  };
 
   render() {
     const dialogActions = [
@@ -124,12 +109,6 @@ class invitePeople extends Component {
           </div>
           <Divider />
           {this.inviteList()}
-          <Snackbar
-            open={this.state.snackbar}
-            message="Copied"
-            autoHideDuration={2000}
-            onRequestClose={this.handleRequestClose}
-          />
         </Dialog>
       </div>
     );

@@ -7,7 +7,7 @@ import ReactQuill from "react-quill";
 
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
-
+import Snackbar from 'material-ui/Snackbar';
 // eslint-disable-next-line
 import theme from "react-quill/dist/quill.snow.css";
 
@@ -44,6 +44,7 @@ class PrivateNote extends Component {
     this.state =  {
       text: noteContent,
       title: title,
+      saveSnackbar: false,
     }; // You can also pass a Quill Delta here
     this.handleChange = this.handleChange.bind(this);
     this.saveNote = this.saveNote.bind(this);
@@ -76,7 +77,18 @@ class PrivateNote extends Component {
     }
   }
 
-  //this.props.privateNotes[this.props.select]
+  handlesSaveSnackbar = () => {
+    this.setState({
+      saveSnackbar: true,
+    });
+  };
+
+  handleSnackbarClose = () => {
+    this.setState({
+      saveSnackbar: false,
+    });
+  };
+
   handleChange(value) {
     this.setState({ text: value });
   }
@@ -95,8 +107,9 @@ class PrivateNote extends Component {
     updatedNote["title"] = this.state.title;
     updatedNote["preview"] = this.quillRef.getText().slice(0,200);
 
-    // console.log(this.quillRef.getText());
+    this.handlesSaveSnackbar();
 
+    // console.log(this.quillRef.getText());
     this.props.actions.saveNote(updatedNote, noteKey);
   }
 
@@ -158,6 +171,12 @@ class PrivateNote extends Component {
               this.saveNote();
             }
           }}
+        />
+        <Snackbar
+          open={this.state.saveSnackbar}
+          message="Note Saved"
+          autoHideDuration={3000}
+          onRequestClose={this.handleSnackbarClose}
         />
       </div>
     );

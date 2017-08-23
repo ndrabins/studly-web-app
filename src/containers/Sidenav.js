@@ -43,14 +43,9 @@ const styles = {
     fontFamily: "Roboto",
     fontSize: "16px",
     fontWeight: "400",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
   },
-  selectedSubCategory:{
-    fontFamily: "Roboto",
-    fontSize: "16px",
-    fontWeight: "400",
-    color: "#000000"
-  }
+
 }
 
 class Sidenav extends React.Component {
@@ -75,11 +70,6 @@ class Sidenav extends React.Component {
     }
 
     const courseList = Map(this.props.courses, (course, key) => {
-      let subcategoryStyle = styles.subCategories;
-      // if(this.props.selectedCourse === key){
-      //   console.log("setting selected style");
-      //   subcategoryStyle = styles.selectedSubCategory;
-      // }
 
       return (
         <ListItem
@@ -96,14 +86,14 @@ class Sidenav extends React.Component {
               primaryText="Chat"
               leftIcon={<QuestionAnswer color={"#FFFFFF"} />}
               containerElement={<Link to={`/dashboard/chat`} />}
-              style={subcategoryStyle}
+              style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
             <ListItem
               key={2}
               primaryText="Notes"
               leftIcon={<Description color={"#FFFFFF"} />}
-              style={subcategoryStyle}
+              style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
               containerElement={<Link to={`/dashboard/notes/collaborative`} />}
             />,
@@ -111,7 +101,7 @@ class Sidenav extends React.Component {
               key={3}
               primaryText="Announcements"
               leftIcon={<VolumeUp color={"#FFFFFF"} />}
-              style={subcategoryStyle}
+              style={styles.subCategories}
               containerElement={<Link to={`/dashboard/announcements`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />,
@@ -119,7 +109,7 @@ class Sidenav extends React.Component {
               key={4}
               primaryText="Assignments"
               leftIcon={<School color={"#FFFFFF"} />}
-              style={subcategoryStyle}
+              style={styles.subCategories}
               containerElement={<Link to={`/dashboard/assignments`} />}
               onClick={() => this.props.actions.selectCourse(key)}
             />
@@ -152,14 +142,9 @@ class Sidenav extends React.Component {
           >
             <div>
               <List>
-
                 {this.courseList()}
               </List>
             </div>
-            {/* <div style={{ display: "flex", justifyContent: "center" }}>
-              <CreateClassButton />
-            </div>
-            <InvitePeople courses={this.props.courses}/> */}
             <MenuSpeedDial courses={this.props.courses}/>
            </Scrollbars>
         </Drawer>
