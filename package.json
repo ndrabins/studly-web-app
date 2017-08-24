@@ -25,6 +25,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "react-speed-dial": "^0.4.5",
     "react-tap-event-plugin": "^2.0.1",
+    "react-transition-group": "^2.2.0",
     "react-treeview-mui": "^0.1.2",
     "redux": "^3.6.0",
     "redux-form": "^6.8.0",

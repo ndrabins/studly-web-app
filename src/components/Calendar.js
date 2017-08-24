@@ -32,10 +32,16 @@ class MyCalendar extends Component {
   }
 
   render() {
+    // let minimumTime = new Date();
+    // minimumTime.setHours(5,0,0,0);
+
+    // let maximumTime = new Date();
+    // maximumTime.setHours(24,0,0,0);
+
+
     return (
       <BigCalendar
         style={{height: '100%', display:"flex", flex:5, marginRight: 10}}
-        selectable
         events={this.props.events}
         step={120}
         timeslots={1}

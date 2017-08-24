@@ -9,8 +9,10 @@ import IconButton from "material-ui/IconButton";
 import IconMenu from "material-ui/IconMenu";
 import MenuItem from "material-ui/MenuItem";
 import FlatButton from "material-ui/FlatButton";
+import RaisedButton from "material-ui/RaisedButton";
 
 import MoreVertIcon from "material-ui/svg-icons/navigation/more-vert";
+import FeedbackIcon from "material-ui/svg-icons/action/feedback";
 
 import Avatar from "material-ui/Avatar";
 
@@ -31,6 +33,13 @@ class Navbar extends React.Component {
           containerElement={<Link to={`/profile`} />}
           label="Profile"
         /> */}
+        <FlatButton
+          label="Feedback"
+          labelStyle={{color:"#FFFFFF"}}
+          icon={<FeedbackIcon color={"#ecf0f1"}/>}
+          href="https://goo.gl/forms/qDP0rSgRofsikszD3"
+          target="_blank"
+        />
         <IconMenu
           iconStyle={{ color:"#FFFFFF" }}
           iconButtonElement={
@@ -46,7 +55,6 @@ class Navbar extends React.Component {
       </div>
     );
   }
-  //  <FlatButton onClick={() => this.handleSignout()} label="Log out" />
 
   loggedOutLinks() {
     return (

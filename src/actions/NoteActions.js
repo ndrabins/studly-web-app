@@ -30,6 +30,12 @@ export const createNote = (courseId) => {
   return dispatch => {
     noteRef.child(`${noteKey}`).set(noteData).then(() => {
       dispatch({ type: CREATE_NOTE });
+
+      //this is so thaton new note, it becomes selected
+      // dispatch({
+      //   type: SELECT_NOTE,
+      //   payload: noteKey
+      // });
     });
   };
 };
