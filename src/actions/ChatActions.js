@@ -61,18 +61,23 @@ export const createChannel = ({courseId, name}) => {
   const userId = firebase.auth().currentUser.uid;
   const channelRef = firebase.database().ref(`course-chat/${courseId}`);
   const channelKey = channelRef.push().key;
+  const courseUsersRef = firebase.database().ref(`courses/${courseId}/users/`)
 
   let channelData = {
     createdAt: new Date(),
     createdByUserId: userId,
     type: "public",
     name: name,
-    id: channelKey
+    id: channelKey,
   }
 
   return dispatch => {
-    channelRef.child(`${channelKey}`).set(channelData).then(() => {
-      dispatch({ type: SELECT_CHANNEL });
+    courseUsersRef.on("value", snapshot => {
+      let usersList = snapshot.val();
+      channelData["users"]= usersList;
+      channelRef.child(`${channelKey}`).set(channelData).then(() => {
+        dispatch({ type: SELECT_CHANNEL,  payload: channelKey });
+      });
     });
   };
 };

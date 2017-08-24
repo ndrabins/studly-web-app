@@ -13,7 +13,7 @@ import SignUp from 'mui-icons/fontawesome/user-plus';
 
 const styles = {
   form: {
-    width:"400px",
+    width:"300px",
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
@@ -27,7 +27,8 @@ const styles = {
     alignSelf:"center",
     height:"100%",
     flexDirection:"column",
-    backgroundColor:"#303030"
+    backgroundColor:"#303030",
+    overflow:"auto",
   },
   buttons:{
     display:"flex",

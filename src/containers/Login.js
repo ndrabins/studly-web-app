@@ -12,7 +12,7 @@ import SignIn from 'mui-icons/fontawesome/sign-in';
 
 const styles = {
   form: {
-    width:"400px",
+    width:"300px",
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
@@ -26,14 +26,15 @@ const styles = {
     alignSelf:"center",
     height:"100%",
     flexDirection:"column",
-    backgroundColor:"#303030"
+    backgroundColor:"#303030",
+    overflow:"auto",
   },
   buttons:{
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
     flexDirection:"column",
-    width:"400px",
+    width:"200px",
   },
   button:{
     margin:"10px",

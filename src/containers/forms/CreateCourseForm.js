@@ -84,7 +84,7 @@ class newCourseForm extends Component {
           </div>
 
           <div>
-            <p>Choose your course color!</p>
+            <p style={{fontSize:"16px" }}>Choose your course color!</p>
             <CirclePicker
               color={this.state.courseColor}
               onChangeComplete={this.handleChangeComplete}

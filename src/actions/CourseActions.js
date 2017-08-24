@@ -108,14 +108,12 @@ export const fetchAllCourses = () => {
 };
 
 //should be renamed joinCourse
+
+/* I AM SO SORRY FOR THIS, THIS NEEDS TO BE REFACTORED */
 export const addCourse = ({ courseKey }) => {
   const userUid = firebase.auth().currentUser.uid;
   const courseAssignmentRef = firebase.database().ref(`course-assignments/${courseKey}/`);
-
-  //  var userData = {
-  //   displayName : firebase.auth().currentUser.displayName,
-  //   avatar: firebase.auth().currentUser.photoURL
-  // }
+  const courseChatRef = firebase.database().ref(`course-chat/${courseKey}/`);
 
   return dispatch => {
     firebase.database().ref().child('courses').child(courseKey).once("value", snapshot => {
@@ -143,12 +141,17 @@ export const addCourse = ({ courseKey }) => {
             addUserToCourse[`user-assignments/${userUid}/${newAssignmentKey}`] = assignment;
           });
 
-          //when user joins a course they should be in course chat
-          //this will be needed when we have private channels/messaging
-          // addUserToCourse[`/channel-members/${classroomChatKey}/${userUid}`] = userData;
+          //when a user joins a course they should be added as a member to all public channels
+          courseChatRef.orderByChild("type").equalTo("public").once("value", snapshot => {
+            let chatRooms = snapshot.val();
 
-          firebase.database().ref().update(addUserToCourse).then(() => {
-            dispatch({ type: ADD_COURSE });
+            Map(chatRooms, (room, roomKey) => {
+              addUserToCourse[`course-chat/${courseKey}/${roomKey}/users/${userUid}`] = true;
+            });
+          }).then(() => {
+            firebase.database().ref().update(addUserToCourse).then(() => {
+              dispatch({ type: ADD_COURSE });
+            });
           });
         });
       }else{

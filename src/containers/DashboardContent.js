@@ -67,7 +67,7 @@ class DashboardContent extends Component {
         <h4>Here is your schedule for the week</h4>
         <div style={styles.calendarContainer}>
           <Calendar events={this.getEvents()} />
-           {/* <AdsSection /> */}
+          {/* <AdsSection /> */}
         </div>
       </div>
     );
