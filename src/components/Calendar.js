@@ -38,7 +38,7 @@ class MyCalendar extends Component {
     // let maximumTime = new Date();
     // maximumTime.setHours(24,0,0,0);
 
-
+    // onSelectEvent={event => alert(event.title)}
     return (
       <BigCalendar
         style={{height: '100%', display:"flex", flex:5, marginRight: 10}}
@@ -49,8 +49,8 @@ class MyCalendar extends Component {
         endAccessor="endDate"
         defaultView="week"
         scrollToTime={new Date()}
-        onSelectEvent={event => alert(event.title)}
         eventPropGetter={(this.eventStyleGetter)}
+        popup
       />
     );
   }
