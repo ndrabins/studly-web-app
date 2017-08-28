@@ -72,7 +72,7 @@ class PrivateNote extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    if(nextProps.selectedNote !== this.props.selectedNote){
+    if(nextProps.selectedNote && nextProps.selectedNote !== this.props.selectedNote){
       let noteContent = nextProps.privateNotes[nextProps.selectedNote].content;
       let title = nextProps.privateNotes[nextProps.selectedNote].title;
 

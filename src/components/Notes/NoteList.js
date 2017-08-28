@@ -51,7 +51,7 @@ const styles = {
     fontFamily: "Roboto",
     fontSize: "16px",
     fontWeight: "400",
-    color:"#EEEEEE"
+    color:"#B9BBBE"
   },
   selectedNote: {
     fontFamily: "Roboto",
