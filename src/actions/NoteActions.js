@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import moment from "moment";
 
+
 import {
   CREATE_NOTE,
   FETCH_NOTES_REQUEST,
@@ -10,7 +11,7 @@ import {
 } from "./Types.js";
 
 
-export const createNote = (courseId) => {
+export const createNote = (courseId, title=moment().format('MMMM Do YYYY'), content="") => {
   const userId = firebase.auth().currentUser.uid;
   const noteRef = firebase.database().ref(`privateNotes/${courseId}/${userId}`);
   const noteKey = noteRef.push().key;
@@ -21,8 +22,8 @@ export const createNote = (courseId) => {
     createdAt: dateNow,
     updatedAt: dateNow,
     createdByUserId: userId,
-    title: moment().format('MMMM Do YYYY'),
-    content: "",
+    title: title,
+    content: content,
     preview: "",
     courseId: courseId,
   };
@@ -31,11 +32,10 @@ export const createNote = (courseId) => {
     noteRef.child(`${noteKey}`).set(noteData).then(() => {
       dispatch({ type: CREATE_NOTE });
 
-      //this is so thaton new note, it becomes selected
-      // dispatch({
-      //   type: SELECT_NOTE,
-      //   payload: noteKey
-      // });
+      dispatch({
+        type: SELECT_NOTE,
+        payload: noteKey
+      });
     });
   };
 };
@@ -52,19 +52,22 @@ export const saveNote = (updatedNote, noteKey) => {
   };
 }
 
-export const fetchPrivateNotes = (courseId) => {
+export const fetchPrivateNotes = (courseId, selectedNote) => {
   const userId = firebase.auth().currentUser.uid;
 
-  const noteRef = firebase.database().ref(`privateNotes/${courseId}/${userId}`);
-
+  const noteRef = firebase.database().ref(`privateNotes/${courseId}/${userId}`).orderByChild('updatedAt');
+  var firstNoteDefaultKey;
   return dispatch => {
     dispatch({ type: FETCH_NOTES_REQUEST });
 
     noteRef.on("value", snapshot => {
+      let notes = snapshot.val();
+
       dispatch({
         type: FETCH_NOTES_SUCCESS,
-        payload: snapshot.val()
+        payload: notes,
       });
+
     });
   };
 }

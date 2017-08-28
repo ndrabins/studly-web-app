@@ -8,6 +8,7 @@ import ReactQuill from "react-quill";
 import RaisedButton from "material-ui/RaisedButton";
 import TextField from "material-ui/TextField";
 import Snackbar from 'material-ui/Snackbar';
+import moment from "moment";
 // eslint-disable-next-line
 import theme from "react-quill/dist/quill.snow.css";
 
@@ -19,6 +20,7 @@ const styles = {
     width:"75%",
     padding:30,
     paddingTop: 0,
+    backgroundColor: "#F9F9F9"
     // flexDirection:"column",
     // wordWrap: "break-word",
     // flexWrap: "wrap"
@@ -38,8 +40,10 @@ const styles = {
 class PrivateNote extends Component {
   constructor(props) {
     super(props);
-    let noteContent = this.props.privateNotes[this.props.selectedNote].content;
-    let title = this.props.privateNotes[this.props.selectedNote].title;
+    // let noteContent = this.props.privateNotes[this.props.selectedNote].content;
+    let noteContent = "note content";
+    // let title = this.props.privateNotes[this.props.selectedNote].title;
+    let title = "title";
 
     this.state =  {
       text: noteContent,
@@ -69,8 +73,8 @@ class PrivateNote extends Component {
 
   componentWillReceiveProps(nextProps){
     if(nextProps.selectedNote !== this.props.selectedNote){
-      let noteContent = this.props.privateNotes[nextProps.selectedNote].content;
-      let title = this.props.privateNotes[nextProps.selectedNote].title;
+      let noteContent = nextProps.privateNotes[nextProps.selectedNote].content;
+      let title = nextProps.privateNotes[nextProps.selectedNote].title;
 
       this.handleChange(noteContent);
       this.setState({ title: title });
@@ -101,16 +105,24 @@ class PrivateNote extends Component {
 
   saveNote(){
     let noteKey = this.props.selectedNote;
+    // console.log(noteKey);
+    if(noteKey === null || this.props.privateNotes === null){
+      let content =  this.state.text;
+      let title = this.state.title;
 
-    let updatedNote = this.props.privateNotes[noteKey]
-    updatedNote["content"] = this.state.text;
-    updatedNote["title"] = this.state.title;
-    updatedNote["preview"] = this.quillRef.getText().slice(0,200);
+      this.props.actions.createNote(this.props.selectedCourse, title, content);
+
+    } else{
+      let updatedNote = this.props.privateNotes[noteKey];
+      updatedNote["updatedAt"] = moment().toString();
+      updatedNote["content"] = this.state.text;
+      updatedNote["title"] = this.state.title;
+      updatedNote["preview"] = this.quillRef.getText().slice(0,200);
+
+      this.props.actions.saveNote(updatedNote, noteKey);
+    }
 
     this.handlesSaveSnackbar();
-
-    // console.log(this.quillRef.getText());
-    this.props.actions.saveNote(updatedNote, noteKey);
   }
 
   render() {
@@ -143,6 +155,9 @@ class PrivateNote extends Component {
             value={this.state.title}
             name="title"
             floatingLabelText="Title"
+            underlineStyle={{borderColor:"#FF9800"}}
+            floatingLabelStyle={{color:"#FF9800"}}
+            floatingLabelFocusStyle={{color:"#2C7CB3"}}
             onChange={this.handleChangeTitle}
             onKeyDown={ev => {
               if (ev.key === "s" && ev.ctrlKey) {
@@ -174,7 +189,7 @@ class PrivateNote extends Component {
         />
         <Snackbar
           open={this.state.saveSnackbar}
-          message="Note Saved"
+          message="Saved"
           autoHideDuration={3000}
           onRequestClose={this.handleSnackbarClose}
         />
@@ -189,6 +204,7 @@ function mapStateToProps(state) {
     user: state.auth.user,
     selectedNote: state.notes.selectedNote,
     privateNotes : state.notes.privateNotes,
+    selectedCourse :  state.courses.selectedCourse
   };
 }
 

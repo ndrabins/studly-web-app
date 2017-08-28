@@ -25,7 +25,7 @@ export default function chat(state = initialState, action) {
     case FETCH_NOTES_SUCCESS:
       return {
         ...state,
-        privateNotes: action.payload
+        privateNotes: action.payload,
       };
     case SELECT_NOTE:
       return {

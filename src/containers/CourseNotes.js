@@ -39,7 +39,7 @@ class CourseNotes extends Component {
       <div style={styles.CourseNotes} >
         <NoteList />
         <Switch>
-          <Route path={`/notes/collaborative`} component={CollaborativeNote} />
+          {/* <Route path={`/notes/collaborative`} component={CollaborativeNote} /> */}
           <Route path={`/notes/private`} component={PrivateNote} />
         </Switch>
       </div>
@@ -50,7 +50,8 @@ class CourseNotes extends Component {
 function mapStateToProps(state) {
   return {
     user: state.auth.user,
-    selectedCourse: state.courses.selectedCourse
+    selectedCourse: state.courses.selectedCourse,
+    selectedNote: state.notes.selectedNote,
   };
 }
 

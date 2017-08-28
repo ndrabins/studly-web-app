@@ -56,7 +56,7 @@ class Sidenav extends React.Component {
   };
 
   toggleList = () => {
-    console.log("toggling");
+    // console.log("toggling");
   }
 
   courseList() {
@@ -95,7 +95,7 @@ class Sidenav extends React.Component {
               leftIcon={<Description color={"#FFFFFF"} />}
               style={styles.subCategories}
               onClick={() => this.props.actions.selectCourse(key)}
-              containerElement={<Link to={`/notes/collaborative`} />}
+              containerElement={<Link to={`/notes/private`} />}
             />,
             <ListItem
               key={3}

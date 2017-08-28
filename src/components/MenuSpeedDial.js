@@ -70,12 +70,10 @@ class MenuSpeedDial extends Component {
   }
 
   openInviteDialog() {
-    console.log("inviting");
     this.setState({ dialogStatus: true });
   }
 
   closeInviteDialog() {
-    console.log("closing");
     this.setState({ dialogStatus: false });
   }
 

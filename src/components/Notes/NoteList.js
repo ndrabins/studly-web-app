@@ -7,6 +7,9 @@ import { Scrollbars } from "react-custom-scrollbars";
 
 import { Link } from "react-router-dom";
 import Map from "lodash/map";
+import keys from "lodash/keys";
+import includes from "lodash/includes";
+import moment from "moment";
 
 import {List, ListItem} from 'material-ui/List';
 import Subheader from 'material-ui/Subheader';
@@ -57,6 +60,15 @@ const styles = {
 }
 
 class NoteList extends Component {
+  componentWillReceiveProps(nextProps){
+    let noteKeys = keys(nextProps.privateNotes);
+    let selectedNeedsUpdate = !includes(noteKeys, this.props.selectedNote);
+
+    if(nextProps.privateNotes !== this.props.privateNotes && selectedNeedsUpdate){
+      this.props.actions.selectNote(noteKeys[0]);
+    }
+  }
+
   renderPrivateNotes() {
     let privateNotes = Map(this.props.privateNotes, (note, key) => {
       let renderedStyle = styles.noteListItem;
@@ -64,13 +76,16 @@ class NoteList extends Component {
         renderedStyle = styles.selectedNote;
       }
 
+      let diff = moment(note.updatedAt).diff(moment(), 'minutes');
+      let timestamp = moment().add(diff, 'minutes').calendar();
+
       return (
         <ListItem
           key={key}
           style={renderedStyle}
           primaryText={note.title}
-          secondaryText={note.preview}
-          secondaryTextLines={2}
+          secondaryText={timestamp}
+          secondaryTextLines={1}
           containerElement={<Link to={`/notes/private`} />}
           onClick={() => this.props.actions.selectNote(key)}
         />
@@ -94,7 +109,7 @@ class NoteList extends Component {
           autoHideTimeout={1000}
           autoHideDuration={200}
         >
-          <List>
+          {/* <List>
             <Subheader style={styles.header}>Collaborative Note </Subheader>
             <ListItem
               style={renderedStyle}
@@ -105,7 +120,7 @@ class NoteList extends Component {
               onClick={() => this.props.actions.selectNote(null)}
             />
           </List>
-          <Divider />
+          <Divider /> */}
           <List>
             <Subheader style={styles.privateNotesHeader}>Private Notes <CreateNote /></Subheader>
             {this.renderPrivateNotes()}
