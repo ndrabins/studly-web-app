@@ -9,7 +9,7 @@ import Google from 'mui-icons/fontawesome/google';
 import Facebook from 'mui-icons/fontawesome/facebook-official';
 import SignUp from 'mui-icons/fontawesome/user-plus';
 
-
+import GoogleG from "../static/google.svg"
 
 const styles = {
   form: {
@@ -27,7 +27,6 @@ const styles = {
     alignSelf:"center",
     height:"100%",
     flexDirection:"column",
-    backgroundColor:"#303030",
     overflow:"auto",
   },
   buttons:{
@@ -41,6 +40,11 @@ const styles = {
     margin:"10px",
     width:"300px",
     color: "#FFFFFF"
+  },
+  googleButton:{
+    margin:"10px",
+    width:"300px",
+    color: "#7D7A80"
   }
 }
 
@@ -121,7 +125,7 @@ class Signup extends React.Component {
     }
 
     return (
-      <div style={styles.login}>
+      <div style={styles.login} className="signInUp">
 
         {this.renderAuthenticationError()}
 
@@ -160,8 +164,8 @@ class Signup extends React.Component {
                 style={styles.button}
                 type="submit"
                 label="Sign Up"
-                backgroundColor="#1FA186"
-                hoverColor="#66CAB6"
+                backgroundColor="#e74c3c"
+                hoverColor="#c0392b"
                 icon={<SignUp />}
               />
 
@@ -174,13 +178,13 @@ class Signup extends React.Component {
                 style={styles.button}
               />
               <FlatButton
-                label="Sign up with Google"
+                label={<span><img src={GoogleG} style={{width:24, height:24, paddingBottom:5, marginRight:10}} />Sign up with Google</span>}
                 onClick={this.handleGoogleSignIn}
-                backgroundColor="#db3236"
-                hoverColor="#F0585C"
-                icon={<Google />}
-                style={styles.button}
+                backgroundColor="#FFFFFF"
+                hoverColor="#EEEEEE"
+                style={styles.googleButton}
                 />
+
             </div>
         </form>
       </div>

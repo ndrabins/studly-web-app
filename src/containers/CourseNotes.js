@@ -16,6 +16,7 @@ const styles = {
     flex:1,
     flexDirection: "row",
     height: "100%",
+    backgroundColor: "#3F3F3F" //this is here because literally 1 pixel shows in the top left corner of ntoes list and is white.
   },
 }
 

@@ -5,9 +5,9 @@ import * as Actions from "../actions";
 
 import Loader from "../utils/Preloader";
 import FlatButton from 'material-ui/FlatButton';
-import Google from 'mui-icons/fontawesome/google';
 import Facebook from 'mui-icons/fontawesome/facebook-official';
 import SignIn from 'mui-icons/fontawesome/sign-in';
+import GoogleG from "../static/google.svg"
 
 
 const styles = {
@@ -26,7 +26,7 @@ const styles = {
     alignSelf:"center",
     height:"100%",
     flexDirection:"column",
-    backgroundColor:"#303030",
+    // backgroundColor:"#303030",
     overflow:"auto",
   },
   buttons:{
@@ -40,6 +40,11 @@ const styles = {
     margin:"10px",
     width:"300px",
     color:"#FFFFFF"
+  },
+  googleButton:{
+    margin:"10px",
+    width:"300px",
+    color: "#7D7A80"
   }
 }
 
@@ -105,7 +110,7 @@ class Login extends React.Component {
     }
 
     return (
-        <div style={styles.login}>
+        <div style={styles.login} className="signInUp">
           {this.renderAuthenticationError()}
 
           <form style={styles.form} onSubmit={this.props.handleSubmit(this.handleFormSubmit)}>
@@ -129,8 +134,8 @@ class Login extends React.Component {
                 style={styles.button}
                 type="submit"
                 label="Sign In"
-                backgroundColor="#1FA186"
-                hoverColor="#66CAB6"
+                backgroundColor="#e74c3c"
+                hoverColor="#c0392b"
                 icon={<SignIn />}
               />
 
@@ -143,12 +148,11 @@ class Login extends React.Component {
                 style={styles.button}
               />
               <FlatButton
-                label="Sign in with Google"
+                label={<span><img src={GoogleG} style={{width:24, height:24, paddingBottom:5, marginRight:10}} />Sign in with Google</span>}
                 onClick={this.handleGoogleSignIn}
-                backgroundColor="#db3236"
-                hoverColor="#F0585C"
-                icon={<Google />}
-                style={styles.button}
+                backgroundColor="#FFFFFF"
+                hoverColor="#EEEEEE"
+                style={styles.googleButton}
                 />
             </div>
           </form>

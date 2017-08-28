@@ -24,16 +24,19 @@ const styles = {
     flex: 1,
     height:"100%",
     // width:"256px",
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#3F3F3F",
     flexDirection: "column",
     color: "#EEEEEE",
     overflow:"auto",
   },
   header: {
     fontSize: "16px",
-    fontFamily: "Roboto, sans-serif"
+    fontFamily: "Roboto, sans-serif",
+    color:"#EEEEEE"
   },
   privateNotesHeader: {
+    paddingTop:"12px",
+    color:"#EEEEEE",
     fontSize: "16px",
     fontFamily: "Roboto, sans-serif",
     display: "flex",
@@ -48,6 +51,7 @@ const styles = {
     fontFamily: "Roboto",
     fontSize: "16px",
     fontWeight: "400",
+    color:"#EEEEEE"
   },
   selectedNote: {
     fontFamily: "Roboto",
@@ -55,7 +59,8 @@ const styles = {
     fontWeight: "400",
     border: "2px solid",
     borderLeft: "10px solid",
-    borderColor: "#2E81BA"
+    borderColor: "#2E81BA",
+    color:"#FFFFFF"
   },
 }
 
@@ -84,7 +89,7 @@ class NoteList extends Component {
           key={key}
           style={renderedStyle}
           primaryText={note.title}
-          secondaryText={timestamp}
+          secondaryText={<span style={{color:"#707070"}}>{timestamp}</span>}
           secondaryTextLines={1}
           containerElement={<Link to={`/notes/private`} />}
           onClick={() => this.props.actions.selectNote(key)}
