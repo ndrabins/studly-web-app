@@ -9,7 +9,6 @@ import Facebook from 'mui-icons/fontawesome/facebook-official';
 import SignIn from 'mui-icons/fontawesome/sign-in';
 import GoogleG from "../static/google.svg"
 
-
 const styles = {
   form: {
     width:"300px",
@@ -24,8 +23,9 @@ const styles = {
     justifyContent:"center",
     alignItems:"center",
     alignSelf:"center",
-    height:"100%",
+    minHeight:"100%",
     flexDirection:"column",
+    paddingTop:100,
     // backgroundColor:"#303030",
     overflow:"auto",
   },
@@ -35,11 +35,13 @@ const styles = {
     alignItems:"center",
     flexDirection:"column",
     width:"200px",
+    minHeight:"168px",
   },
   button:{
     margin:"10px",
     width:"300px",
-    color:"#FFFFFF"
+    color:"#FFFFFF",
+    minHeight:"38px"
   },
   googleButton:{
     margin:"10px",
@@ -47,7 +49,6 @@ const styles = {
     color: "#7D7A80"
   }
 }
-
 
 const validate = values => {
   const errors = {};
@@ -134,8 +135,8 @@ class Login extends React.Component {
                 style={styles.button}
                 type="submit"
                 label="Sign In"
-                backgroundColor="#e74c3c"
-                hoverColor="#c0392b"
+                backgroundColor="#1abc9c"
+                hoverColor="#66D8C2"
                 icon={<SignIn />}
               />
 

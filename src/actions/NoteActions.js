@@ -56,7 +56,7 @@ export const fetchPrivateNotes = (courseId, selectedNote) => {
   const userId = firebase.auth().currentUser.uid;
 
   const noteRef = firebase.database().ref(`privateNotes/${courseId}/${userId}`).orderByChild('updatedAt');
-  var firstNoteDefaultKey;
+
   return dispatch => {
     dispatch({ type: FETCH_NOTES_REQUEST });
 

@@ -12,12 +12,12 @@ import AdsSection from "./AdsSection";
 const styles = {
   container: {
     margin: "15px",
-    height: "100%"
+    height: "94%"
   },
   calendarContainer: {
     color: "#303030",
     margin: "10px",
-    height: "100%",
+    height: "85%",
     flexDirection: "row",
     display:"flex",
     justifyContent: "stretch",

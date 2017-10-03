@@ -43,7 +43,7 @@ class MyCalendar extends Component {
       <BigCalendar
         style={{height: '100%', display:"flex", flex:5, marginRight: 10}}
         events={this.props.events}
-        step={120}
+        step={60}
         timeslots={1}
         startAccessor="dueDate"
         endAccessor="endDate"
